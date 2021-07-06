@@ -15,13 +15,11 @@ class Person
     def attack(other_person)
         if not other_person.ability_check?
             other_person.take_damage(@attack_damage)
-            puts "#{@name} attacks #{other_person.name} that has #{other_person.hitpoint} 
-            hitpoint and #{other_person.attack_damage} attack damage"
+            puts "#{@name} attacks #{other_person.name} that has #{other_person.hitpoint} hitpoint and #{other_person.attack_damage} attack damage"
         else
             if not other_person.evade?
                 other_person.take_damage(@attack_damage)
-                puts "#{@name} attacks #{other_person.name} that has #{other_person.hitpoint} 
-                hitpoint and #{other_person.attack_damage} attack damage"
+                puts "#{@name} attacks #{other_person.name} that has #{other_person.hitpoint} hitpoint and #{other_person.attack_damage} attack damage"
             else
                 puts "#{other_person.getName} deflects the attack"
                 puts "\n"
