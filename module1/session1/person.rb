@@ -41,7 +41,7 @@ class Person
     end    
 
     def evade?
-        evade_action = [true, false].sample
+        evade_action = [true, true, true, true, true, true, true, true, false, false].sample
         if evade_action == true
             true
         end
