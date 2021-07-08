@@ -8,7 +8,7 @@
             "name": "Debug Local File",
             "type": "Ruby",
             "request": "launch",
-            "program": "${workspaceRoot}/module1/session1/homework.rb"
+            "program": "${workspaceRoot}/module1/session2/homework.rb"
         }
     ]
 }
