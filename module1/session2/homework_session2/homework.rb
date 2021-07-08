@@ -84,7 +84,7 @@ until (jin.die? || villains.empty?) do
             allyAttack(tempVil,tempAll,villains)
         end    
     else
-        puts "which friend do u want to healk"
+        puts "which friend do u want to heal"
         allies.each_with_index do |ally,index|
             puts "#{index+1}) #{ally.name}"
         end
