@@ -3,7 +3,7 @@ require_relative 'hero'
 class PlayableCharacter < Hero
     def initialize(name, hitpoint, attack_damage)
         super(name, hitpoint, attack_damage)
-        @actions = ["heal","attack"]
+        @actions = ["heal","attack"] #actions
     end
 
     def play_turn(heroes, villains)
