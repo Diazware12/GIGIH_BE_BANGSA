@@ -5,17 +5,18 @@ class Hero < Person
     def initialize (name, hitpoint, attack_damage)
         super(name, hitpoint, attack_damage)
         @deflect_percentage = 0.8
+        @healing_point = 50
     end
 
-    def heal (ally)
-        ally.receive_heal(20)
+    def heal(ally)
+        ally.take_healing(@healing_point)
     end 
 
     def take_damage(damage)
         if rand < @deflect_percentage
             deflect
         else
-            @hitpoint -= damage
+            super(damage)
         end
     end
 
@@ -24,12 +25,12 @@ class Hero < Person
     end
 end
 
-class Ally < Person
-    def initialize (name, hitpoint, attack_damage)
-        super(name, hitpoint, attack_damage)
-    end
+# class Ally < Person
+#     def initialize (name, hitpoint, attack_damage)
+#         super(name, hitpoint, attack_damage)
+#     end
 
-    def receive_heal (healing_point)
-        @hitpoint += healing_point
-    end
-end
+#     def receive_heal (healing_point)
+#         @hitpoint += healing_point
+#     end
+# end

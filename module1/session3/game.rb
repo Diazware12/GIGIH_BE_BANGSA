@@ -26,7 +26,26 @@ class Game
         @playable_character.play_turn(@non_playable_characters[:heroes],@non_playable_characters[:villains])
         
         @non_playable_characters.each do |group, people|
+            people.each do |person|
+                if group == :heroes
+                    targets = @non_playable_characters[:villains]
+                    unless targets.empty?
+                       target = targets[rand(targets.size)]
+                       person.attack(target)
+                       targets.delete(target) if target.removed? 
+                    end
+                elsif group == :villains
+                    targets = @non_playable_characters[:heroes].dup
+                    targets << @playable_character
+                    unless targets.empty?
+                        target = targets[rand(targets.size)]
+                        person.attack(target)
+                        @non_playable_characters[:heroes].delete(target) if target.removed?
+                    end
+                end
+            end
         end
+        puts "\n"
     end
 
     def start
