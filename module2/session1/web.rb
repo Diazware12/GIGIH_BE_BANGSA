@@ -1,4 +1,4 @@
-require 'sinatra' #gem install sinatra
+require 'sinatra' #gem install sinatra -> buat install
 
 get '/' do
     "hello world"
