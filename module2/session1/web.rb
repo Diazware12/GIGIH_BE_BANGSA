@@ -9,11 +9,12 @@ get '/messages/:name' do
     "hello world #{name}"
 end
 
+items = {name: [], type: []}
 
 post '/insertItem' do
-    prod = params['prod']
-    type = params['type']
-    "product #{prod} \n type #{type}"
+    items[:name] << params['prod']
+    items[:type] << params['type']
+    "#{items}"
 end
 
 get '/insertItem' do
