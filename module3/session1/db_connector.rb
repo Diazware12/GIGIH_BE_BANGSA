@@ -92,7 +92,8 @@ def update_items(name,price,item_id,category_id)
     client = create_db_client
     client.query("""
                 update items set 
-                    name = '#{name}'
+                    name = '#{name}',
+                    price = #{price}
                 where id = #{item_id}
         """)
         
