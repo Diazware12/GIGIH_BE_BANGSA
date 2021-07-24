@@ -13,35 +13,19 @@
   <body>
     <div class="container pt-5">
      
-        <form method="post" action="/update/submit">
+        <form method="post" action="/showCategoryList/update/submit">
 
-          <h1 class="pt-3 pb-3">Edit Item > <%= item.name %> </h1>
-          <input name="item_id" value="<%= item.id %>" style="display: none;">
+          <h1 class="pt-3 pb-3">Edit Category > <%= category_data.name %> </h1>
+          <input name="category_id" value="<%= category_data.id %>" style="display: none;">
 
           <div class="form-group">
-              <label>Item Name</label>
-              <input type="text" class="form-control" placeholder="Item Name" name="item_name" required value="<%= item.name %>">
+              <label>Category Name</label>
+              <input type="text" class="form-control" placeholder="Category Name" name="category_name" required value="<%= category_data.name %>">
           </div>
-          <div class="form-group">
-              <label>Item Price</label>
-              <input type="number" class="form-control" placeholder="Item Price" name="item_price" required value="<%= item.price %>">
-          </div>
-          <div class="form-group">
-              <label>Item Category</label>
-              <select required name="item_category" class="form-control">
-                  <% categories.each do |category| %>
-                      <% if category.id == item.category.id %>
-                        <option value=<%=category.id%> selected><%=category.name%></option>
-                      <% else %>
-                        <option value=<%=category.id%>><%=category.name%></option>
-                      <% end %>
-                  <% end %>
-              </select>
-          </div>
-          
+
           <div class="d-flex flex-row-reverse bd-highlight pb-5">
             <div class="p-2 bd-highlight"><button type="submit" class="btn btn-primary">Edit</button></div>
-            <div class="p-2 bd-highlight"><a type="submit" style="text-decoration: none;color:white;" class="btn btn-primary" href="/">Back</a></div>
+            <div class="p-2 bd-highlight"><a type="submit" style="text-decoration: none;color:white;" class="btn btn-primary" href="/showCategoryList">Back</a></div>
           </div>  
 
         </form>

@@ -15,22 +15,22 @@
      
         <form method="post" action="/update/submit">
 
-          <h1 class="pt-3 pb-3">Edit Item > <%= item.name %> </h1>
-          <input name="item_id" value="<%= item.id %>" style="display: none;">
+          <h1 class="pt-3 pb-3">Edit Item > <%= item_data.name %> </h1>
+          <input name="item_id" value="<%= item_data.id %>" style="display: none;">
 
           <div class="form-group">
               <label>Item Name</label>
-              <input type="text" class="form-control" placeholder="Item Name" name="item_name" required value="<%= item.name %>">
+              <input type="text" class="form-control" placeholder="Item Name" name="item_name" required value="<%= item_data.name %>">
           </div>
           <div class="form-group">
               <label>Item Price</label>
-              <input type="number" class="form-control" placeholder="Item Price" name="item_price" required value="<%= item.price %>">
+              <input type="number" class="form-control" placeholder="Item Price" name="item_price" required value="<%= item_data.price %>">
           </div>
           <div class="form-group">
               <label>Item Category</label>
               <select required name="item_category" class="form-control">
                   <% categories.each do |category| %>
-                      <% if category.id == item.category.id %>
+                      <% if category.id == item_data.category.id %>
                         <option value=<%=category.id%> selected><%=category.name%></option>
                       <% else %>
                         <option value=<%=category.id%>><%=category.name%></option>

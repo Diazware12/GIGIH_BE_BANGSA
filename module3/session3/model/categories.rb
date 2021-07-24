@@ -3,7 +3,7 @@ require './db/db_connector'
 class Category
     attr_reader :id, :name
 
-    def initialize (id, name)
+    def initialize (id=nil, name)
         @id = id
         @name = name
     end
@@ -32,12 +32,29 @@ class Category
     def save
         return false unless valid?
         client = create_db_client
-        rawData=client.query("insert into categories (name) values ('#{name}')")
+        rawData=client.query("insert into categories (name) values ('#{@name}')")
+    end
+
+    def update
+        return false unless valid?
+        client = create_db_client
+        rawData=client.query("update categories set name = '#{@name}' where id = #{@id} ")
+    end
+
+    def delete
+        return false unless valid?
+        client = create_db_client
+        client.query("""
+                delete from categories
+                where id = #{@id} and name = '#{@name}'
+            """)
     end
 
     def valid?
         return false if @name.nil?
         return true
     end
+
+
 
 end

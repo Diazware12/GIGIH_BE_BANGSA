@@ -15,62 +15,50 @@
   <body>
     <div class="container">
 
-        <form method="post" action="/create" class="pt-5 pb-5">
+        <h1 class="pt-5 pb-3"> Category List </h1>
+
+        <form method="post" action="/showCategoryList/create" class="pt-5 pb-5">
             <div class="row">
                 <div class="col">
-                    <input required type="text" name="item_name" class="form-control" placeholder="Item name">
-                </div>
-                <div class="col">
-                    <input required type="number" name="item_price" class="form-control" placeholder="Item price">
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <select required name="item_category" class="form-control">
-                            <option disabled value selected>Item Category</option>
-                            <% categories.each do |category| %>
-                                <option value=<%=category.id%>><%=category.name%></option>
-                            <% end %>
-                        </select>
-                    </div>
+                    <input required type="text" name="category_name" class="form-control" placeholder="Category Name">
                 </div>
 
-                <div class="col">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+                <div class="d-flex flex-row-reverse bd-highlight">
+                    <div class="p-2 bd-highlight"><button type="submit" class="btn btn-primary">Submit</button></div>
+                    <div class="p-2 bd-highlight"><a style="text-decoration: none;color:white;" class="btn btn-info" href="/">See Items</a></div>
+                </div>  
             </div>
         </form>
-
 
 
         <table class="table text-center">
             <thead class="thead-dark">
                 <tr>
                 <th scope="col">No.</th>
-                <th scope="col">Item</th>
-                <th scope="col">Category</th>
-                <th scope="col">Price</th>
-                <th scope="col">action</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
 
-                <% items.each_with_index do |item,index| %>
+                <% categories.each_with_index do |categories,index| %>
                     <tr>
                         <th scope="row"><%= index+1 %></th>
-                        <td><%= item.name %></td>
-                        <td><%= item.category.name %></td>
-                        <td><%= item.price %></td>
+                        <td><%= categories.name %></td>
                         <td>
-                            <a href="/update/<%= item.id %>/<%= item.name %>" style="color: black; text-decoration: none;" class="pl-1 pr-1">
+                            <a href="/showCategoryList/details/<%= categories.id %>/<%= categories.name %>" style="color: black; text-decoration: none;" class="pl-1 pr-1">
+                                details
+                            </a>  
+                            <a href="/showCategoryList/update/<%= categories.id %>/<%= categories.name %>" style="color: black; text-decoration: none;" class="pl-1 pr-1">
                                 edit
                             </a>                        
-                            <a href="#" style="color: black; text-decoration: none;" class="pl-1 pr-1" data-toggle="modal" data-target="#deleteModal<%= item.id %>">
+                            <a href="#" style="color: black; text-decoration: none;" class="pl-1 pr-1" data-toggle="modal" data-target="#deleteModal<%= categories.id %>">
                                 delete
                             </a>     
                         </td>
                     </tr>
 
-                    <div class="modal fade" id="deleteModal<%= item.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="deleteModal<%= categories.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -79,11 +67,11 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Are you sure you want to delete <b><%= item.name %></b>
+                                    Are you sure you want to delete <b><%= categories.name %></b>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <a type="submit" style="text-decoration: none;color:white;" class="btn btn-primary" href="/delete/<%= item.id %>/<%= item.name %>">Delete</a>
+                                    <a type="submit" style="text-decoration: none;color:white;" class="btn btn-primary" href="/showCategoryList/delete/<%= categories.id %>/<%= categories.name %>">Delete</a>
                                 </div>
                             </div>
                         </div>
