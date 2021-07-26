@@ -1,0 +1,9 @@
+install rspec
+    - sudo gem install rspec
+
+inisial rspec kedalam projek/dir
+    - rspec --init
+
+untuk testing
+    - buat file <nama class yng mau di test>_spec.rb kedalam folder _spec
+    - abis itu di terminal, tinggal tulis rspec
