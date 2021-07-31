@@ -5,14 +5,6 @@ require_relative '../db/db_connector'
 
 describe Category do
 
-    before(:each) do
-        client = create_db_client
-        client.query('set FOREIGN_KEY_CHECKS = 0')
-        client.query('truncate item_categories')
-        client.query('truncate table items')
-        client.query('truncate table categories')
-        client.query('set FOREIGN_KEY_CHECKS = 1')
-    end
 
     # =================== valid initialize =====================
 
@@ -20,9 +12,19 @@ describe Category do
         context 'init input category' do
             it 'should be true' do
                 cat = Category.new({
+                    id: 1,
                     name: "Jamuan"
                 })
                 expect(cat.valid?).to eq(true)
+            end
+        end 
+
+        context 'init input category' do
+            it 'should be false' do
+                cat = Category.new({
+                    id: 1
+                })
+                expect(cat.valid?).to eq(false)
             end
         end 
     end
@@ -33,6 +35,14 @@ describe Category do
     describe '#validSelectAllCategories' do
         context 'select all categories' do
             it 'should be true' do
+
+                stub_client = double
+                stub_query = "SELECT * from categories"
+                categories = [{"id": 1, "name": "a"}]
+
+                allow(Mysql2::Client).to receive(:new).and_return(stub_client)
+                expect(stub_client).to receive(:query).with(stub_query).and_return(categories)
+
                 categories = Category.get_all_categories
                 expect(categories.nil?).to eq(false)
             end
@@ -45,8 +55,33 @@ describe Category do
     describe '#validSelectItem' do
         context 'select data' do
             it 'there\'s a data' do
-                item = Item.get_selected_item(2)
-                expect(item.nil?).to eq(true)
+
+                stub_client = double
+                stub_query = "select * from categories where id = 1"
+                categories = [{"id": 1, "name": "a"}]
+
+                allow(Mysql2::Client).to receive(:new).and_return(stub_client)
+                expect(stub_client).to receive(:query).with(stub_query).and_return(categories)
+                
+
+                category = Category.get_categories(1)
+                expect(category).not_to be_nil
+            end
+        end
+
+        context 'select data' do
+            it 'there\'s no data' do
+
+                stub_client = double
+                stub_query = "select * from categories where id = 1"
+                categories = [{"id": 1, "name": "a"}]
+
+                allow(Mysql2::Client).to receive(:new).and_return(stub_client)
+                expect(stub_client).to receive(:query).with(stub_query).and_return([])
+                
+
+                category = Category.get_categories(1)
+                expect(category).to eq(nil)
             end
         end
     end
@@ -59,7 +94,14 @@ describe Category do
     describe '#saveCategory' do
         context 'save category data' do
             it 'input category' do
-                category = Category.new(6,"comfort food")
+                stub_client = double
+                stub_query = "insert into categories (name) values ('comfort food')"
+                category = Category.new({
+                    id: 1,
+                    name: 'comfort food'
+                })
+                allow(Mysql2::Client).to receive(:new).and_return(stub_client)
+                expect(stub_client).to receive(:query).with(stub_query)
                 category.save
             end
         end
@@ -71,28 +113,16 @@ describe Category do
 
     describe '#updateCategory' do
         context 'update category data' do
-            it 'input category' do
-                category = Category.new(6,"comfort food")
-                category.update
-            end
-        end
-
-        context 'return category' do
-            it 'it should return' do
+            it 'update' do
                 stub_client = double
+                stub_query_1 ="update categories set name = 'qux' where id = 1 "
+                category = Category.new({
+                    id: 1, 
+                    name: 'qux'
+                })
                 allow(Mysql2::Client).to receive(:new).and_return(stub_client)
-                stub_query = "update from categories set name = 'Halal' where id = 2"
-                allow(stub_client).to receive(:affected_rows).and_return(2) 
-                expect(stub_client).to receive(:query).with(stub_client)
-
-                stub_category = double
-                allow(Category).to receive(:get_categories).with(2).and_return(Category.new(2,"Halal"))
-
-                old_cat=Category.get_categories(2)
-                old_cat.name = 'Halal'
-
-                affected_row = old_cat.update
-                expect(affected_row).to eq(2)
+                expect(stub_client).to receive(:query).with(stub_query_1)
+                category.update
             end
         end
     end  
@@ -105,7 +135,14 @@ describe Category do
     describe '#deleteCategory' do
         context 'delete category data' do
             it 'input category' do
-                category = Category.new(6,"comfort food")
+                stub_client = double
+                stub_query = "delete from categories where id = 1 and name = 'comfort food'"
+                category = Category.new({
+                    id: 1, 
+                    name: 'comfort food'
+                })
+                allow(Mysql2::Client).to receive(:new).and_return(stub_client)
+                expect(stub_client).to receive(:query).with(stub_query)
                 category.delete
             end
         end

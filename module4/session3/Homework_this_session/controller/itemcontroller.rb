@@ -10,9 +10,9 @@ class ItemController
     end
 
     def createItems(params)
-        getCat = Category.get_categories(params['item_category'])
-        insert_item = Item.new(params['item_name'],params['item_price'],getCat)
-        insert_item.save
+        item = Item.new(params)
+        return false unless item.valid?
+        item.save
     end
 
     def show
@@ -28,14 +28,22 @@ class ItemController
     end
 
     def editItems(params)
-        getCat = Category.get_categories(params['item_category'])
-        items = Item.new(params['item_id'],params['item_name'],params['item_price'],getCat)
-        items.update
+        item = Item.get_selected_item(params['id'])
+        return false unless item
+    
+        item.name = params['name']
+        item.price = params['price']
+        item.category = params['category']
+        item.update
+    
+        true
     end
     
     def deleteItems(params)
-        item_data = Item.get_selected_item(params["item_id"],params["item_name"])
-        item_data.delete
+        item = Item.get_selected_item(params['id'])
+        return false unless item
+    
+        item.delete
     end    
 
 end

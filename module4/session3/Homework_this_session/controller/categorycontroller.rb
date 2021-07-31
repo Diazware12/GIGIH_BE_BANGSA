@@ -32,21 +32,18 @@ class CategoryController
     end
 
     def editCategory(params)
-        category = Category.new(params['category_id'],params['category_name'])
+        category = Category.get_categories(params['id'])
+        return false unless category
+        category.name = params['name']
         category.update
+    
+        true
     end
 
     def deleteCategory(params)
-        item_categories = ItemCategories.get_item_categories_by_category(params['category_id'])
-        temp_item_id = nil
-        item_categories.each do |data|
-            temp_item_id = data.item_id
-            getItem = Item.get_selected_item(temp_item_id)
-            getItem.delete
-        end
-
-        get_cat = Category.get_categories(params['category_id'])
-        get_cat.delete
+        category = Category.get_categories(params['id'])
+        return false unless category
+        category.delete
 
     end
 
