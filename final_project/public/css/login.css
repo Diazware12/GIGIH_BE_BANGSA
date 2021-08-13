@@ -1,0 +1,55 @@
+.article-subtitle, .article-title {
+    font-weight: 300;
+    letter-spacing: .15em;
+  }
+
+  body, html, article {
+    height: 100%;
+  }
+/* twitter */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+  
+.column-right {
+    float: left;
+    width: 25.3%;
+    padding: 5px;
+    background-color: black;
+}
+
+
+.column-left {
+    float: left;
+    width: 1377px;
+    height: 970px;
+    padding: 25px;
+    background-image: url("/asset/yg.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+  .imageBg {
+    width: 606px;
+    background-color: white;
+    background-size: auto;
+  }
+
+
+
+.column-left img{
+    width:50%;
+}
+
+
+/* Clearfix (clear floats) */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+

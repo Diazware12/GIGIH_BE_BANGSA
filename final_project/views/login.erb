@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Twitter Clone - Final</title>
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/login_ext.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend&display=swap" rel="stylesheet">
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+
+    <div class="row">
+      <div class="column-left">
+        <div class="d-flex justify-content-center" style="margin-top:15%; ">
+            <img class="pt-5 mt-5" src="/asset/jadi3.png"  alt="Snow" 
+              style="background-color:white; border-radius: 25px; 
+              padding:50px 50px 50px 50px;">
+        </div>
+      </div>
+      <div class="column-right">
+        
+        <form id="booking-form" method="POST" action="/" style="margin-top:25%;">
+            <h2>Login Account</h2>
+
+            <% if alert != nil %>
+              <div class="alert alert-danger" role="alert">
+                <%=alert%>
+              </div>
+            <% end %>
+
+
+            <div class="form-group form-input">
+                <input type="name" name="username" id="username" value="" required/>
+                <label for="username" class="form-label">Username</label>
+            </div>
+            <div class="form-group form-input pt-2">
+                <input type="password" class="pt-2" name="password" id="password" value="" required/>
+                <label for="password" class="form-label">Password</label>
+            </div>
+
+            <div class="form-submit pt-5">
+                <input type="submit" value="Log-In" class="submit" id="submit" name="submit" />
+                <a href="#" class="vertify-booking">Register Account</a>
+                <a href="#" class="vertify-booking">Forgot Your Password?</a>
+            </div>
+        </form>
+        
+      </div>
+    </div>
+
+    <script src="/js/custom.js"></script>
+
+  </body>
+  
+</html>

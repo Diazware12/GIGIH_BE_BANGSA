@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/styles.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link
       rel="stylesheet"
@@ -23,9 +23,9 @@
 
     <header class='header' style="overflow: hidden;" data-animate-header-container>
       <menu class='header-bar' data-animate-header>
-        <a href='#menu' onclick="openNav()"  class='btn-menu' data-toggle-class='menu-active'>Menu</a>
-        <a href='/' class='btn-search' data-toggle-class='search-active'><img src="/asset/jadi4.png" class="pl-3" style="border-radius: 4px;padding: 1px;width: 100px;"></a>
-        <a href='#menu' class='btn-search' data-toggle-class='search-active'>Login</a>
+        <a href='#' onclick="openNav()"  class='btn-menu' data-toggle-class='menu-active'>Menu</a>
+        <a href='/<%=getUser.userId%>/home' class='btn-search' data-toggle-class='search-active'><img src="/asset/jadi4.png" class="pl-3" style="border-radius: 4px;padding: 1px;width: 100px;"></a>
+        <a href='#menu' class='btn-search' data-toggle-class='search-active'>Logout</a>
       </menu>
     </header>
     <!-- sidebar starts -->
@@ -49,7 +49,7 @@
         </div>
       </a>
 
-      <a href="/">
+      <a href="/explore">
         <div class="sidebarOption">
           <span class="material-icons"> search </span>
           <h2>Explore</h2>
@@ -169,7 +169,7 @@
 
     </div>
 
-    <script src="/script/custom.js"></script>
+    <script src="/js/custom.js"></script>
   </body>
   
 </html>

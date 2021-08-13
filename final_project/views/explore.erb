@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Twitter Clone - Final</title>
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/search_bar.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+
+    <header class='header' style="overflow: hidden;" data-animate-header-container>
+      <menu class='header-bar' data-animate-header>
+        <a href='#' onclick="openNav()"  class='btn-menu' data-toggle-class='menu-active'>Menu</a>
+        <a href='/<%=getUser.userId%>/home' class='btn-menu' data-toggle-class='search-active'><img src="/asset/jadi4.png" class="pl-3" style="border-radius: 4px;padding: 1px;width: 100px;"></a>
+        <a href='#' class='btn-menu' data-toggle-class='search-active'>Logout</a>
+      </menu>
+    </header>
+    <!-- sidebar starts -->
+
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+
+      <img src="/asset/jadi3.png" class="pl-3 pb-5" style="border-radius: 4px;padding: 5px;width: 200px;">
+
+      <a href="/">
+        <div class="sidebarOption">
+          <span class="material-icons"> home </span>
+          <h2>Home</h2>
+        </div>
+      </a>
+      
+      <a href="/profile">
+        <div class="sidebarOption">
+          <span class="material-icons"> perm_identity </span>
+          <h2>Profile</h2>
+        </div>
+      </a>
+
+      <a href="/explore">
+        <div class="sidebarOption">
+          <span class="material-icons"> search </span>
+          <h2>Explore</h2>
+        </div>
+      </a>
+    </div>
+
+    <div class="container pt-5 mt-5" style="background-color:white;">
+    
+      <div class="d-flex px-4 pt-4 pb-4 bg-dark">
+          <div class="search-box">
+            <button class="btn-search"><i class="fas fa-search"></i></button>
+            <input type="text" class="input-search" placeholder="Type to Search...">
+          </div>
+
+      </div>
+
+      <div class="py-4 px-4">
+        <div class="py-4">
+          <h5 class="mb-3">Recent posts</h5>
+
+              <div class="post">
+                  <div class="post__body">
+                    <h3><b>#lambeturah</b></h3>
+                  </div>
+              </div>
+              <div class="post">
+                  <div class="post__body">
+                    <h3><b>#lambeturah</b></h3>
+                  </div>
+              </div>
+              <div class="post">
+                  <div class="post__body">
+                    <h3><b>#lambeturah</b></h3>
+                  </div>
+              </div>
+              <div class="post">
+                  <div class="post__body">
+                    <h3><b>#lambeturah</b></h3>
+                  </div>
+              </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- End profile widget -->
+
+
+
+    <script src="/js/custom.js"></script>
+  </body>
+  
+</html>
