@@ -1,6 +1,8 @@
 require './model/user'
 require './model/tweet'
 require './model/liketweet'
+require './model/commenttweet'
+require './model/follower'
 
 class UserController
 
@@ -28,6 +30,24 @@ class UserController
         getUser = User.getUserById(params['usId'])
 
         renderer = ERB.new(File.read("views/index.erb"))
+        renderer.result(binding)        
+    end
+
+    def comment(params)
+        getTweet = Tweet.getTweet(params['tweetId'])
+        commentList = CommentTweet.commentTweetListById(params['tweetId'])
+        getUser = User.getUserById(params['usId'])
+
+        renderer = ERB.new(File.read("views/comment.erb"))
+        renderer.result(binding)        
+    end
+
+    def profile(params)
+        getUser = User.getUserById(params['usId'])
+        followers = Follower.followersListById(params['usId'])
+        tweetList = Tweet.tweetListById(params['usId'])
+
+        renderer = ERB.new(File.read("views/profile.erb"))
         renderer.result(binding)        
     end
 

@@ -11,8 +11,8 @@
 
     <script src="/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/tweet.css">
     <link rel="stylesheet" href="/css/upload.css">
+    <link rel="stylesheet" href="/css/tweet.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link
       rel="stylesheet"
@@ -31,7 +31,7 @@
         <a href='' class='btn-search' data-toggle-class='search-active'>Logout</a>
       </menu>
     </header>
-    <!-- sidebar starts -->
+    
 
     <div id="mySidebar" class="sidebar">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
@@ -64,57 +64,13 @@
       <div class="bg-white shadow rounded overflow-hidden">
         <div class="feed">
           <div class="container">
-            <div class="tweetBox">
-              <form method="POST" action="/<%=getUser.userId%>/createTweet">
-                <div class="tweetbox__input">
 
-                  <% if getUser.profile_pic == nil %>                  
-                    <% if getUser.gender == "Male" %>
-                      <img
-                        src="/asset/avatar/male.jpg"
-                      alt=""/>
-                    <% else %>
-                      <img
-                        src="/asset/avatar/female.jpg"
-                      alt=""/>
-                    <% end %>
-                  <% else %>
-                    <img
-                      src="<%=getUser.profile_pic%>"
-                    alt=""/>
-                  <% end %>
-
-                  <input type="text" name="content" placeholder="What's happening?" required/>
-                </div>
-
-                <div class="tweetbox__input" style="margin-bottom:-30px;">
-                  <input type="text" name="hashtags" style="color:gray;font-size: 17px;" placeholder="Add Hashtag" />
-                </div>
-
-                <div class="d-flex justify-content-end">
-                  <div class="container" >
-                    <div class="container pt-4" style="padding-left:700px;" >
-                  </div>
-                    <div class="custom-file" >
-                      <input type="file" name="attachment" class="custom-file-input" id="customFile">
-                      <label class="custom-file-label" for="customFile">Add Attachment</label>
-                      <div class="invalid-feedback">Example invalid custom file feedback</div>
-                    </div>
-                  
-                  </div>
-                  <div class="p-2 bd-highlight"><button class="tweetBox__tweetButton">Submit</button></div>
-                </div>
-
-              </form>
-            </div>
-
-
-          <% tweetList.each_with_index do |tweet,index| %> 
+          <!-- get tweet -->
             <div class="post">
               <div class="post__avatar">
-                <% if tweet.userId.profile_pic == nil %>
+                <% if getTweet.userId.profile_pic == nil %>
                   
-                  <% if tweet.userId.gender == "Male" %>
+                  <% if getTweet.userId.gender == "Male" %>
                     <img
                       src="/asset/avatar/male.jpg"
                     alt=""/>
@@ -126,52 +82,50 @@
 
                 <% else %>
                   <img
-                    src="<%=tweet.userId.profile_pic%>"
+                    src="<%=getTweet.userId.profile_pic%>"
                   alt=""/>
                 <% end %>
 
 
               </div>
 
-
               <div class="post__body">
                 <div class="post__header">
                   <div class="post__headerText">
                     <h3>
-                      <%= tweet.userId.full_name %>
-                      <span class="post__headerSpecial">@<%= tweet.userId.username %></span>
+                      <%= getTweet.userId.full_name %>
+                      <span class="post__headerSpecial">@<%= getTweet.userId.username %></span>
                     </h3>
                   </div>
                   <div class="post__headerDescription text-justify">
                     <p class="show-read-more">
-                      <%= tweet.content %>
+                      <%= getTweet.content %>
                     </p>
-                    
-                    <% if tweet.hashtags.length > 0 %>
-                      <% tweet.hashtags.each do |hashtag| %> 
+
+                    <% if getTweet.hashtags.length > 0 %>
+                      <% getTweet.hashtags.each do |hashtag| %> 
                         <b>#<%= hashtag.hashtagId.hashtagName %></b>
                       <% end %>
                     <% end %>
                     
-                 
                   </div>
                 </div>
                 <div class="post__footer">
                   
                   <div class="container">
-                    <% if tweet.alreadyLike == false %>
-                      <a href="/<%=getUser.userId%>/<%=tweet.tweetId%>/like" style="color:black;"><span class="material-icons"> favorite_border </span></a>
+                    <% if getTweet.alreadyLike == false %>
+                      <a href="/<%=getUser.userId%>/<%=getTweet.tweetId%>/like" style="color:black;"><span class="material-icons"> favorite_border </span></a>
                     <% else %> 
-                      <a href="/<%=getUser.userId%>/<%=tweet.tweetId%>/dislike" style="color:black;"><i class="fas fa-heart"></i></a>
+                      <a href="/<%=getUser.userId%>/<%=getTweet.tweetId%>/dislike" style="color:black;"><i class="fas fa-heart"></i></a>
                     <% end %>
 
                     <span>
-                      <% if tweet.likes.length != 0 %>
+                      <% if getTweet.likes.length != 0 %>
                       
-                        <a href="#" style="color:black;padding-left:10px;" data-toggle="modal" data-target="#likeDataModal<%=tweet.tweetId%>"><%= tweet.likes.length %></a> 
+                        <a href="#" style="color:black;padding-left:10px;" data-toggle="modal" data-target="#likeDataModal<%=getTweet.tweetId%>"><%= getTweet.likes.length %></a> 
 
                         <!-- Modal -->
-                        <div class="modal fade" id="likeDataModal<%=tweet.tweetId%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="likeDataModal<%=getTweet.tweetId%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
@@ -181,7 +135,7 @@
                               </div>
                               <div class="modal-body">
                                 <ul class="list-group">
-                                    <% tweet.likes.each do |likes| %>
+                                    <% getTweet.likes.each do |likes| %>
                                       <li class="list-group-item">
                                         <div class="post__headerText">
                                           <h3 style="font-size:18px;"><%= likes.userId.full_name %><span class="post__headerSpecial pl-2" style="font-size:14px;">@<%= likes.userId.username %></span></h3>
@@ -199,10 +153,10 @@
                   </div>
 
                   <div class="container">
-                    <a href="/<%=getUser.userId%>/<%=tweet.tweetId%>/comment" style="color:black;"><span class="material-icons"> comment </span></a> 
+                    <a href="/<%=getTweet.userId%>/<%=getTweet.tweetId%>/comment" style="color:black;"><span class="material-icons"> comment </span></a> 
                     <span style="padding-bottom:5px;padding-left:10px;">
-                      <% if tweet.comments != 0 %>
-                        <a href="/<%=getUser.userId%>/<%=tweet.tweetId%>/comment" style="color:black;"><%= tweet.comments %></a> 
+                      <% if getTweet.comments != 0 %>
+                        <a href="/<%=getUser.userId%>/<%=getTweet.tweetId%>/comment" style="color:black;"><%= getTweet.comments %></a> 
                       <% end %>
                     </span>
                   </div>
@@ -211,47 +165,125 @@
                 </div>
               </div>
             </div>
-          <% end %>
 
+          <!-- comment list -->
+            <% commentList.each_with_index do |comment,index| %> 
+              <div class="post">
+                <div class="post__avatar">
+                  <% if comment.userId.profile_pic == nil %>
+                    
+                    <% if comment.userId.gender == "Male" %>
+                      <img
+                        src="/asset/avatar/male.jpg"
+                      alt=""/>
+                    <% else %>
+                      <img
+                        src="/asset/avatar/female.jpg"
+                      alt=""/>
+                    <% end %>
+
+                  <% else %>
+                    <img
+                      src="<%=comment.userId.profile_pic%>"
+                    alt=""/>
+                  <% end %>
+
+
+                </div>
+
+                <div class="post__body">
+                  <div class="post__header">
+                    <div class="post__headerText">
+                      <h3>
+                        <%= comment.userId.full_name %>
+                        <span class="post__headerSpecial">@<%= comment.userId.username %></span>
+                      </h3>
+                    </div>
+                    <div class="post__headerDescription text-justify">
+                      <p class="show-read-more">
+                        <%= comment.comment_tweet %>
+                      </p>
+
+                      <% if comment.hashtags.length > 0 %>
+                        <% comment.hashtags.each do |hashtag| %> 
+                          <b>#<%= hashtag.hashtagId.hashtagName %></b>
+                        <% end %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+      
+      <div class="pt-2">
+        <div class="bg-white shadow rounded overflow-hidden pt-1">
+          <div class="feed">
+            <div class="container">
+
+
+            <!-- write comment -->
+
+                    <div class="tweetBox">
+                      <form method="POST" action="/<%=getUser.userId%>/<%=getTweet.tweetId%>/comment">
+                        <div class="tweetbox__input">
+
+                          <% if getUser.profile_pic == nil %>                  
+                            <% if getUser.gender == "Male" %>
+                              <img
+                                src="/asset/avatar/male.jpg"
+                              alt=""/>
+                            <% else %>
+                              <img
+                                src="/asset/avatar/female.jpg"
+                              alt=""/>
+                            <% end %>
+                          <% else %>
+                            <img
+                              src="<%=getUser.profile_pic%>"
+                            alt=""/>
+                          <% end %>
+
+                          <input type="text" name="comment_tweet" placeholder="write a comment..." required/>
+                        </div>
+
+                        <div class="tweetbox__input" style="margin-bottom:-30px;">
+                          <input type="text" name="hashtags" style="color:gray;font-size: 17px;" placeholder="Add Hashtag" />
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                          <div class="container" >
+                            <div class="container pt-4" style="padding-left:700px;" >
+                          </div>
+                            <div class="custom-file" >
+                              <input type="file" name="attachment" class="custom-file-input" id="customFile">
+                              <label class="custom-file-label" for="customFile">Add Attachment</label>
+                              <div class="invalid-feedback">Example invalid custom file feedback</div>
+                            </div>
+                          
+                          </div>
+                          <div class="p-2 bd-highlight"><button class="tweetBox__tweetButton">Submit</button></div>
+                        </div>
+
+                      </form>
+                    </div>
+
+
+
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="container pt-5 mt-5">
 
-      <div class="bg-white shadow rounded overflow-hidden pl-3 pt-3 pb-3">
-        <h2>Hot News</h2>
-      </div>
 
-      <div class="bg-white shadow rounded overflow-hidden d-flex justify-content-center pt-3 pb-3">
-        <div class="card " style="width: 18rem;">
-          <img class="card-img-top" src="https://katasumbar.com/wp-content/uploads/2021/08/E7w_USVX0AItmN--1140x815.jpg" alt="Card image cap">
-          <div class="card-body">
-            <p class="card-text">
-              Greysia/Apriyani akhirnya mencetak sejarah sebagai ganda putri pertama Indonesia yang merebut medali emas....
-              <a href="https://katasumbar.com/mengenal-greysia-polii-apriyani-rahayu-peraih-medali-emas-olimpiade-tokyo-2020/">See More</a>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="bg-white shadow rounded overflow-hidden d-flex justify-content-center pt-3 pb-3">
-        <div class="card " style="width: 18rem;">
-          <img class="card-img-top" src="https://akcdn.detik.net.id/visual/2020/12/06/jejak-rasuah-bansos-mensos-6_169.jpeg?w=650" alt="Card image cap">
-          <div class="card-body">
-            <p class="card-text">
-              Pemerintah bakal mempercepat penyaluran bantuan sosial (bansos) sebelum Lebaran. Penyaluran bansos yang bertepatan..
-              <a href="https://www.cnnindonesia.com/ekonomi/20210429130804-532-636380/daftar-bansos-yang-cair-jelang-lebaran-2021">See More</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script src="/js/tweet.js"></script>
     <script src="/js/custom.js"></script>
     <script src="/js/upload.js"></script>
-   
+    <script src="/js/tweet.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

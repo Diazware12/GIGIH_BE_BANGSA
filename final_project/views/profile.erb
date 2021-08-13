@@ -9,7 +9,8 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-
+    <script src="/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/tweet.css">
     <link rel="stylesheet" href="/css/styles.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link
@@ -35,21 +36,21 @@
 
       <img src="/asset/jadi3.png" class="pl-3 pb-5" style="border-radius: 4px;padding: 5px;width: 200px;">
 
-      <a href="/">
+      <a href="/<%=getUser.userId%>/home">
         <div class="sidebarOption">
           <span class="material-icons"> home </span>
           <h2>Home</h2>
         </div>
       </a>
       
-      <a href="/profile">
+      <a href="/<%=getUser.userId%>/profile">
         <div class="sidebarOption">
           <span class="material-icons"> perm_identity </span>
           <h2>Profile</h2>
         </div>
       </a>
 
-      <a href="/explore">
+      <a href="/<%=getUser.userId%>/explore">
         <div class="sidebarOption">
           <span class="material-icons"> search </span>
           <h2>Explore</h2>
@@ -65,8 +66,8 @@
                   <div class="media align-items-end profile-header">
                     <div class="profile mr-3"><img src="https://d19m59y37dris4.cloudfront.net/university/1-1-1/img/teacher-4.jpg" alt="..." width="130" class="rounded mb-2 img-thumbnail"><a href="#" class="btn btn-dark btn-sm btn-block">Edit profile</a></div>
                     <div class="media-body mb-5 text-white">
-                      <h4 class="mt-0 mb-0">Manuella Tarly</h4>
-                      <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i>San Farcisco</p>
+                      <h4 class="mt-0 mb-0"><%=getUser.full_name%></h4>
+                      <p class="small mb-4">@<%=getUser.username%></p>
                     </div>
                   </div>
                 </div>
@@ -74,91 +75,165 @@
                 <div class="bg-light p-4 d-flex justify-content-end text-center">
                   <ul class="list-inline mb-0">
                     <li class="list-inline-item">
-                      <h5 class="font-weight-bold mb-0 d-block">241</h5><small class="text-muted"> <i class="fa fa-picture-o mr-1"></i>Tweets</small>
+                      <h5 class="font-weight-bold mb-0 d-block"><%=tweetList.length%></h5><small class="text-muted"> <i class="fa fa-picture-o mr-1"></i>Tweets</small>
                     </li>
                     <li class="list-inline-item">
-                      <h5 class="font-weight-bold mb-0 d-block">84K</h5><small class="text-muted"> <i class="fa fa-user-circle-o mr-1"></i>Followers</small>
+                      <h5 class="font-weight-bold mb-0 d-block"><%=followers.length%></h5><small class="text-muted"> <i class="fa fa-user-circle-o mr-1"></i>Followers</small>
                     </li>
                   </ul>
                 </div>
 
                 <div class="py-4 px-4">
                   <div class="py-4">
+                    <h5 class="mb-3">Write a post</h5>
+
+                    <div class="tweetBox">
+                      <form method="POST" action="/<%=getUser.userId%>/profile/createTweet">
+                        <div class="tweetbox__input">
+
+                          <% if getUser.profile_pic == nil %>                  
+                            <% if getUser.gender == "Male" %>
+                              <img
+                                src="/asset/avatar/male.jpg"
+                              alt=""/>
+                            <% else %>
+                              <img
+                                src="/asset/avatar/female.jpg"
+                              alt=""/>
+                            <% end %>
+                          <% else %>
+                            <img
+                              src="<%=getUser.profile_pic%>"
+                            alt=""/>
+                          <% end %>
+
+                          <input type="text" name="content" placeholder="What's happening?" required/>
+                        </div>
+
+                        <div class="tweetbox__input" style="margin-bottom:-30px;">
+                          <input type="text" name="hashtags" style="color:gray;font-size: 17px;" placeholder="Add Hashtag" />
+                        </div>
+
+                        <div class="d-flex justify-content-end">
+                          <div class="container" >
+                            <div class="container pt-4" style="padding-left:700px;" >
+                          </div>
+                            <div class="custom-file" >
+                              <input type="file" name="attachment" class="custom-file-input" id="customFile">
+                              <label class="custom-file-label" for="customFile">Add Attachment</label>
+                              <div class="invalid-feedback">Example invalid custom file feedback</div>
+                            </div>
+                          
+                          </div>
+                          <div class="p-2 bd-highlight"><button class="tweetBox__tweetButton">Submit</button></div>
+                        </div>
+
+                      </form>
+                    </div>
+
                     <h5 class="mb-3">Recent posts</h5>
 
-
+                      <% tweetList.each_with_index do |tweet,index| %> 
                         <div class="post">
-                            <div class="post__avatar">
+                          <div class="post__avatar">
+                            <% if tweet.userId.profile_pic == nil %>
+                              
+                              <% if tweet.userId.gender == "Male" %>
                                 <img
-                                    src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"
-                                    alt=""
-                                />
-                            </div>
-
-                            <div class="post__body">
-                                <div class="post__header">
-                                    <div class="post__headerText">
-                                        <h3>
-                                            Somanath Goudar
-                                            <span class="post__headerSpecial">
-                                            <span class="material-icons post__badge"> verified </span>@somanathg</span>
-                                        </h3>
-                                    </div>
-                                    <div class="post__headerDescription">
-                                        <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="post__footer">
-                                    <span class="material-icons"> repeat </span>
-                                    <span class="material-icons"> favorite_border </span>
-                                    <span class="material-icons"> publish </span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="post">
-                            <div class="post__avatar">
+                                  src="/asset/avatar/male.jpg"
+                                alt=""/>
+                              <% else %>
                                 <img
-                                    src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"
-                                    alt=""
-                                />
-                            </div>
+                                  src="/asset/avatar/female.jpg"
+                                alt=""/>
+                              <% end %>
 
-                            <div class="post__body">
-                                <div class="post__header">
-                                    <div class="post__headerText">
-                                        <h3>
-                                            Somanath Goudar
-                                            <span class="post__headerSpecial">
-                                            <span class="material-icons post__badge"> verified </span>@somanathg</span>
-                                        </h3>
-                                    </div>
-                                    <div class="post__headerDescription">
-                                        <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="post__footer">
-                                    <span class="material-icons"> repeat </span>
-                                    <span class="material-icons"> favorite_border </span>
-                                    <span class="material-icons"> publish </span>
-                                </div>
+                            <% else %>
+                              <img
+                                src="<%=tweet.userId.profile_pic%>"
+                              alt=""/>
+                            <% end %>
+
+
+                          </div>
+
+                          <div class="post__body">
+                            <div class="post__header">
+                              <div class="post__headerText">
+                                <h3>
+                                  <%= tweet.userId.full_name %>
+                                  <span class="post__headerSpecial">@<%= tweet.userId.username %></span>
+                                </h3>
+                              </div>
+                              <div class="post__headerDescription text-justify">
+                                <p class="show-read-more">
+                                  <%= tweet.content %>
+                                </p>
+                              </div>
+
+                              <% if tweet.hashtags.length > 0 %>
+                                <% tweet.hashtags.each do |hashtag| %> 
+                                  <b>#<%= hashtag.hashtagId.hashtagName %></b>
+                                <% end %>
+                              <% end %>
+
                             </div>
+                            <div class="post__footer">
+                              
+                              <div class="container">
+                                <% if tweet.alreadyLike == false %>
+                                  <a href="/<%=getUser.userId%>/profile/<%=tweet.tweetId%>/like" style="color:black;"><span class="material-icons"> favorite_border </span></a>
+                                <% else %> 
+                                  <a href="/<%=getUser.userId%>/profile/<%=tweet.tweetId%>/dislike" style="color:black;"><i class="fas fa-heart"></i></a>
+                                <% end %>
+
+                                <span>
+                                  <% if tweet.likes.length != 0 %>
+                                  
+                                    <a href="#" style="color:black;padding-left:10px;" data-toggle="modal" data-target="#likeDataModal<%=tweet.tweetId%>"><%= tweet.likes.length %></a> 
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="likeDataModal<%=tweet.tweetId%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <ul class="list-group">
+                                                <% tweet.likes.each do |likes| %>
+                                                  <li class="list-group-item">
+                                                    <div class="post__headerText">
+                                                      <h3 style="font-size:18px;"><%= likes.userId.full_name %><span class="post__headerSpecial pl-2" style="font-size:14px;">@<%= likes.userId.username %></span></h3>
+                                                    </div>
+                                                  </li> 
+                                                <% end %>
+                                            </ul>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                  <% end %>
+                                </span>
+                              </div>
+
+                              <div class="container">
+                                <a href="/<%=getUser.userId%>/<%=tweet.tweetId%>/comment" style="color:black;"><span class="material-icons"> comment </span></a> 
+                                <span style="padding-bottom:5px;padding-left:10px;">
+                                  <% if tweet.comments != 0 %>
+                                    <a href="/<%=getUser.userId%>/<%=tweet.tweetId%>/comment" style="color:black;"><%= tweet.comments %></a> 
+                                  <% end %>
+                                </span>
+                              </div>
+
+                              <span class="material-icons">  </span>
+                            </div>
+                          </div>
                         </div>
-
+                      <% end %>
 
                   </div>
                 </div>
@@ -169,7 +244,11 @@
 
     </div>
 
+    <script src="/js/tweet.js"></script>
     <script src="/js/custom.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </body>
   
 </html>
