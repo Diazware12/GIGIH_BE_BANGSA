@@ -30,6 +30,7 @@
     </header>
     <!-- sidebar starts -->
 
+
     <div id="mySidebar" class="sidebar">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
 
@@ -46,13 +47,6 @@
         <div class="sidebarOption">
           <span class="material-icons"> perm_identity </span>
           <h2>Profile</h2>
-        </div>
-      </a>
-
-      <a href="/<%=getUser.userId%>/explore">
-        <div class="sidebarOption">
-          <span class="material-icons"> search </span>
-          <h2>Explore</h2>
         </div>
       </a>
 
@@ -75,20 +69,42 @@
     <div class="container pt-5 mt-5">
       <div class="bg-white shadow rounded overflow-hidden">
         <div class="d-flex px-4 pt-4 pb-4 bg-dark">
-          <h3 style="color:white;" class="text-center"><b>Trending Topic</b></h3>
+          <h3 style="color:white;" class="text-center"><b>Edit User: @<%=getUser.username%></b></h3>
         </div>
-        <div class="py-4 px-4">
-          <div class="py-4">
-                <% hashtagList.each_with_index do |tag,index| %>
-                  <div class="post">
-                      <div class="post__body">
-                        <h3>  <a style="color:black;text-decoration:none;" href="/<%=getUser.userId%>/explore/<%=tag.hashtagId%>/details">  <b>#<%=tag.hashtagName%></b>   </a>  </h3>
-                        <p><%=tag.totalUsage%> tweets and comments use this tags</p>
-                      </div>
-                  </div>
-                <% end %>
+    
+        <div class="container p-5">
+          
+            <form method="POST" action="/<%=getUser.userId%>/profile/editdata">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" class="form-control" placeholder="fill Full Name" value="<%=getUser.full_name%>" required >
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">User Name</label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="fill username" value="<%=getUser.username%>" required >
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="fill email" value="<%=getUser.email%>" required >
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Description</label>
+                    <% if getUser.description == '' || getUser.description == nil %>
+                      <textarea id="description" name="description" value="<%=getUser.description%>" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <% else %>
+                      <textarea id="description" name="description" value="<%=getUser.description%>" class="form-control" id="exampleFormControlTextarea1" rows="3"><%=getUser.description%></textarea>
+                    <% end %>                    
+                </div>
 
-          </div>
+                <div class="d-flex flex-row-reverse bd-highlight">
+                    <div class="p-2 bd-highlight"><button type="submit" class="tweetBox__tweetButton">edit</button></div>
+                </div>
+                
+            </form>
+
+
+
+
         </div>
       </div>
     </div>

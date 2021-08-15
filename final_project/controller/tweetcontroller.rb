@@ -13,6 +13,9 @@ class TweetController
     end
 
     def createTweet(params)
+        
+        textContent = params['content']
+        return false if textContent.length > 1000
 
         filename = params[:file][:filename]
         file = params[:file][:tempfile]
@@ -21,7 +24,6 @@ class TweetController
           f.write(file.read)
         end
 
-        puts "#{filename}"
         createTweet = Tweet.new(
             userId: params['usId'],
             content: params['content'],

@@ -28,12 +28,13 @@
     <header class='header' style="overflow: hidden;" data-animate-header-container>
       <menu class='header-bar' data-animate-header>
         <a href="#" onclick="openNav()"  class='btn-menu' data-toggle-class='menu-active'>Menu</a>
-        <a href='/<%=getUser.userId%>/home' class='btn-search' data-toggle-class='search-active'><img src="/asset/jadi4.png" class="pl-3" style="border-radius: 4px;padding: 1px;width: 100px;"></a>
-        <a href='/' class='btn-search' data-toggle-class='search-active'>Logout</a>
+        <a href='/<%=getUser.userId%>/home' class='btn-menu' data-toggle-class='search-active'><img src="/asset/jadi4.png" class="pl-3" style="border-radius: 4px;padding: 1px;width: 100px;"></a>
+        <a href='/' class='btn-menu' data-toggle-class='search-active'>Logout</a>
       </menu>
     </header>
     <!-- sidebar starts -->
   
+
     <div id="mySidebar" class="sidebar">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
 
@@ -50,13 +51,6 @@
         <div class="sidebarOption">
           <span class="material-icons"> perm_identity </span>
           <h2>Profile</h2>
-        </div>
-      </a>
-
-      <a href="/<%=getUser.userId%>/explore">
-        <div class="sidebarOption">
-          <span class="material-icons"> search </span>
-          <h2>Explore</h2>
         </div>
       </a>
 
@@ -145,11 +139,11 @@
                           <%= tweet.content %>
                         </p>
                         
-                        <% if tweet.hashtags.length > 0 %>
-                          <% tweet.hashtags.each do |hashtag| %> 
-                            <b>#<%= hashtag.hashtagId.hashtagName %></b>
-                          <% end %>
+                      <% if tweet.hashtags.length > 0 %>
+                        <% tweet.hashtags.each do |hashtag| %> 
+                          <a href="/<%=getUser.userId%>/explore/<%=hashtag.hashtagId.hashtagId%>/details"><b>#<%= hashtag.hashtagId.hashtagName %></b></a>
                         <% end %>
+                      <% end %>
                         
                     
                       </div>
@@ -272,12 +266,17 @@
 
                                 <% if comment.hashtags.length > 0 %>
                                   <% comment.hashtags.each do |hashtag| %> 
-                                    <b>#<%= hashtag.hashtagId.hashtagName %></b>
+                                    <a href="/<%=getUser.userId%>/explore/<%=hashtag.hashtagId.hashtagId%>/details"><b>#<%= hashtag.hashtagId.hashtagName %></b></a>
                                   <% end %>
                                 <% end %>
 
 
                             </div>
+                          <% if comment.attachment != nil %>
+                            <img
+                              src="<%=comment.attachment%>"
+                            alt=""/>
+                          <% end %>
                         </div>
                     </div>
                 </div>

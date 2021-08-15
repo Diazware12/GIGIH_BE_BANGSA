@@ -31,6 +31,7 @@
     </header>
     <!-- sidebar starts -->
 
+
     <div id="mySidebar" class="sidebar">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
 
@@ -47,13 +48,6 @@
         <div class="sidebarOption">
           <span class="material-icons"> perm_identity </span>
           <h2>Profile</h2>
-        </div>
-      </a>
-
-      <a href="/<%=getUser.userId%>/explore">
-        <div class="sidebarOption">
-          <span class="material-icons"> search </span>
-          <h2>Explore</h2>
         </div>
       </a>
 
@@ -181,11 +175,11 @@
                                 </p>
                               </div>
 
-                              <% if tweet.hashtags.length > 0 %>
-                                <% tweet.hashtags.each do |hashtag| %> 
-                                  <b>#<%= hashtag.hashtagId.hashtagName %></b>
-                                <% end %>
+                            <% if tweet.hashtags.length > 0 %>
+                              <% tweet.hashtags.each do |hashtag| %> 
+                                <a href="/<%=getUser.userId%>/explore/<%=hashtag.hashtagId.hashtagId%>/details"><b>#<%= hashtag.hashtagId.hashtagName %></b></a>
                               <% end %>
+                            <% end %>
 
                             </div>
                             <div class="post__footer">

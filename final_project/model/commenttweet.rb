@@ -4,7 +4,7 @@ require_relative 'tweet'
 require_relative 'commenthashtag'
 
 class CommentTweet
-    attr_reader :commentTweetId, :userId, :tweetId, :comment_tweet,:hashtags, :dtm_crt
+    attr_reader :commentTweetId, :userId, :tweetId, :comment_tweet,:hashtags, :dtm_crt, :attachment
 
     def initialize (params)
         @commentTweetId = params[:commentTweetId]
@@ -13,6 +13,7 @@ class CommentTweet
         @comment_tweet = params[:comment_tweet]
         @hashtags = params[:hashtags]
         @dtm_crt = params[:dtm_crt]
+        @attachment = params[:attachment]
     end
 
     def self.commentTweetListById(id)
@@ -31,6 +32,7 @@ class CommentTweet
                 comment_tweet: data["comment_tweet"],
                 hashtags: CommentHashtag.getHashtagByCommentTweet(data["commentTweetId"]),
                 dtm_crt: data["dtm_crt"],
+                attachment: data["attachment"]
             )
             commentList.push(tweet)
         end
@@ -45,7 +47,8 @@ class CommentTweet
                     ct.userId,
                     ct.tweetId,
                     ct.comment_tweet,
-                    ct.dtm_crt
+                    ct.dtm_crt,
+                    ct.attachment
                 from commenttweets as ct
                 join commentHashtag as ch on 
                     ct.commentTweetId = ch.commentTweetId
@@ -61,6 +64,7 @@ class CommentTweet
                 comment_tweet: data["comment_tweet"],
                 hashtags: CommentHashtag.getHashtagByCommentTweet(data["commentTweetId"]),
                 dtm_crt: data["dtm_crt"],
+                attachment: data["attachment"]
             )
             commentList.push(tweet)
         end
@@ -70,7 +74,13 @@ class CommentTweet
     def save
         return false unless valid?
         client = create_db_client
-        rawData=client.query("insert into commenttweets (userId,tweetId,comment_tweet,dtm_crt) values (#{@userId},#{@tweetId},'#{@comment_tweet}',curdate());")
+
+        if @attachment == nil
+            rawData=client.query("insert into commenttweets (userId,tweetId,comment_tweet,dtm_crt) values (#{@userId},#{@tweetId},'#{@comment_tweet}',curdate());")
+        else
+            rawData=client.query("insert into commenttweets (userId,tweetId,comment_tweet,dtm_crt,attachment) values (#{@userId},#{@tweetId},'#{@comment_tweet}',curdate(),'/transaction/#{@attachment}');")
+        end
+        
         
         commentId = client.last_id
         if !@hashtags.nil? || !@hashtags == ""

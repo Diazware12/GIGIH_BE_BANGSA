@@ -1,0 +1,24 @@
+{
+  "profilePicture"=>{
+    "filename"=>"my-image.jpg", 
+    "type"=>"image/png", 
+    "name"=>"profilePicture", 
+    "tempfile"=>#<Tempfile:/tmp/RackMultipart20210815-17964-97gj7d.jpg>, 
+    
+    "head"=>"Content-Disposition: 
+    form-data; name=\"profilePicture\"; filename=\"my-image.jpg\"\r\nContent-Type: image/png\r\n"}, 
+"usId"=>"1"}
+
+{
+  "content"=>"Ini Bias saya, mana bias kamu?", 
+  "hashtags"=>"#mina #twice", 
+  "file"=>{
+    "filename"=>"twice-mina-profile-1-wm-758x506.jpg", 
+    "type"=>"image/jpeg", "name"=>"file", 
+    "tempfile"=>#<Tempfile:/tmp/RackMultipart20210815-18096-kp9ofz.jpg>, 
+    "head"=>"Content-Disposition: 
+      form-data; name=\"file\"; 
+      filename=\"twice-mina-profile-1-wm-758x506.jpg\"\r\nContent-Type: image/jpeg\r\n"4
+  },     
+  "usId"=>"1"
+}

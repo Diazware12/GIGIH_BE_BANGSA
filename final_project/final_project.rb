@@ -29,13 +29,10 @@ get '/:usId/home' do
 end
 
 
-    post '/:usId/createTweet' do
-        tweetController.createTweet(params)
-        redirect "/#{params['usId']}/home"
-    end
-
-
-
+post '/:usId/createTweet' do
+    tweetController.createTweet(params)
+    redirect "/#{params['usId']}/home"
+end
 
 
 get '/:usId/:tweetId/like' do
@@ -69,6 +66,24 @@ end
 
     get '/:usId/profile' do
         userController.profile(params)
+    end
+
+    get '/:usId/profile/editdata' do
+        userController.editPage(params)
+    end
+
+    post '/:usId/profile/editdata' do
+        userController.editData(params)
+        redirect "/#{params["usId"]}/profile"
+    end
+
+    get '/:usId/profile/editprofpic' do
+        userController.editProfPicPage(params)
+    end
+
+    post '/:usId/profile/editprofpic' do
+        userController.editProfPicData(params)
+        redirect "/#{params["usId"]}/profile"
     end
 
     get '/:usId/profile/:tweetId/like' do

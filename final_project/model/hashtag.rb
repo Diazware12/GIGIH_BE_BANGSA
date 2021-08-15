@@ -69,11 +69,20 @@ class Hashtag
                 select 
                 (@x:=h.hashtagId) as hashtagId,
                 h.hashtagName,
-                h.dtm_crt
+                h.dtm_crt,
+                FORMAT(
+                    (
+                        (	
+                            select count(*) from
+                            tweetHashtag where hashtagId = (@x)
+                        )+(
+                            select count(*) from
+                            commentHashtag where hashtagId = (@x)
+                        )
+                    ),0
+                ) as totalUse
                 from hashtags as h
                 where h.hashtagName like '%#{keyword}%'
-                group by h.hashtagId
-                order by h.dtm_crt
             """)
         hashtagList = Array.new
 
@@ -82,13 +91,12 @@ class Hashtag
                 hashtagId: data["hashtagId"],
                 hashtagName: data["hashtagName"],
                 dtm_crt: data["dtm_crt"],
-                totalUsage: Hashtag.getSumUser(data["hashtagId"])
+                totalUsage: data["totalUse"]
             )
             hashtagList.push(hashtag)
         end
         hashtagList
     end
-
 
     def self.hashtagList
         client = create_db_client
@@ -96,10 +104,20 @@ class Hashtag
                 select 
                 (@x:=h.hashtagId) as hashtagId,
                 h.hashtagName,
-                h.dtm_crt
+                h.dtm_crt,
+                FORMAT(
+                    (
+                        (	
+                            select count(*) from
+                            tweetHashtag where hashtagId = (@x)
+                        )+(
+                            select count(*) from
+                            commentHashtag where hashtagId = (@x)
+                        )
+                    ),0
+                ) as totalUse
                 from hashtags as h
-                group by h.hashtagId
-                order by h.dtm_crt
+                order by totalUse desc
             """)
         hashtagList = Array.new
 
@@ -108,7 +126,7 @@ class Hashtag
                 hashtagId: data["hashtagId"],
                 hashtagName: data["hashtagName"],
                 dtm_crt: data["dtm_crt"],
-                totalUsage: Hashtag.getSumUser(data["hashtagId"])
+                totalUsage: data["totalUse"]
             )
             hashtagList.push(hashtag)
         end
@@ -122,9 +140,21 @@ class Hashtag
                 (@x:=h.hashtagId) as hashtagId,
                 h.hashtagName,
                 h.dtm_crt,
-                HOUR(TIMEDIFF(curdate(), h.dtm_crt)) as test
+                FORMAT(
+                    (
+                        (	
+                            select count(*) from
+                            tweetHashtag where hashtagId = (@x)
+                        )+(
+                            select count(*) from
+                            commentHashtag where hashtagId = (@x)
+                        )
+                    ),0
+                ) as totalUse,
+                HOUR(TIMEDIFF(curdate(), h.dtm_crt)) as trendDate
                 from hashtags as h
-                having test = 24
+                having trendDate = 24
+                order by totalUse desc
                 limit 5
             """)
         hashtagList = Array.new
@@ -134,32 +164,11 @@ class Hashtag
                 hashtagId: data["hashtagId"],
                 hashtagName: data["hashtagName"],
                 dtm_crt: data["dtm_crt"],
-                totalUsage: Hashtag.getSumUser(data["hashtagId"])
+                totalUsage: data["totalUse"]
             )
             hashtagList.push(hashtag)
         end
         hashtagList
-    end
-
-    def self.getSumUser(id)
-        client = create_db_client
-        rawData=client.query("""
-                select 
-                sum((
-                    select count(*) from
-                    tweetHashtag where hashtagId = #{id}
-                )+(
-                    select count(*) from
-                    commentHashtag where hashtagId = #{id}
-                )) as totalUse
-                from hashtags
-                where hashtagId = #{id}
-            """)
-        sum = nil
-        rawData.each do |data|
-            sum = data["totalUse"]
-        end
-        sum
     end
 
 

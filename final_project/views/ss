@@ -1,33 +1,17 @@
-    <div id="mySidebar" class="sidebar">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Twitter Clone - Final</title>
 
-      <img src="/asset/jadi3.png" class="pl-3 pb-5" style="border-radius: 4px;padding: 5px;width: 200px;">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-      <a href="/<%=getUser.userId%>/home">
-        <div class="sidebarOption">
-          <span class="material-icons"> home </span>
-          <h2>Home</h2>
-        </div>
-      </a>
-      
-      <a href="/<%=getUser.userId%>/profile">
-        <div class="sidebarOption">
-          <span class="material-icons"> perm_identity </span>
-          <h2>Profile</h2>
-        </div>
-      </a>
 
-      <a href="/<%=getUser.userId%>/explore">
-        <div class="sidebarOption">
-          <span class="material-icons"> search </span>
-          <h2>Explore</h2>
-        </div>
-      </a>
-
-      <a href="/<%=getUser.userId%>/trending">
-        <div class="sidebarOption">
-          <span class="material-icons"> <i class="fas fa-chart-line"></i> </span>
-          <h2>Trending</h2>
-        </div>
-      </a>
-    </div>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />

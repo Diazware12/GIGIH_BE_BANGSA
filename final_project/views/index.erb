@@ -11,6 +11,7 @@
 
     <script src="/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/stringCount.css">
     <link rel="stylesheet" href="/css/showmore.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link
@@ -48,13 +49,6 @@
         <div class="sidebarOption">
           <span class="material-icons"> perm_identity </span>
           <h2>Profile</h2>
-        </div>
-      </a>
-
-      <a href="/<%=getUser.userId%>/explore">
-        <div class="sidebarOption">
-          <span class="material-icons"> search </span>
-          <h2>Explore</h2>
         </div>
       </a>
 
@@ -97,10 +91,12 @@
                     alt=""/>
                   <% end %>
 
-                  <input type="text" name="content" placeholder="What's happening?" required/>
+                  <input type="text" id="input-textarea" name="content" placeholder="What's happening?" required/>
+                  
                 </div>
+                <div class="count" style="padding-left:800px;"><b id="charac-count">0</b><b>/1000</b></div>
 
-                <div class="tweetbox__input" style="margin-bottom:-30px;">
+                <div class="tweetbox__input" style="margin-bottom:-30px;margin-top:-40px;">
                   <input type="text" name="hashtags" style="color:gray;font-size: 17px;" placeholder="Add Hashtag" />
                 </div>
 
@@ -115,7 +111,7 @@
                     </div>
                   
                   </div>
-                  <div class="p-2 bd-highlight"><button class="tweetBox__tweetButton">Submit</button></div>
+                  <div class="p-2 bd-highlight"><button class="tweetBox__tweetButton" id="submitBtn">Submit</button></div>
                 </div>
 
               </form>
@@ -174,9 +170,10 @@
                     
                     <% if tweet.hashtags.length > 0 %>
                       <% tweet.hashtags.each do |hashtag| %> 
-                        <b>#<%= hashtag.hashtagId.hashtagName %></b>
+                        <a href="/<%=getUser.userId%>/explore/<%=hashtag.hashtagId.hashtagId%>/details"><b>#<%= hashtag.hashtagId.hashtagName %></b></a>
                       <% end %>
                     <% end %>
+
                   </div>
                     <% if tweet.attachment != nil %>
                       <img
@@ -276,9 +273,11 @@
       </div>
     </div>
 
+    <script src="/js/stringCount.js"></script>
     <script src="/js/showmore.js"></script>
     <script src="/js/custom.js"></script>
     <script src="/js/uploadFile.js"></script>
+    
    
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

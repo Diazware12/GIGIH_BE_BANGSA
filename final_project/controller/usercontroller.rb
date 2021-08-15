@@ -51,6 +51,60 @@ class UserController
         renderer.result(binding)        
     end
 
+    def editPage(params)
+        getUser = User.getUserById(params['usId'])
+        renderer = ERB.new(File.read("views/edituserdata.erb"))
+        renderer.result(binding)        
+    end
+
+    def editData(params)
+        getUser = User.getUserById(params['usId'])
+        
+        desc = nil
+        if params['description'] == "" || params['description'] == nil
+            desc = ""
+        else
+            desc = params['description']
+        end
+
+        editUser = User.new(
+            userId: params['usId'],
+            full_name: params['fullname'],
+            username: params['username'],
+            email: params['email'],
+            description: desc
+        )
+        
+        editUser.update
+    end
+
+    def editProfPicPage(params)
+        getUser = User.getUserById(params['usId'])
+        renderer = ERB.new(File.read("views/editprofilepicture.erb"))
+        renderer.result(binding)        
+    end
+
+    def editProfPicData(params)
+        
+        filename = params[:profilePicture][:filename]
+        file = params[:profilePicture][:tempfile]
+      
+        File.open("./public/transaction/#{filename}", 'wb') do |f|
+          f.write(file.read)
+        end
+
+        getUser = User.getUserById(params['usId'])
+        updatePicture = User.new(
+            userId: getUser.userId,
+            full_name: getUser.full_name,
+            username: getUser.username,
+            email: getUser.email,
+            profile_pic: filename
+        )
+        updatePicture.updateProfilePic
+        
+    end
+
     def otherProfile(params)
 
         return false if params['usId'] == params['otherUsId']
