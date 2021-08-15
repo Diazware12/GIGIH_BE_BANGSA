@@ -13,10 +13,19 @@ class TweetController
     end
 
     def createTweet(params)
+
+        filename = params[:file][:filename]
+        file = params[:file][:tempfile]
+      
+        File.open("./public/transaction/#{filename}", 'wb') do |f|
+          f.write(file.read)
+        end
+
+        puts "#{filename}"
         createTweet = Tweet.new(
             userId: params['usId'],
             content: params['content'],
-            attachment: params['attachment'],
+            attachment: filename,
             hashtags: params['hashtags'],
         )
         createTweet.save

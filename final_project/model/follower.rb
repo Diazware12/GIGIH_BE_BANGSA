@@ -33,6 +33,62 @@ class Follower
         followerList
     end
 
+    def self.checkFollowStatus(userId,otherUserId)
+        client = create_db_client
+        rawData=client.query("""
+            select count(*) as follStatus from followers
+            where userFollowersId = #{userId} and userId = #{otherUserId} 
+        """)
+
+        status = nil
+        rawData.each do |data|
+            status = data["follStatus"]
+        end
+        
+        return true if status > 0
+        return false if status == 0
+    end
+
+    def self.getFollowerData(userId,otherUserId)
+        client = create_db_client
+        rawData=client.query("""
+            select * from followers
+            where userFollowersId = #{userId} and userId = #{otherUserId}
+        """)
+
+        follower = nil
+        rawData.each do |data|
+            follower = Follower.new(
+                followersId: data["followersId"],
+                userId: data["userId"],
+                userFollowersId: data["userFollowersId"],
+                dtm_crt: data["dtm_crt"]
+            )
+        end
+        follower
+    end
+
+
+    def delete
+        return false unless valid?
+        client = create_db_client
+        rawData=client.query("""
+            delete from followers
+            where followersId = #{@followersId}
+        """)
+    end
+
+    def save
+        return false unless valid?
+        client = create_db_client
+        rawData=client.query("""
+            insert into followers
+            (userId,userFollowersId,dtm_crt)
+            values (#{@userFollowersId},#{@userId},curdate())
+        """)
+    end
+
+
     def valid?
         return false if @userId.nil?
         return false if @userFollowersId.nil?

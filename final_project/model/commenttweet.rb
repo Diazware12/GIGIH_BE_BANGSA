@@ -29,7 +29,37 @@ class CommentTweet
                 userId: user,
                 tweetId: data["tweetId"],
                 comment_tweet: data["comment_tweet"],
-                hashtags: CommentHashtag.getHashtag(data["commentTweetId"]),
+                hashtags: CommentHashtag.getHashtagByCommentTweet(data["commentTweetId"]),
+                dtm_crt: data["dtm_crt"],
+            )
+            commentList.push(tweet)
+        end
+        commentList
+    end
+
+    def self.commentTweetListByHashtag(id)
+        client = create_db_client
+        rawData=client.query("""
+                select 
+                    ct.commentTweetId,
+                    ct.userId,
+                    ct.tweetId,
+                    ct.comment_tweet,
+                    ct.dtm_crt
+                from commenttweets as ct
+                join commentHashtag as ch on 
+                    ct.commentTweetId = ch.commentTweetId
+                where ch.hashtagId = #{id}
+            """)
+        commentList = Array.new
+        rawData.each do |data|
+            user = User.getUserById(data["userId"])
+            tweet = CommentTweet.new(
+                commentTweetId: data["commentTweetId"],
+                userId: user,
+                tweetId: Tweet.getTweet(data["tweetId"]),
+                comment_tweet: data["comment_tweet"],
+                hashtags: CommentHashtag.getHashtagByCommentTweet(data["commentTweetId"]),
                 dtm_crt: data["dtm_crt"],
             )
             commentList.push(tweet)

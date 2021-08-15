@@ -1,45 +1,33 @@
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
 
-            <div class="tweetBox">
-              <h2>Write Comment</h2>
-              <form>
-                <div class="tweetbox__input">
+      <img src="/asset/jadi3.png" class="pl-3 pb-5" style="border-radius: 4px;padding: 5px;width: 200px;">
 
-                  <% if getUser.profile_pic == nil %>                  
-                    <% if getUser.gender == "Male" %>
-                      <img
-                        src="/asset/avatar/male.jpg"
-                      alt=""/>
-                    <% else %>
-                      <img
-                        src="/asset/avatar/female.jpg"
-                      alt=""/>
-                    <% end %>
-                  <% else %>
-                    <img
-                      src="<%=getUser.profile_pic%>"
-                    alt=""/>
-                  <% end %>
+      <a href="/<%=getUser.userId%>/home">
+        <div class="sidebarOption">
+          <span class="material-icons"> home </span>
+          <h2>Home</h2>
+        </div>
+      </a>
+      
+      <a href="/<%=getUser.userId%>/profile">
+        <div class="sidebarOption">
+          <span class="material-icons"> perm_identity </span>
+          <h2>Profile</h2>
+        </div>
+      </a>
 
-                  <input type="text" placeholder="Write Comment" required/>
-                </div>
+      <a href="/<%=getUser.userId%>/explore">
+        <div class="sidebarOption">
+          <span class="material-icons"> search </span>
+          <h2>Explore</h2>
+        </div>
+      </a>
 
-                <div class="tweetbox__input" style="margin-bottom:-30px;">
-                  <input type="text" style="color:gray;font-size: 17px;" placeholder="Add Hashtag" />
-                </div>
-
-                <div class="d-flex justify-content-end">
-                  <div class="container" >
-                    <div class="container pt-4" style="padding-left:700px;" >
-                  </div>
-                    <div class="custom-file" >
-                      <input type="file" class="custom-file-input" id="customFile">
-                      <label class="custom-file-label" for="customFile">Add Attachment</label>
-                      <div class="invalid-feedback">Example invalid custom file feedback</div>
-                    </div>
-                  
-                  </div>
-                  <div class="p-2 bd-highlight"><button class="tweetBox__tweetButton">Submit</button></div>
-                </div>
-
-              </form>
-            </div>
+      <a href="/<%=getUser.userId%>/trending">
+        <div class="sidebarOption">
+          <span class="material-icons"> <i class="fas fa-chart-line"></i> </span>
+          <h2>Trending</h2>
+        </div>
+      </a>
+    </div>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Twitter Clone - Final</title>
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <script src="/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/showmore.css">
+    <link rel="stylesheet" href="/css/upload.css">
+    <link rel="stylesheet" href="/css/search_bar.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+
+    <header class='header' style="overflow: hidden;" data-animate-header-container>
+      <menu class='header-bar' data-animate-header>
+        <a href="#" onclick="openNav()"  class='btn-menu' data-toggle-class='menu-active'>Menu</a>
+        <a href='/<%=getUser.userId%>/home' class='btn-search' data-toggle-class='search-active'><img src="/asset/jadi4.png" class="pl-3" style="border-radius: 4px;padding: 1px;width: 100px;"></a>
+        <a href='/' class='btn-search' data-toggle-class='search-active'>Logout</a>
+      </menu>
+    </header>
+    <!-- sidebar starts -->
+  
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+
+      <img src="/asset/jadi3.png" class="pl-3 pb-5" style="border-radius: 4px;padding: 5px;width: 200px;">
+
+      <a href="/<%=getUser.userId%>/home">
+        <div class="sidebarOption">
+          <span class="material-icons"> home </span>
+          <h2>Home</h2>
+        </div>
+      </a>
+      
+      <a href="/<%=getUser.userId%>/profile">
+        <div class="sidebarOption">
+          <span class="material-icons"> perm_identity </span>
+          <h2>Profile</h2>
+        </div>
+      </a>
+
+      <a href="/<%=getUser.userId%>/explore">
+        <div class="sidebarOption">
+          <span class="material-icons"> search </span>
+          <h2>Explore</h2>
+        </div>
+      </a>
+
+      <a href="/<%=getUser.userId%>/trending">
+        <div class="sidebarOption">
+          <span class="material-icons"> <i class="fas fa-chart-line"></i> </span>
+          <h2>Trending</h2>
+        </div>
+      </a>
+
+      <a href="/<%=getUser.userId%>/findpeople">
+        <div class="sidebarOption">
+          <span class="material-icons"> <i class="fas fa-user-plus"></i> </span>
+          <h2>Find People</h2>
+        </div>
+      </a>  
+    </div>
+
+
+    <div class="container pt-5 mt-5">
+      <div class="bg-white shadow rounded overflow-hidden">
+        <div class="d-flex px-4 pt-4 pb-4 bg-dark">
+          <h3 style="color:white;"><b>#<%=hashtagData.hashtagName%></b></h3>
+        </div>
+
+        <div class="py-4 px-4">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#tweet" role="tab" aria-controls="home" aria-selected="true">Tweet</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="profile" aria-selected="false">Comment</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="tweet" role="tabpanel" aria-labelledby="home-tab">
+            
+              <% tweetList.each_with_index do |tweet,index| %> 
+                <div class="post">
+                  <div class="post__avatar">
+                    <% if tweet.userId.profile_pic == nil %>
+                      
+                      <% if tweet.userId.gender == "Male" %>
+                        <img
+                          src="/asset/avatar/male.jpg"
+                        alt=""/>
+                      <% else %>
+                        <img
+                          src="/asset/avatar/female.jpg"
+                        alt=""/>
+                      <% end %>
+
+                    <% else %>
+                      <img
+                        src="<%=tweet.userId.profile_pic%>"
+                      alt=""/>
+                    <% end %>
+
+
+                  </div>
+
+
+                  <div class="post__body">
+                    <div class="post__header">
+                      <div class="post__headerText">
+                        
+                        <% if getUser.userId != tweet.userId.userId %>
+                          <a style="text-decoration:none;" href="/<%=getUser.userId%>/<%=tweet.userId.userId%>/profile">
+                            <h3>
+                              <%= tweet.userId.full_name %>
+                              <span class="post__headerSpecial">@<%= tweet.userId.username %></span>
+                            </h3>
+                          </a>
+                        <% else %>
+                          <a style="text-decoration:none;" href="/<%=getUser.userId%>/profile">
+                            <h3>
+                              <%= tweet.userId.full_name %>
+                              <span class="post__headerSpecial">@<%= tweet.userId.username %></span>
+                            </h3>
+                          </a>                    
+                        <% end %>
+
+                      </div>
+                      <div class="post__headerDescription text-justify">
+                        <p class="show-read-more">
+                          <%= tweet.content %>
+                        </p>
+                        
+                        <% if tweet.hashtags.length > 0 %>
+                          <% tweet.hashtags.each do |hashtag| %> 
+                            <b>#<%= hashtag.hashtagId.hashtagName %></b>
+                          <% end %>
+                        <% end %>
+                        
+                    
+                      </div>
+                      <% if tweet.attachment != nil %>
+                        <img
+                          src="<%=tweet.attachment%>"
+                        alt=""/>
+                      <% end %>
+                    </div>
+                    <div class="post__footer">
+                      
+                      <div class="container">
+                      
+                        <% if tweet.alreadyLike == false %>
+                          <a href="/<%=getUser.userId%>/explore/<%=hashtagData.hashtagId%>/details/<%=tweet.tweetId%>/like" style="color:black;"><span class="material-icons"> favorite_border </span></a>
+                        <% else %> 
+                          <a href="/<%=getUser.userId%>/explore/<%=hashtagData.hashtagId%>/details/<%=tweet.tweetId%>/dislike" style="color:black;"><i class="fas fa-heart"></i></a>
+                        <% end %>
+
+                        <span>
+                          <% if tweet.likes.length != 0 %>
+                          
+                            <a href="#" style="color:black;padding-left:10px;" data-toggle="modal" data-target="#likeDataModal<%=tweet.tweetId%>"><%= tweet.likes.length %></a> 
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="likeDataModal<%=tweet.tweetId%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <ul class="list-group">
+                                        <% tweet.likes.each do |likes| %>
+                                          <li class="list-group-item">
+                                            <div class="post__headerText">
+                                              <h3 style="font-size:18px;"><%= likes.userId.full_name %><span class="post__headerSpecial pl-2" style="font-size:14px;">@<%= likes.userId.username %></span></h3>
+                                            </div>
+                                          </li> 
+                                        <% end %>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                          <% end %>
+                        </span>
+                      </div>
+
+                      <div class="container">
+                        <a href="/<%=getUser.userId%>/<%=tweet.tweetId%>/comment" style="color:black;"><span class="material-icons"> comment </span></a> 
+                        <span style="padding-bottom:5px;padding-left:10px;">
+                          <% if tweet.comments != 0 %>
+                            <a href="/<%=getUser.userId%>/<%=tweet.tweetId%>/comment" style="color:black;"><%= tweet.comments %></a> 
+                          <% end %>
+                        </span>
+                      </div>
+
+                      <span class="material-icons">  </span>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            
+            </div>
+            <div class="tab-pane fade" id="comment" role="tabpanel" aria-labelledby="profile-tab">
+            
+              <% commentTweetList.each_with_index do |comment,index| %>
+                <div class="post">
+                    <div class="post__avatar">
+                      <% if comment.userId.profile_pic == nil %>
+                        
+                        <% if comment.userId.gender == "Male" %>
+                          <img
+                            src="/asset/avatar/male.jpg"
+                          alt=""/>
+                        <% else %>
+                          <img
+                            src="/asset/avatar/female.jpg"
+                          alt=""/>
+                        <% end %>
+
+                      <% else %>
+                        <img
+                          src="<%=comment.userId.profile_pic%>"
+                        alt=""/>
+                      <% end %>
+                    </div>
+
+                    <div class="post__body">
+                        <div class="post__header">
+                            <div class="post__headerText">
+                                <h3 class="pb-2">
+                                    <%=comment.userId.full_name%>
+                                    <span class="post__headerSpecial">
+                                    <span class="material-icons post__badge"></span>@<%=comment.userId.username%>
+                                    </span>
+
+                                      <div class="container">
+                                        <span class="material-icons"> repeat </span>
+
+                                          
+                                        <a href="/<%=getUser.userId%>/<%=comment.tweetId.tweetId%>/comment" style="color:black;"> 
+                                          <span class="material-icons post__badge" ></span>@<%=comment.tweetId.userId.username%>
+                                            <p class="show-comment pl-5">
+                                                <%=comment.tweetId.content%>
+                                            </p>
+                                        <a>
+                                      </div>
+                                </h3>
+                            </div>
+                            <div class="post__headerDescription">
+                                <p class="show-read-more">
+                                    <%=comment.comment_tweet%>
+                                </p>
+
+
+                                <% if comment.hashtags.length > 0 %>
+                                  <% comment.hashtags.each do |hashtag| %> 
+                                    <b>#<%= hashtag.hashtagId.hashtagName %></b>
+                                  <% end %>
+                                <% end %>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <% end %>
+            
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- End profile widget -->
+
+
+
+    <script src="/js/showmore.js"></script>
+    <script src="/js/custom.js"></script>
+    <script src="/js/upload.js"></script>
+   
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+  
+</html>

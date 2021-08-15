@@ -47,7 +47,7 @@ class TweetHashtag
         return hashtagList
     end
 
-    def self.getHashtag(id)
+    def self.getHashtagByTweetId(id)
         client = create_db_client
         rawData=client.query("""
             select * from tweetHashtag

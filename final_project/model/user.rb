@@ -61,6 +61,52 @@ class User
         user
     end
 
+    def self.userList
+        client = create_db_client
+        rawData=client.query("""
+                select * from users
+            """)
+        userList = Array.new
+        rawData.each do |data|
+            user = User.new(
+                userId: data["userId"],
+                full_name: data["full_name"],
+                username: data["username"],
+                email: data["email"],
+                password: data["password"],
+                gender: data["gender"],
+                profile_pic: data["profile_pic"],
+                role: data["role"],
+                dtm_crt: data["dtm_crt"]
+            )
+            userList.push(user)
+        end
+        userList
+    end
+
+    def self.searchUser(search)
+        client = create_db_client
+        rawData=client.query("""
+                select * from users
+                where username like '%#{search}%'
+            """)
+        userList = Array.new
+        rawData.each do |data|
+            user = User.new(
+                userId: data["userId"],
+                full_name: data["full_name"],
+                username: data["username"],
+                email: data["email"],
+                password: data["password"],
+                gender: data["gender"],
+                profile_pic: data["profile_pic"],
+                role: data["role"],
+                dtm_crt: data["dtm_crt"]
+            )
+            userList.push(user)
+        end
+        userList
+    end
 
     def valid?
         return false if @full_name.nil?

@@ -47,7 +47,7 @@ class CommentHashtag
         return hashtagList
     end
 
-    def self.getHashtag(id)
+    def self.getHashtagByCommentTweet(id)
         client = create_db_client
         rawData=client.query("""
             select * from commentHashtag

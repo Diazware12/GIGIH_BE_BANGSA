@@ -24,9 +24,9 @@
 
     <header class='header' style="overflow: hidden;" data-animate-header-container>
       <menu class='header-bar' data-animate-header>
-        <a href='#' onclick="openNav()"  class='btn-menu' data-toggle-class='menu-active'>Menu</a>
+        <a href="#" onclick="openNav()"  class='btn-menu' data-toggle-class='menu-active'>Menu</a>
         <a href='/<%=getUser.userId%>/home' class='btn-menu' data-toggle-class='search-active'><img src="/asset/jadi4.png" class="pl-3" style="border-radius: 4px;padding: 1px;width: 100px;"></a>
-        <a href='#' class='btn-menu' data-toggle-class='search-active'>Logout</a>
+        <a href='/' class='btn-menu' data-toggle-class='search-active'>Logout</a>
       </menu>
     </header>
     <!-- sidebar starts -->
@@ -36,63 +36,69 @@
 
       <img src="/asset/jadi3.png" class="pl-3 pb-5" style="border-radius: 4px;padding: 5px;width: 200px;">
 
-      <a href="/">
+      <a href="/<%=getUser.userId%>/home">
         <div class="sidebarOption">
           <span class="material-icons"> home </span>
           <h2>Home</h2>
         </div>
       </a>
       
-      <a href="/profile">
+      <a href="/<%=getUser.userId%>/profile">
         <div class="sidebarOption">
           <span class="material-icons"> perm_identity </span>
           <h2>Profile</h2>
         </div>
       </a>
 
-      <a href="/explore">
+      <a href="/<%=getUser.userId%>/explore">
         <div class="sidebarOption">
           <span class="material-icons"> search </span>
           <h2>Explore</h2>
         </div>
       </a>
+
+      <a href="/<%=getUser.userId%>/trending">
+        <div class="sidebarOption">
+          <span class="material-icons"> <i class="fas fa-chart-line"></i> </span>
+          <h2>Trending</h2>
+        </div>
+      </a>
+
+      <a href="/<%=getUser.userId%>/findpeople">
+        <div class="sidebarOption">
+          <span class="material-icons"> <i class="fas fa-user-plus"></i> </span>
+          <h2>Find People</h2>
+        </div>
+      </a>  
     </div>
 
-    <div class="container pt-5 mt-5" style="background-color:white;">
-    
-      <div class="d-flex px-4 pt-4 pb-4 bg-dark">
-          <div class="search-box">
-            <button class="btn-search"><i class="fas fa-search"></i></button>
-            <input type="text" class="input-search" placeholder="Type to Search...">
+
+    <div class="container pt-5 mt-5">
+      <div class="bg-white shadow rounded overflow-hidden">
+        <div class="d-flex px-4 pt-4 pb-4 bg-dark">
+            <div class="search-box">
+              <form method="get">
+                <button class="btn-search"><i class="fas fa-search"></i></button>
+                <input type="text" name="hashtag" id="hashtag" class="input-search" placeholder="Type to Search...">
+              </form>
+            </div>
+
+        </div>
+
+        <div class="py-4 px-4">
+          <div class="py-4">
+            <h5 class="mb-3">Recent Hashtag</h5>
+
+                <% hashtagList.each_with_index do |tag,index| %>
+                  <div class="post">
+                      <div class="post__body">
+                        <h3>  <a style="color:black;text-decoration:none;" href="/<%=getUser.userId%>/explore/<%=tag.hashtagId%>/details">  <b>#<%=tag.hashtagName%></b>   </a>  </h3>
+                        <p><%=tag.totalUsage%> people use this tags</p>
+                      </div>
+                  </div>
+                <% end %>
+
           </div>
-
-      </div>
-
-      <div class="py-4 px-4">
-        <div class="py-4">
-          <h5 class="mb-3">Recent posts</h5>
-
-              <div class="post">
-                  <div class="post__body">
-                    <h3><b>#lambeturah</b></h3>
-                  </div>
-              </div>
-              <div class="post">
-                  <div class="post__body">
-                    <h3><b>#lambeturah</b></h3>
-                  </div>
-              </div>
-              <div class="post">
-                  <div class="post__body">
-                    <h3><b>#lambeturah</b></h3>
-                  </div>
-              </div>
-              <div class="post">
-                  <div class="post__body">
-                    <h3><b>#lambeturah</b></h3>
-                  </div>
-              </div>
-
         </div>
       </div>
     </div>

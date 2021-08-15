@@ -19,14 +19,14 @@ class UserController
             renderer = ERB.new(File.read("views/login.erb"))
             renderer.result(binding)
         else
-            tweetList = Tweet.tweetListById(getUser.userId)
+            tweetList = Tweet.tweetList(getUser.userId)
             renderer = ERB.new(File.read("views/index.erb"))
             renderer.result(binding)
         end
     end
 
     def homepage(params)
-        tweetList = Tweet.tweetListById(params['usId'])
+        tweetList = Tweet.tweetList(params['usId'])
         getUser = User.getUserById(params['usId'])
 
         renderer = ERB.new(File.read("views/index.erb"))
@@ -48,6 +48,22 @@ class UserController
         tweetList = Tweet.tweetListById(params['usId'])
 
         renderer = ERB.new(File.read("views/profile.erb"))
+        renderer.result(binding)        
+    end
+
+    def otherProfile(params)
+
+        return false if params['usId'] == params['otherUsId']
+
+        getUser = User.getUserById(params['usId'])
+        getOtherUser= User.getUserById(params['otherUsId'])
+
+        followStatus = Follower.checkFollowStatus(params['usId'],params['otherUsId'])
+
+        followers = Follower.followersListById(params['otherUsId'])
+        tweetList = Tweet.otherTweetListById(params['otherUsId'],params['usId'])
+
+        renderer = ERB.new(File.read("views/otherProfile.erb"))
         renderer.result(binding)        
     end
 

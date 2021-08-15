@@ -18,7 +18,92 @@ class Tweet
         @hashtags = params[:hashtags]
     end
 
+    def self.tweetList(id)
+        client = create_db_client
+        rawData=client.query("""
+            select
+                (@x:=t.tweetId) as tweetId,
+                u.userId as userId,
+                t.content,
+                t.attachment,
+                t.dtm_crt,
+				(
+                    select count(*) from liketweets
+                    where tweetId = (@x) 
+                ) as likes,
+                (
+                    select count(*) from commenttweets
+                    where tweetId = (@x) 
+                ) as comments
+                from tweets as t join
+                users as u on t.userId = u.userId
+                join followers as f on u.userId = f.userId
+                where u.userId = #{id} or f.userFollowersId = #{id}
+                order by likes desc
+            """)
+        tweetList = Array.new
+
+        rawData.each do |data|
+            user = User.getUserById(data["userId"])
+            tweet = Tweet.new(
+                tweetId: data["tweetId"],
+                userId: user,
+                content: data["content"],
+                attachment: data["attachment"],
+                dtm_crt: data["dtm_crt"],
+                likes: LikeTweet.likesData(data["tweetId"]),
+                alreadyLike: LikeTweet.checkUserLikedStatus(id,data["tweetId"]),
+                comments: data["comments"],
+                hashtags: TweetHashtag.getHashtagByTweetId(data["tweetId"])
+            )
+            tweetList.push(tweet)
+        end
+        tweetList
+    end
+
     def self.tweetListById(id)
+        client = create_db_client
+        rawData=client.query("""
+            select
+                (@x:=t.tweetId) as tweetId,
+                u.userId as userId,
+                t.content,
+                t.attachment,
+                t.dtm_crt,
+                (
+                    select count(*) from liketweets
+                    where tweetId = (@x) 
+                ) as likes,
+                (
+                    select count(*) from commenttweets
+                    where tweetId = (@x) 
+                ) as comments
+                from tweets as t join
+                users as u on t.userId = u.userId
+                where u.userId = #{id}
+                order by likes desc
+            """)
+        tweetList = Array.new
+
+        rawData.each do |data|
+            user = User.getUserById(data["userId"])
+            tweet = Tweet.new(
+                tweetId: data["tweetId"],
+                userId: user,
+                content: data["content"],
+                attachment: data["attachment"],
+                dtm_crt: data["dtm_crt"],
+                likes: LikeTweet.likesData(data["tweetId"]),
+                alreadyLike: LikeTweet.checkUserLikedStatus(id,data["tweetId"]),
+                comments: data["comments"],
+                hashtags: TweetHashtag.getHashtagByTweetId(data["tweetId"])
+            )
+            tweetList.push(tweet)
+        end
+        tweetList
+    end
+
+    def self.otherTweetListById(id,userId)
         client = create_db_client
         rawData=client.query("""
             select
@@ -46,9 +131,54 @@ class Tweet
                 attachment: data["attachment"],
                 dtm_crt: data["dtm_crt"],
                 likes: LikeTweet.likesData(data["tweetId"]),
-                alreadyLike: LikeTweet.checkUserLikedStatus(id,data["tweetId"]),
+                alreadyLike: LikeTweet.checkUserLikedStatus(userId,data["tweetId"]),
                 comments: data["comments"],
-                hashtags: TweetHashtag.getHashtag(data["tweetId"])
+                hashtags: TweetHashtag.getHashtagByTweetId(data["tweetId"])
+            )
+            tweetList.push(tweet)
+        end
+        tweetList
+    end
+
+    def self.tweetListByHashtag(usId,hashtagId)
+
+        client = create_db_client
+        rawData=client.query("""
+            select 
+            (@x:=t.tweetId) as tweetId,
+            u.userId as userId,
+            t.content,
+            t.attachment,
+            t.dtm_crt,
+            (
+                select count(*) from liketweets
+                where tweetId = (@x) 
+            ) as likes,
+            (
+                select count(*) from commenttweets
+                where tweetId = (@x) 
+            ) as comments
+            from tweets as t
+            join tweetHashtag as th on t.tweetId = th.tweetId
+            join users as u on t.userId = u.userId
+            where th.hashtagId = #{hashtagId}
+            order by likes desc
+            """)
+            
+        tweetList = Array.new
+
+        rawData.each do |data|
+            user = User.getUserById(data["userId"])
+            tweet = Tweet.new(
+                tweetId: data["tweetId"],
+                userId: user,
+                content: data["content"],
+                attachment: data["attachment"],
+                dtm_crt: data["dtm_crt"],
+                likes: LikeTweet.likesData(data["tweetId"]),
+                alreadyLike: LikeTweet.checkUserLikedStatus(usId,data["tweetId"]),
+                comments: data["comments"],
+                hashtags: TweetHashtag.getHashtagByTweetId(data["tweetId"])
             )
             tweetList.push(tweet)
         end
@@ -84,7 +214,7 @@ class Tweet
                 likes: LikeTweet.likesData(data["tweetId"]),
                 alreadyLike: LikeTweet.checkUserLikedStatus(id,data["tweetId"]),
                 comments: data["comments"],
-                hashtags: TweetHashtag.getHashtag(data["tweetId"])
+                hashtags: TweetHashtag.getHashtagByTweetId(data["tweetId"])
             )
         end
         response
@@ -93,8 +223,12 @@ class Tweet
     def save
         return false unless valid?
         client = create_db_client
-        rawData=client.query("insert into tweets (userId,content,dtm_crt) values (#{@userId},'#{@content}',curdate());")
-        
+        if @attachment == nil
+            rawData=client.query("insert into tweets (userId,content,dtm_crt) values (#{@userId},'#{@content}',curdate());")            
+        else
+            rawData=client.query("insert into tweets (userId,content,attachment,dtm_crt) values (#{@userId},'#{@content}','/transaction/#{@attachment}',curdate());") 
+        end
+
         tweetid = client.last_id
         if !@hashtags.nil? || !@hashtags == ""
             insertHashtag = TweetHashtag.saveToHashtag(@hashtags,tweetid)
