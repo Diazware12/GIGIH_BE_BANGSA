@@ -55,11 +55,19 @@ post '/:usId/:tweetId/comment' do
 end
 
 get '/register' do
-    erb:register
+    userController.registerPage(params,"page")
+end
+
+post '/register' do
+    userController.registerPage(params,"submit")
 end
 
 get '/forgotpassword' do
-    erb:forgotPassword
+    userController.forgotPassword(params,"page")
+end
+
+post '/forgotpassword' do
+    userController.forgotPassword(params,"submit")
 end
 
 # own profile
@@ -93,6 +101,11 @@ end
 
     get '/:usId/profile/:tweetId/dislike' do
         tweetController.dislike(params)
+        redirect "/#{params['usId']}/profile"
+    end
+
+    get '/:usId/profile/:tweetId/delete' do
+        tweetController.deleteTweet(params)
         redirect "/#{params['usId']}/profile"
     end
 

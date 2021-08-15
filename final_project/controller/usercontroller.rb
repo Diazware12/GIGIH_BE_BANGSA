@@ -12,6 +12,83 @@ class UserController
         renderer.result(binding)
     end
 
+    def registerPage(params,context)
+        if context == "page"
+            alert = nil
+            renderer = ERB.new(File.read("views/register.erb"))
+            renderer.result(binding)
+        else
+            alert = nil
+            getUser = User.new(
+                full_name: params["fullname"],
+                username: params["username"],
+                email: params["email"],
+                password: params["password"],
+                gender: params["gender"]
+            )
+
+            exist = User.checkUser(getUser.username)
+
+            if params["password"] != params["conpass"]
+                alert = "Confirm password should be same as password"
+            elsif params["username"].include? " "
+                alert = "username cannot contain space (' ')"
+            elsif exist == true
+                alert = "username already used by other user"
+            end
+
+            if alert != nil
+                renderer = ERB.new(File.read("views/register.erb"))
+                renderer.result(binding)
+            else 
+                getUser.save
+                renderer = ERB.new(File.read("views/login.erb"))
+                renderer.result(binding)
+            end
+            
+        end
+    end
+
+    def forgotPassword(params,context)
+        if context == "page"
+            alert = nil
+            renderer = ERB.new(File.read("views/forgotPassword.erb"))
+            renderer.result(binding)
+        else
+            alert = nil
+
+            exist = User.checkUser(params["username"])
+
+            if params["password"] != params["conpass"]
+                alert = "Confirm password should be same as password"
+            elsif params["username"].include? " "
+                alert = "username cannot contain space (' ')"
+            elsif exist == false
+                alert = "username not found"
+            end
+
+            if alert != nil
+                renderer = ERB.new(File.read("views/register.erb"))
+                renderer.result(binding)
+            else 
+                getUser = User.getUserByName(params["username"])
+
+                updatePass = User.new(
+                    userId: getUser.userId,
+                    full_name: getUser.full_name,
+                    username: getUser.username,
+                    email: getUser.email,
+                    password: params["password"]
+                )
+                updatePass.updatePassword
+
+                renderer = ERB.new(File.read("views/login.erb"))
+                renderer.result(binding)
+            end
+            
+        end
+    end
+
     def loginUser(params)
         getUser = User.getUser(params['username'],params['password'])
         if getUser == nil

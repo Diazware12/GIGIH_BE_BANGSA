@@ -31,7 +31,16 @@
             <div class="booking-content">
                 <div class="booking-image"></div>
                 <div class="booking-form">
-                    <form id="booking-form" method="POST" >
+
+
+                    <form id="booking-form" method="POST" action="/register" >
+
+                        <% if alert != nil %>
+                            <div class="alert alert-danger" role="alert">
+                                <h5><%=alert%></h5>
+                            </div>
+                        <% end %>    
+
                         <h2>Register Account</h2>
                         <div class="form-group form-input">
                             <input type="name" name="fullname" id="fullname" value="" required/>
@@ -39,7 +48,7 @@
                         </div>
                         <div class="form-group form-input">
                             <input type="name" name="username" id="username" value="" required/>
-                            <label for="username" class="form-label">Username (should without space)</label>
+                            <label for="username" class="form-label">Username (cannot contain space)</label>
                         </div>
                         <div class="form-group form-input">
                             <input type="email" name="email" id="email" value="" required/>
@@ -50,23 +59,21 @@
                             <label for="password" class="form-label">Password</label>
                         </div>
                         <div class="form-group form-input">
-                            <input type="password" class="pt-2" name="password" id="password" value="" required/>
+                            <input type="password" class="pt-2" name="conpass" id="conpass" value="" required/>
                             <label for="password" class="form-label">Confirm Password</label>
                         </div>
                         <div class="form-group pt-3">
                             <div class="select-list">
-                                <select name="time" id="time" required>
-                                    <option disabled value="">Gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
+                                <select name="gender" id="gender" required>
+                                    <option disabled value="" style="color:black;">Gender</option>
+                                    <option value="Male" style="color:black;">Male</option>
+                                    <option value="Female" style="color:black;">Female</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="form-submit pt-5">
-                            <input type="submit" value="Log-In" class="submit" id="submit" name="submit" />
-                            <a href="#" class="vertify-booking">Register Account</a>
-                            <a href="#" class="vertify-booking">Forgot Your Password?</a>
+                            <input type="submit" value="Register" class="submit" id="submit" name="submit" />
                         </div>
                     </form>
                 </div>

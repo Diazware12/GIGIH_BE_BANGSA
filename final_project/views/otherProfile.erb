@@ -181,7 +181,13 @@
                               <% end %>
                             <% end %>
 
-                            </div>
+                          </div>
+                            <% if tweet.attachment != nil %>
+                              <img
+                                src="<%=tweet.attachment%>"
+                              alt=""/>
+                            <% end %>
+
                             <div class="post__footer">
                               
                               <div class="container">

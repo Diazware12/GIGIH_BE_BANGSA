@@ -235,6 +235,12 @@ class Tweet
         end
     end
 
+    def delete
+        return false unless valid?
+        client = create_db_client
+        rawData=client.query("delete from tweets where tweetId = #{@tweetId};")
+    end
+
     def valid?
         return false if @userId.nil?
         return false if @content.nil?

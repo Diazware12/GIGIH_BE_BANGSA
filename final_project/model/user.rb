@@ -63,6 +63,30 @@ class User
         user
     end
 
+    def self.getUserByName(username)
+        client = create_db_client
+        rawData=client.query("""
+                select * from users
+                where username = '#{username}'
+            """)
+        user = nil
+        rawData.each do |data|
+            user = User.new(
+                userId: data["userId"],
+                full_name: data["full_name"],
+                username: data["username"],
+                email: data["email"],
+                password: data["password"],
+                gender: data["gender"],
+                profile_pic: data["profile_pic"],
+                role: data["role"],
+                dtm_crt: data["dtm_crt"],
+                description: data["description"]
+            )
+        end
+        user
+    end
+
     def self.userList
         client = create_db_client
         rawData=client.query("""
@@ -111,6 +135,43 @@ class User
         userList
     end
 
+    def self.checkUser(username)
+        client = create_db_client
+        rawData=client.query("""
+                select count(*) as checkUser from users
+                where username = '#{username}'
+            """)
+        userCheck = nil
+        rawData.each do |data|
+            userCheck = data["checkUser"]
+        end
+        return true if userCheck > 0
+        return false if userCheck == 0
+    end 
+
+    def save
+        client = create_db_client
+        rawData=client.query("""
+            insert into users (
+                full_name,
+                username,
+                email,
+                password,
+                gender,
+                role,
+                dtm_crt
+            ) values (
+                '#{@full_name}',
+                '#{@username}',
+                '#{@email}',
+                '#{@password}',
+                '#{@gender}',
+                'User',
+                curdate()
+            )
+        """)
+    end 
+
     def update
         return false unless valid? 
         client = create_db_client
@@ -120,6 +181,18 @@ class User
                 username = '#{@username}',
                 full_name = '#{@full_name}',
                 description = '#{@description}'
+            WHERE userId = #{@userId} 
+        
+        """) 
+    end
+
+    def updatePassword
+        return false unless valid? 
+        client = create_db_client
+        rawData=client.query("""
+            UPDATE users
+            SET 
+                password = '#{@password}'
             WHERE userId = #{@userId} 
         
         """) 

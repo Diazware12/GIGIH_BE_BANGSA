@@ -153,7 +153,7 @@ class Hashtag
                 ) as totalUse,
                 HOUR(TIMEDIFF(curdate(), h.dtm_crt)) as trendDate
                 from hashtags as h
-                having trendDate = 24
+                having trendDate = 24 and totalUse != 0
                 order by totalUse desc
                 limit 5
             """)

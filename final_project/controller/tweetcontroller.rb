@@ -33,6 +33,11 @@ class TweetController
         createTweet.save
     end
 
+    def deleteTweet(params)
+        tweet = Tweet.getTweet(params["tweetId"])
+        tweet.delete
+    end
+    
     def dislike(params)
         likeProcess = LikeTweet.getSelectedDataForDelete(params['usId'],params['tweetId'])
         likeProcess.delete
