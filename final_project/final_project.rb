@@ -54,6 +54,11 @@ post '/:usId/:tweetId/comment' do
     redirect "/#{params['usId']}/#{params['tweetId']}/comment"
 end
 
+get '/:usId/:tweetId/delete' do
+    tweetController.deleteTweet(params)
+    redirect "/#{params['usId']}/home"
+end
+
 get '/register' do
     userController.registerPage(params,"page")
 end

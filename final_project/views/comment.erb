@@ -113,7 +113,7 @@
 
                     <% if getTweet.hashtags.length > 0 %>
                       <% getTweet.hashtags.each do |hashtag| %> 
-                        <b>#<%= hashtag.hashtagId.hashtagName %></b>
+                        <a href="/<%=getUser.userId%>/explore/<%=hashtag.hashtagId.hashtagId%>/details"><b>#<%= hashtag.hashtagId.hashtagName %></b></a>
                       <% end %>
                     <% end %>
                     
@@ -167,7 +167,7 @@
 
                       <% if comment.hashtags.length > 0 %>
                         <% comment.hashtags.each do |hashtag| %> 
-                          <b>#<%= hashtag.hashtagId.hashtagName %></b>
+                          <a href="/<%=getUser.userId%>/explore/<%=hashtag.hashtagId.hashtagId%>/details"><b>#<%= hashtag.hashtagId.hashtagName %></b></a>
                         <% end %>
                       <% end %>
                     </div>

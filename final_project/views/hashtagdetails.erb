@@ -239,23 +239,34 @@
                     <div class="post__body">
                         <div class="post__header">
                             <div class="post__headerText">
-                                <h3 class="pb-2">
-                                    <%=comment.userId.full_name%>
-                                    <span class="post__headerSpecial">
-                                    <span class="material-icons post__badge"></span>@<%=comment.userId.username%>
-                                    </span>
+                          
+                                  <% if getUser.userId != comment.userId.userId %>
+                                    <a style="text-decoration:none;" href="/<%=getUser.userId%>/<%=comment.userId.userId%>/profile">     
+                                      <%=comment.userId.full_name%>
+                                      <span class="post__headerSpecial">
+                                      <span class="material-icons post__badge"></span>@<%=comment.userId.username%>
+                                      </span>
+                                    </a>
+                                  <% else %>
+                                    <a style="text-decoration:none;" href="/<%=getUser.userId%>/profile">
+                                      <%=comment.userId.full_name%>
+                                      <span class="post__headerSpecial">
+                                      <span class="material-icons post__badge"></span>@<%=comment.userId.username%>
+                                      </span>
+                                    </a>                    
+                                  <% end %>
 
-                                      <div class="container">
-                                        <span class="material-icons"> repeat </span>
+                                  <div class="container">
+                                    <span class="material-icons"> repeat </span>
 
-                                          
-                                        <a href="/<%=getUser.userId%>/<%=comment.tweetId.tweetId%>/comment" style="color:black;"> 
-                                          <span class="material-icons post__badge" ></span>@<%=comment.tweetId.userId.username%>
-                                            <p class="show-comment pl-5">
-                                                <%=comment.tweetId.content%>
-                                            </p>
-                                        <a>
-                                      </div>
+                                      
+                                    <a href="/<%=getUser.userId%>/<%=comment.tweetId.tweetId%>/comment" style="color:black;"> 
+                                      <span class="material-icons post__badge" ></span>@<%=comment.tweetId.userId.username%>
+                                      <p class="show-comment pl-5">
+                                          <%=comment.tweetId.content%>
+                                      </p>
+                                    <a>
+                                  </div>
                                 </h3>
                             </div>
                             <div class="post__headerDescription">
