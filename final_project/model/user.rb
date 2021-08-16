@@ -18,10 +18,7 @@ class User
 
     def self.getUser(username,password)
         client = create_db_client
-        rawData=client.query("""
-                select * from users
-                where username = '#{username}' and password = '#{password}'
-            """)
+        rawData=client.query("select * from users where username = '#{username}' and password = '#{password}'")
         user = nil
         rawData.each do |data|
             user = User.new(
@@ -41,10 +38,7 @@ class User
 
     def self.getUserById(id)
         client = create_db_client
-        rawData=client.query("""
-                select * from users
-                where userId = #{id}
-            """)
+        rawData=client.query("select * from users where userId = #{id}")
         user = nil
         rawData.each do |data|
             user = User.new(
@@ -65,10 +59,7 @@ class User
 
     def self.getUserByName(username)
         client = create_db_client
-        rawData=client.query("""
-                select * from users
-                where username = '#{username}'
-            """)
+        rawData=client.query("select * from users where username = '#{username}'")
         user = nil
         rawData.each do |data|
             user = User.new(
@@ -89,9 +80,7 @@ class User
 
     def self.userList
         client = create_db_client
-        rawData=client.query("""
-                select * from users
-            """)
+        rawData=client.query("select * from users")
         userList = Array.new
         rawData.each do |data|
             user = User.new(
@@ -112,11 +101,7 @@ class User
 
     def self.searchUser(search)
         client = create_db_client
-        rawData=client.query("""
-                select * from users
-                where username like '%#{search}%'
-                or full_name like '%#{search}%'
-            """)
+        rawData=client.query("select * from users where username like '%#{search}%' or full_name like '%#{search}%'")
         userList = Array.new
         rawData.each do |data|
             user = User.new(
@@ -137,10 +122,7 @@ class User
 
     def self.checkUser(username)
         client = create_db_client
-        rawData=client.query("""
-                select count(*) as checkUser from users
-                where username = '#{username}'
-            """)
+        rawData=client.query("select count(*) as checkUser from users where username = '#{username}'")
         userCheck = nil
         rawData.each do |data|
             userCheck = data["checkUser"]
@@ -170,12 +152,7 @@ class User
     def updateProfilePic
         return false unless valid? 
         client = create_db_client
-        rawData=client.query("""
-            UPDATE users
-            SET 
-                profile_pic = '/transaction/#{profile_pic}'
-            WHERE userId = #{@userId} 
-        """) 
+        rawData=client.query("UPDATE users SET profile_pic = '/transaction/#{profile_pic}' WHERE userId = #{@userId} ") 
     end
 
     def valid?
