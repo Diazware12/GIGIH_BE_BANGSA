@@ -47,11 +47,7 @@ class Hashtag
 
     def self.getHashtagById(id)
         client = create_db_client
-        rawData=client.query("""
-            select *
-            from hashtags
-            where hashtagid = #{id}
-            """)
+        rawData=client.query("select * from hashtags where hashtagid = #{id}")
         hashtag = nil
         rawData.each do |data|
             hashtag = Hashtag.new(

@@ -30,7 +30,6 @@ class TweetHashtag
                 hashtagId: getHashtag.hashtagId
             )
             insertTweetHashtag.save
-
         end
     end
 
@@ -49,10 +48,7 @@ class TweetHashtag
 
     def self.getHashtagByTweetId(id)
         client = create_db_client
-        rawData=client.query("""
-            select * from tweetHashtag
-            where tweetId = #{id}
-        """)
+        rawData=client.query("select * from tweetHashtag where tweetId = #{id}")
         hashtagList = Array.new
         rawData.each do |data|
             hashtag = TweetHashtag.new(

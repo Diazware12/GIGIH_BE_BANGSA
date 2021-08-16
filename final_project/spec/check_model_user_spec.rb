@@ -61,7 +61,6 @@ describe User do
                 allow(Mysql2::Client).to receive(:new).and_return(stub_client)
                 expect(stub_client).to receive(:query).with(stub_query)
                 getUser.save
-
             end
         end
     end
