@@ -150,52 +150,21 @@ class User
     end 
 
     def save
+        return false unless valid?
         client = create_db_client
-        rawData=client.query("""
-            insert into users (
-                full_name,
-                username,
-                email,
-                password,
-                gender,
-                role,
-                dtm_crt
-            ) values (
-                '#{@full_name}',
-                '#{@username}',
-                '#{@email}',
-                '#{@password}',
-                '#{@gender}',
-                'User',
-                curdate()
-            )
-        """)
+        rawData=client.query("insert into users (full_name,username,email,password,gender,role,dtm_crt) values ('#{@full_name}','#{@username}','#{@email}','#{@password}','#{@gender}','User',curdate())")
     end 
 
     def update
         return false unless valid? 
         client = create_db_client
-        rawData=client.query("""
-            UPDATE users
-            SET 
-                username = '#{@username}',
-                full_name = '#{@full_name}',
-                description = '#{@description}'
-            WHERE userId = #{@userId} 
-        
-        """) 
+        rawData=client.query("UPDATE users SET username = '#{@username}',full_name = '#{@full_name}',email = '#{@email}',description = '#{@description}' WHERE userId = #{@userId} ") 
     end
 
     def updatePassword
         return false unless valid? 
         client = create_db_client
-        rawData=client.query("""
-            UPDATE users
-            SET 
-                password = '#{@password}'
-            WHERE userId = #{@userId} 
-        
-        """) 
+        rawData=client.query("UPDATE users SET password = '#{@password}' WHERE userId = #{@userId}") 
     end
 
     def updateProfilePic

@@ -90,6 +90,7 @@ class CommentTweet
 
     def valid?
         return false if @userId.nil?
+        return false if @tweetId.nil?
         return false if @comment_tweet.nil?
         return true
     end
