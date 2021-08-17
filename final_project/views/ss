@@ -1,36 +1,66 @@
-                  insert into users (
-                      full_name,
-                      username,
-                      email,
-                      password,
-                      gender,
-                      role,
-                      dtm_crt
-                  ) values (
-                      'Aldebaran Adi',
-                      'aldi123',
-                      'aldi123@gmail.com',
-                      'aldi123',
-                      'Male',
-                      'User',
-                      curdate()
-                  )
-                       
-                   insert into users (
-                       full_name,
-                       username,
-                       email,
-                       password,
-                       gender,
-                       role,
-                       dtm_crt
-                   ) values (
-                       'Aldebaran Adi',
-                       'aldi123',
-                       'aldi123@gmail.com',
-                       'aldi123',
-                       'Male',
-                       'User',
-                       curdate()
-                   )
-               
+    describe 'tweetlist' do
+        context 'true' do
+            it 'there\'s a data' do
+                stub_client = double
+                stub_query_1 = "select (@x:=t.tweetId) as tweetId,u.userId as userId,t.content,t.attachment,t.dtm_crt,(select count(*) from liketweets where tweetId = (@x) ) as likes,(select count(*) from commenttweets where tweetId = (@x) ) as comments from tweets as t join users as u on t.userId = u.userId join followers as f on u.userId = f.userId where u.userId = 1 or f.userFollowersId = 1 order by likes desc"
+                stub_query = "select * from users where userId = "
+                stub_query_2 = "select * from liketweets where tweetId = "
+                stub_query_3 = "select count(*) as checkLike from liketweets where userId = 1 and tweetId = "
+                stub_query_4 = "select * from tweetHashtag where tweetId = "
+                stub_query_5 = "select * from hashtags where hashtagid = "
+                
+                user_test = [{
+                    "userId": 1, 
+                    "full_name": "Martin Garrix", 
+                    "username": "mGrix99", 
+                    "email": "mGrix99@gmail.com", 
+                    "password": "mGrix99",
+                    "gender": "Male", 
+                    "profile_pic": "/transaction/1-mGrix99.jpg", 
+                    "role": "User",
+                    "dtm_crt": "2021-08-12",
+                    "description": "only for test purposes"
+                }]
+                tweet = [{
+                    "tweetId": 1,
+                    "userId": 1,  
+                    "content": "only for testing purposes", 
+                    "attactment": "/transaction/test.jpg",
+                    "likes":1,
+                    "comments":1
+                }]
+                liketweets = [{
+                    "likeTweetId": 1, 
+                    "userId": 1,  
+                    "tweetId": 1,
+                    "dtm_crt": "2021-08-12"
+                }]
+                checkLikeStatus = [{
+                    "checkLike": 1
+                }]
+                tweetHashtags = [{
+                    "tweetHashtagId": 1, 
+                    "tweetId": 1,
+                    "hashtagId": 1, 
+                    "dtm_crt": "2021-08-12"
+                }]
+                hashtag = [{
+                    "hashtagId": 1,
+                    "hashtagName": "generasigigih",
+                    "dtm_crt": "2020-12-23"
+                }]
+
+                allow(Mysql2::Client).to receive(:new).and_return(stub_client)
+                expect(stub_client).to receive(:query).with(stub_query_1).and_return(tweet)
+                expect(stub_client).to receive(:query).with(stub_query).and_return(user_test)
+                expect(stub_client).to receive(:query).with(stub_query_2).and_return(liketweets)
+                expect(stub_client).to receive(:query).with(stub_query_3).and_return(checkLikeStatus)
+                expect(stub_client).to receive(:query).with(stub_query_4).and_return(tweetHashtags)
+                expect(stub_client).to receive(:query).with(stub_query_5).and_return(hashtag)
+
+                tweets = Tweet.tweetList(1)
+                expect(tweets).not_to be_nil
+            end
+        end
+
+    end

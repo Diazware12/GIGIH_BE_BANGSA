@@ -83,7 +83,6 @@ describe TweetHashtag do
 
     end
 
-
     # =================== hashtag to array =====================
     describe 'hashtag to array' do
 
@@ -97,6 +96,31 @@ describe TweetHashtag do
         end
 
 
+    end
+
+    describe 'save To Hashtag' do
+        context 'when executed' do
+            it 'should save To Hashtag' do
+                stub_client = double
+                stub_query = "select count(*) as checkHashtag from hashtags where hashtagName = 'generasigigih'"
+                stub_query_2 = "select * from hashtags where hashtagName = 'generasigigih'"
+
+                tweetHashtag = [{
+                    "checkHashtag": 1
+                }]
+
+                hashtagData = [{
+                    "hashtagId": 1,
+                    "hashtagName": "generasigigih",
+                    "dtm_crt": "2020-12-23"
+                }]
+
+                allow(Mysql2::Client).to receive(:new).and_return(stub_client)
+                expect(stub_client).to receive(:query).with(stub_query).and_return(tweetHashtag)
+                expect(stub_client).to receive(:query).with(stub_query_2).and_return(hashtagData)
+                insertHashtag = TweetHashtag.saveToHashtag('generasigigih',1)
+            end
+        end
     end
 
 end

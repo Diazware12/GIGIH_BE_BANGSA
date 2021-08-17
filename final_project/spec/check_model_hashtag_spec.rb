@@ -29,6 +29,24 @@ describe Hashtag do
 
     end
 
+    # =================== save =====================
+
+    describe 'save' do
+        context 'when executed' do
+            it 'should save data' do
+                stub_client = double
+                stub_query = "insert into hashtags (hashtagName,dtm_crt) values (LOWER('generasigigih'),curdate());"
+
+                saveHashtag = Hashtag.new(
+                    hashtagName: 'generasigigih'
+                )
+
+                allow(Mysql2::Client).to receive(:new).and_return(stub_client)
+                expect(stub_client).to receive(:query).with(stub_query)
+                saveHashtag.save
+            end
+        end
+    end
 
 
 end

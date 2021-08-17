@@ -13,10 +13,7 @@ class LikeTweet
 
     def self.likesData(id)
         client = create_db_client
-        rawData=client.query("""
-            select * from liketweets
-            where tweetId = #{id}
-            """)
+        rawData=client.query("select * from liketweets where tweetId = #{id}")
         liketweets = Array.new
         rawData.each do |data|
             user = User.getUserById(data["userId"])
@@ -33,11 +30,7 @@ class LikeTweet
 
     def self.checkUserLikedStatus(userId,tweetId)
         client = create_db_client
-        rawData=client.query("""
-            select count(*) as checkLike
-            from liketweets
-            where userId = #{userId} and tweetId = #{tweetId}
-            """)
+        rawData=client.query("select count(*) as checkLike from liketweets where userId = #{userId} and tweetId = #{tweetId}")
         status = nil
         rawData.each do |data|
             status = data["checkLike"]
@@ -48,10 +41,7 @@ class LikeTweet
 
     def self.getSelectedDataForDelete(userId,tweetId)
         client = create_db_client
-        rawData=client.query("""
-            select * from liketweets
-            where userId = #{userId} and tweetId = #{tweetId}
-            """)
+        rawData=client.query("select * from liketweets where userId = #{userId} and tweetId = #{tweetId}")
 
         getLikeTweet = nil
         rawData.each do |data|

@@ -20,27 +20,7 @@ class Tweet
 
     def self.tweetList(id)
         client = create_db_client
-        rawData=client.query("""
-            select
-                (@x:=t.tweetId) as tweetId,
-                u.userId as userId,
-                t.content,
-                t.attachment,
-                t.dtm_crt,
-				(
-                    select count(*) from liketweets
-                    where tweetId = (@x) 
-                ) as likes,
-                (
-                    select count(*) from commenttweets
-                    where tweetId = (@x) 
-                ) as comments
-                from tweets as t join
-                users as u on t.userId = u.userId
-                join followers as f on u.userId = f.userId
-                where u.userId = #{id} or f.userFollowersId = #{id}
-                order by likes desc
-            """)
+        rawData=client.query("select (@x:=t.tweetId) as tweetId,u.userId as userId,t.content,t.attachment,t.dtm_crt,(select count(*) from liketweets where tweetId = (@x) ) as likes,(select count(*) from commenttweets where tweetId = (@x) ) as comments from tweets as t join users as u on t.userId = u.userId join followers as f on u.userId = f.userId where u.userId = #{id} or f.userFollowersId = #{id} order by likes desc")
         tweetList = Array.new
 
         rawData.each do |data|

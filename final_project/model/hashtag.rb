@@ -14,11 +14,7 @@ class Hashtag
 
     def self.checkHashtagExist(hashtagName)
         client = create_db_client
-        rawData=client.query("""
-            select count(*) as checkHashtag
-            from hashtags
-            where hashtagName = '#{hashtagName}'
-            """)
+        rawData=client.query("select count(*) as checkHashtag from hashtags where hashtagName = '#{hashtagName}'")
         status = nil
         rawData.each do |data|
             status = data["checkHashtag"]
@@ -29,11 +25,7 @@ class Hashtag
 
     def self.getHashtagByName(hashtagName)
         client = create_db_client
-        rawData=client.query("""
-            select *
-            from hashtags
-            where hashtagName = '#{hashtagName}'
-            """)
+        rawData=client.query("select * from hashtags where hashtagName = '#{hashtagName}'")
         hashtag = nil
         rawData.each do |data|
             hashtag = Hashtag.new(
@@ -166,8 +158,6 @@ class Hashtag
         end
         hashtagList
     end
-
-
 
     def save
         return false unless valid?

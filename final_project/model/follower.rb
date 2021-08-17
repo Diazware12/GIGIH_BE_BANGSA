@@ -81,11 +81,7 @@ class Follower
     def save
         return false unless valid?
         client = create_db_client
-        rawData=client.query("""
-            insert into followers
-            (userId,userFollowersId,dtm_crt)
-            values (#{@userFollowersId},#{@userId},curdate())
-        """)
+        rawData=client.query("insert into followers (userId,userFollowersId,dtm_crt) values (#{@userFollowersId},#{@userId},curdate())")
     end
 
 
