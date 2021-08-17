@@ -18,10 +18,7 @@ class CommentTweet
 
     def self.commentTweetListById(id)
         client = create_db_client
-        rawData=client.query("""
-                select * from commenttweets
-                where tweetId = #{id}
-            """)
+        rawData=client.query("select * from commenttweets where tweetId = #{id}")
         commentList = Array.new
         rawData.each do |data|
             user = User.getUserById(data["userId"])
@@ -41,19 +38,7 @@ class CommentTweet
 
     def self.commentTweetListByHashtag(id)
         client = create_db_client
-        rawData=client.query("""
-                select 
-                    ct.commentTweetId,
-                    ct.userId,
-                    ct.tweetId,
-                    ct.comment_tweet,
-                    ct.dtm_crt,
-                    ct.attachment
-                from commenttweets as ct
-                join commentHashtag as ch on 
-                    ct.commentTweetId = ch.commentTweetId
-                where ch.hashtagId = #{id}
-            """)
+        rawData=client.query("select ct.commentTweetId, ct.userId, ct.tweetId, ct.comment_tweet, ct.dtm_crt, ct.attachment from commenttweets as ct join commentHashtag as ch on ct.commentTweetId = ch.commentTweetId where ch.hashtagId = #{id}")
         commentList = Array.new
         rawData.each do |data|
             user = User.getUserById(data["userId"])

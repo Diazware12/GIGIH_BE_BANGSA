@@ -14,11 +14,7 @@ class Follower
 
     def self.followersListById(id)
         client = create_db_client
-        rawData=client.query("""
-            select * from followers	
-            where userId = #{id}
-        """)
-
+        rawData=client.query("select * from followers where userId = #{id}")
         followerList = Array.new
         rawData.each do |data|
             user = User.getUserById(data["userFollowersId"])
@@ -35,26 +31,20 @@ class Follower
 
     def self.checkFollowStatus(userId,otherUserId)
         client = create_db_client
-        rawData=client.query("""
-            select count(*) as follStatus from followers
-            where userFollowersId = #{userId} and userId = #{otherUserId} 
-        """)
+        rawData=client.query("select count(*) as follStatus from followers where userFollowersId = #{userId} and userId = #{otherUserId} ")
 
         status = nil
         rawData.each do |data|
             status = data["follStatus"]
         end
         
-        return true if status > 0
+        return true if status == 1
         return false if status == 0
     end
 
     def self.getFollowerData(userId,otherUserId)
         client = create_db_client
-        rawData=client.query("""
-            select * from followers
-            where userFollowersId = #{userId} and userId = #{otherUserId}
-        """)
+        rawData=client.query("select * from followers where userFollowersId = #{userId} and userId = #{otherUserId}")
 
         follower = nil
         rawData.each do |data|
@@ -68,14 +58,10 @@ class Follower
         follower
     end
 
-
     def delete
         return false unless valid?
         client = create_db_client
-        rawData=client.query("""
-            delete from followers
-            where followersId = #{@followersId}
-        """)
+        rawData=client.query("delete from followers where followersId = #{@followersId}")
     end
 
     def save

@@ -145,13 +145,6 @@ end
         redirect "/#{params["usId"]}/#{params["otherUsId"]}/profile"
     end
 
-
-
-
-get '/:usId/explore' do
-    exploreController.explorePage(params)
-end
-
 get '/:usId/explore/:hashtagId/details' do
     exploreController.details(params)
 end

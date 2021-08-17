@@ -49,10 +49,7 @@ class CommentHashtag
 
     def self.getHashtagByCommentTweet(id)
         client = create_db_client
-        rawData=client.query("""
-            select * from commentHashtag
-            where commentTweetId = #{id}
-        """)
+        rawData=client.query("select * from commentHashtag where commentTweetId = #{id}")
         hashtagList = Array.new
         rawData.each do |data|
             hashtag = CommentHashtag.new(

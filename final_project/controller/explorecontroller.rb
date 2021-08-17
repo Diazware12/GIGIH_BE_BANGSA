@@ -5,18 +5,6 @@ require './model/tweet'
 require './model/commenttweet'
 
 class ExploreController
-    def explorePage(params)
-        getUser = User.getUserById(params['usId'])
-
-        hashtagList = nil
-        if params['hashtag'] != nil
-            hashtagList = Hashtag.searchHashtag(params['hashtag'])
-        else    
-            hashtagList = Hashtag.hashtagList
-        end 
-        renderer = ERB.new(File.read("views/explore.erb"))
-        renderer.result(binding)  
-    end
 
     def details(params)
         getUser = User.getUserById(params['usId'])
