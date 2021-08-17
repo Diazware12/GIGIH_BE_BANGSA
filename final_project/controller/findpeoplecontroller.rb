@@ -3,7 +3,7 @@ require './model/user'
 class FindPeopleController
     def findPeople(params)
 
-        getUser = User.getUserById(params['usId'])
+        getUser = User.getUserById(params['userId'])
 
         peopleList = nil
         if params['searchUser'] != nil

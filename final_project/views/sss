@@ -4,7 +4,6 @@
     "type"=>"image/png", 
     "name"=>"profilePicture", 
     "tempfile"=>#<Tempfile:/tmp/RackMultipart20210815-17964-97gj7d.jpg>, 
-    
     "head"=>"Content-Disposition: 
     form-data; name=\"profilePicture\"; filename=\"my-image.jpg\"\r\nContent-Type: image/png\r\n"}, 
 "usId"=>"1"}
@@ -22,3 +21,5 @@
   },     
   "usId"=>"1"
 }
+
+{"usId"=>"1", "hashtagId"=>"14"}

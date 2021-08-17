@@ -5,10 +5,7 @@ require './model/liketweet'
 class TweetController
 
     def like(params)
-        likeProcess = LikeTweet.new(
-            userId: params['usId'],
-            tweetId: params['tweetId']
-        )
+        likeProcess = LikeTweet.new(params)
         likeProcess.save
     end
 
@@ -39,7 +36,7 @@ class TweetController
     end
     
     def dislike(params)
-        likeProcess = LikeTweet.getSelectedDataForDelete(params['usId'],params['tweetId'])
+        likeProcess = LikeTweet.getSelectedDataForDelete(params['userId'],params['tweetId'])
         likeProcess.delete
     end
 

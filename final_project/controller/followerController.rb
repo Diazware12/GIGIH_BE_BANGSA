@@ -7,15 +7,12 @@ require './model/follower'
 class FollowerController
 
     def follow(params)
-        saveFollower = Follower.new(
-            userId:params["usId"],
-            userFollowersId:params["otherUsId"]
-        )
+        saveFollower = Follower.new(params)
         saveFollower.save
     end
 
     def unfollow(params)
-        getFollower = Follower.getFollowerData(params["usId"],params["otherUsId"])
+        getFollower = Follower.getFollowerData(params["userId"],params["userFollowersId"])
         getFollower.delete
     end
 

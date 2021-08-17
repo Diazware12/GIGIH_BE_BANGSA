@@ -20,7 +20,7 @@ class UserController
         else
             alert = nil
             getUser = User.new(
-                full_name: params["fullname"],
+                full_name: params["full_name"],
                 username: params["username"],
                 email: params["email"],
                 password: params["password"],
@@ -103,8 +103,8 @@ class UserController
     end
 
     def homepage(params)
-        tweetList = Tweet.tweetList(params['usId'])
-        getUser = User.getUserById(params['usId'])
+        tweetList = Tweet.tweetList(params['userId'])
+        getUser = User.getUserById(params['userId'])
 
         renderer = ERB.new(File.read("views/index.erb"))
         renderer.result(binding)        
@@ -113,29 +113,29 @@ class UserController
     def comment(params)
         getTweet = Tweet.getTweet(params['tweetId'])
         commentList = CommentTweet.commentTweetListById(params['tweetId'])
-        getUser = User.getUserById(params['usId'])
+        getUser = User.getUserById(params['userId'])
 
         renderer = ERB.new(File.read("views/comment.erb"))
         renderer.result(binding)        
     end
 
     def profile(params)
-        getUser = User.getUserById(params['usId'])
-        followers = Follower.followersListById(params['usId'])
-        tweetList = Tweet.tweetListById(params['usId'])
+        getUser = User.getUserById(params['userId'])
+        followers = Follower.followersListById(params['userId'])
+        tweetList = Tweet.tweetListById(params['userId'])
 
         renderer = ERB.new(File.read("views/profile.erb"))
         renderer.result(binding)        
     end
 
     def editPage(params)
-        getUser = User.getUserById(params['usId'])
+        getUser = User.getUserById(params['userId'])
         renderer = ERB.new(File.read("views/edituserdata.erb"))
         renderer.result(binding)        
     end
 
     def editData(params)
-        getUser = User.getUserById(params['usId'])
+        getUser = User.getUserById(params['userId'])
         
         desc = nil
         if params['description'] == "" || params['description'] == nil
@@ -145,7 +145,7 @@ class UserController
         end
 
         editUser = User.new(
-            userId: params['usId'],
+            userId: params['userId'],
             full_name: params['fullname'],
             username: params['username'],
             email: params['email'],
@@ -156,7 +156,7 @@ class UserController
     end
 
     def editProfPicPage(params)
-        getUser = User.getUserById(params['usId'])
+        getUser = User.getUserById(params['userId'])
         renderer = ERB.new(File.read("views/editprofilepicture.erb"))
         renderer.result(binding)        
     end
@@ -170,7 +170,7 @@ class UserController
           f.write(file.read)
         end
 
-        getUser = User.getUserById(params['usId'])
+        getUser = User.getUserById(params['userId'])
         updatePicture = User.new(
             userId: getUser.userId,
             full_name: getUser.full_name,
@@ -184,15 +184,15 @@ class UserController
 
     def otherProfile(params)
 
-        return false if params['usId'] == params['otherUsId']
+        return false if params['userId'] == params['otherUsId']
 
-        getUser = User.getUserById(params['usId'])
+        getUser = User.getUserById(params['userId'])
         getOtherUser= User.getUserById(params['otherUsId'])
 
-        followStatus = Follower.checkFollowStatus(params['usId'],params['otherUsId'])
+        followStatus = Follower.checkFollowStatus(params['userId'],params['otherUsId'])
 
         followers = Follower.followersListById(params['otherUsId'])
-        tweetList = Tweet.otherTweetListById(params['otherUsId'],params['usId'])
+        tweetList = Tweet.otherTweetListById(params['otherUsId'],params['userId'])
 
         renderer = ERB.new(File.read("views/otherProfile.erb"))
         renderer.result(binding)        

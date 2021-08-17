@@ -7,10 +7,10 @@ require './model/commenttweet'
 class ExploreController
 
     def details(params)
-        getUser = User.getUserById(params['usId'])
+        getUser = User.getUserById(params['userId'])
         hashtagData = Hashtag.getHashtagById(params['hashtagId'])
 
-        tweetList = Tweet.tweetListByHashtag(params['usId'],params['hashtagId'])
+        tweetList = Tweet.tweetListByHashtag(params['userId'],params['hashtagId'])
 
         commentTweetList = CommentTweet.commentTweetListByHashtag(params['hashtagId'])
 

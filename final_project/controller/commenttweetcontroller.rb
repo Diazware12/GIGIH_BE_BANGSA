@@ -14,7 +14,7 @@ class CommentTweetController
         end
 
         comment = CommentTweet.new(
-            userId: params['usId'],
+            userId: params['userId'],
             tweetId: params['tweetId'],
             comment_tweet: params['comment_tweet'],
             hashtags: params['hashtags'],

@@ -24,39 +24,39 @@ post '/' do
     userController.loginUser(params)
 end
 
-get '/:usId/home' do
+get '/:userId/home' do
     userController.homepage(params)
 end
 
 
-post '/:usId/createTweet' do
+post '/:userId/createTweet' do
     tweetController.createTweet(params)
-    redirect "/#{params['usId']}/home"
+    redirect "/#{params['userId']}/home"
 end
 
 
-get '/:usId/:tweetId/like' do
+get '/:userId/:tweetId/like' do
     tweetController.like(params)
-    redirect "/#{params['usId']}/home"
+    redirect "/#{params['userId']}/home"
 end
 
-get '/:usId/:tweetId/dislike' do
+get '/:userId/:tweetId/dislike' do
     tweetController.dislike(params)
-    redirect "/#{params['usId']}/home"
+    redirect "/#{params['userId']}/home"
 end
 
-get '/:usId/:tweetId/comment' do
+get '/:userId/:tweetId/comment' do
     userController.comment(params)
 end
 
-post '/:usId/:tweetId/comment' do
+post '/:userId/:tweetId/comment' do
     commenttweetcontroller.createCommentTweet(params)
-    redirect "/#{params['usId']}/#{params['tweetId']}/comment"
+    redirect "/#{params['userId']}/#{params['tweetId']}/comment"
 end
 
-get '/:usId/:tweetId/delete' do
+get '/:userId/:tweetId/delete' do
     tweetController.deleteTweet(params)
-    redirect "/#{params['usId']}/home"
+    redirect "/#{params['userId']}/home"
 end
 
 get '/register' do
@@ -77,92 +77,92 @@ end
 
 # own profile
 
-    get '/:usId/profile' do
+    get '/:userId/profile' do
         userController.profile(params)
     end
 
-    get '/:usId/profile/editdata' do
+    get '/:userId/profile/editdata' do
         userController.editPage(params)
     end
 
-    post '/:usId/profile/editdata' do
+    post '/:userId/profile/editdata' do
         userController.editData(params)
-        redirect "/#{params["usId"]}/profile"
+        redirect "/#{params["userId"]}/profile"
     end
 
-    get '/:usId/profile/editprofpic' do
+    get '/:userId/profile/editprofpic' do
         userController.editProfPicPage(params)
     end
 
-    post '/:usId/profile/editprofpic' do
+    post '/:userId/profile/editprofpic' do
         userController.editProfPicData(params)
-        redirect "/#{params["usId"]}/profile"
+        redirect "/#{params["userId"]}/profile"
     end
 
-    get '/:usId/profile/:tweetId/like' do
+    get '/:userId/profile/:tweetId/like' do
         tweetController.like(params)
-        redirect "/#{params['usId']}/profile"
+        redirect "/#{params['userId']}/profile"
     end
 
-    get '/:usId/profile/:tweetId/dislike' do
+    get '/:userId/profile/:tweetId/dislike' do
         tweetController.dislike(params)
-        redirect "/#{params['usId']}/profile"
+        redirect "/#{params['userId']}/profile"
     end
 
-    get '/:usId/profile/:tweetId/delete' do
+    get '/:userId/profile/:tweetId/delete' do
         tweetController.deleteTweet(params)
-        redirect "/#{params['usId']}/profile"
+        redirect "/#{params['userId']}/profile"
     end
 
-    post '/:usId/profile/createTweet' do
+    post '/:userId/profile/createTweet' do
         tweetController.createTweet(params)
-        redirect "/#{params['usId']}/profile"
+        redirect "/#{params['userId']}/profile"
     end
 
 # other profile
 
-    get '/:usId/:otherUsId/profile' do
+    get '/:userId/:otherUsId/profile' do
         userController.otherProfile(params)
     end
 
-    get '/:usId/:otherUsId/profile/follow' do
+    get '/:userId/:userFollowersId/profile/follow' do
         followerController.follow(params)
-        redirect "/#{params["usId"]}/#{params["otherUsId"]}/profile"
+        redirect "/#{params["userId"]}/#{params["userFollowersId"]}/profile"
     end
 
-    get '/:usId/:otherUsId/profile/unfollow' do
+    get '/:userId/:userFollowersId/profile/unfollow' do
         followerController.unfollow(params)
-        redirect "/#{params["usId"]}/#{params["otherUsId"]}/profile"
+        redirect "/#{params["userId"]}/#{params["userFollowersId"]}/profile"
     end
 
-    get '/:usId/:otherUsId/profile/:tweetId/like' do
+    get '/:userId/:otherUsId/profile/:tweetId/like' do
         tweetController.like(params)
-        redirect "/#{params["usId"]}/#{params["otherUsId"]}/profile"
+        redirect "/#{params["userId"]}/#{params["otherUsId"]}/profile"
     end
 
-    get '/:usId/:otherUsId/profile/:tweetId/dislike' do
+    get '/:userId/:otherUsId/profile/:tweetId/dislike' do
         tweetController.dislike(params)
-        redirect "/#{params["usId"]}/#{params["otherUsId"]}/profile"
+        redirect "/#{params["userId"]}/#{params["otherUsId"]}/profile"
     end
 
-get '/:usId/explore/:hashtagId/details' do
+get '/:userId/explore/:hashtagId/details' do
     exploreController.details(params)
 end
 
-get '/:usId/explore/:hashtagId/details/:tweetId/like' do
+get '/:userId/explore/:hashtagId/details/:tweetId/like' do
     tweetController.like(params)
-    redirect "/#{params['usId']}/explore/#{params['hashtagId']}/details"
+    redirect "/#{params['userId']}/explore/#{params['hashtagId']}/details"
 end
 
-get '/:usId/explore/:hashtagId/details/:tweetId/dislike' do
+get '/:userId/explore/:hashtagId/details/:tweetId/dislike' do
     tweetController.dislike(params)
-    redirect "/#{params['usId']}/explore/#{params['hashtagId']}/details"
+    redirect "/#{params['userId']}/explore/#{params['hashtagId']}/details"
 end
 
-get '/:usId/trending' do
+get '/:userId/trending' do
     trendingController.trendingPage(params)
 end
 
-get '/:usId/findpeople' do
+get '/:userId/findpeople' do
     findPeopleController.findPeople(params)
 end
