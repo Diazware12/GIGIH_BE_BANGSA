@@ -1,19 +1,16 @@
 require './model/user'
 
 class FindPeopleController
-    def findPeople(params)
+  def findPeople(params)
+    getUser = User.getUserById(params['userId'])
 
-        getUser = User.getUserById(params['userId'])
-
-        peopleList = nil
-        if params['searchUser'] != nil
-            peopleList = User.searchUser(params['searchUser'])
-        else    
-            peopleList = User.userList
-        end 
-        renderer = ERB.new(File.read("views/findpeople.erb"))
-        renderer.result(binding)  
-    end
-
-
+    peopleList = nil
+    peopleList = if !params['searchUser'].nil?
+                   User.searchUser(params['searchUser'])
+                 else
+                   User.userList
+                 end
+    renderer = ERB.new(File.read('views/findpeople.erb'))
+    renderer.result(binding)
+  end
 end

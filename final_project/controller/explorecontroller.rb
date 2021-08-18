@@ -5,16 +5,15 @@ require './model/tweet'
 require './model/commenttweet'
 
 class ExploreController
+  def details(params)
+    getUser = User.getUserById(params['userId'])
+    hashtagData = Hashtag.getHashtagById(params['hashtagId'])
 
-    def details(params)
-        getUser = User.getUserById(params['userId'])
-        hashtagData = Hashtag.getHashtagById(params['hashtagId'])
+    tweetList = Tweet.tweetListByHashtag(params['userId'], params['hashtagId'])
 
-        tweetList = Tweet.tweetListByHashtag(params['userId'],params['hashtagId'])
+    commentTweetList = CommentTweet.commentTweetListByHashtag(params['hashtagId'])
 
-        commentTweetList = CommentTweet.commentTweetListByHashtag(params['hashtagId'])
-
-        renderer = ERB.new(File.read("views/hashtagdetails.erb"))
-        renderer.result(binding)  
-    end
+    renderer = ERB.new(File.read('views/hashtagdetails.erb'))
+    renderer.result(binding)
+  end
 end
