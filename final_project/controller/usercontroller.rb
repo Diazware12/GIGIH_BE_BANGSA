@@ -3,6 +3,7 @@ require './model/tweet'
 require './model/liketweet'
 require './model/commenttweet'
 require './model/follower'
+require_relative 'generalcontroller'
 
 class UserController
 
@@ -319,7 +320,7 @@ class UserController
 
     def login_API(params)
         getUser = User.getUser(params['username'],params['password'])
-        if getUser == nil
+        if GeneralController.checkNil(getUser) == true
             alert = "username didn't found or registered"
             return {
                 'message' => alert,
@@ -380,13 +381,13 @@ class UserController
             'status' => 401,
             'method' => 'POST',
             'data' => params
-        } if getUser == nil || getUser == ''
+        } if GeneralController.checkNil(getUser) == true
         return {
             'message' => 'tweet not found',
             'status' => 401,
             'method' => 'POST',
             'data' => params
-        } if getTweet == nil || getTweet == ''
+        } if GeneralController.checkNil(getTweet) == true
 
         commentResponse = []
 
@@ -452,7 +453,7 @@ class UserController
             'status' => 401,
             'method' => 'POST',
             'data' => params
-        } if getUser == nil || getUser == ''
+        } if GeneralController.checkNil(getUser) == true
 
         tweetsResponse = []
         followerResponse = []
@@ -518,7 +519,7 @@ class UserController
             'status' => 401,
             'method' => 'POST',
             'data' => params
-        } if getUser == nil || getUser == ''
+        } if GeneralController.checkNil(getUser) == true
         
         desc = nil
         if params['description'] == "" || params['description'] == nil
@@ -662,7 +663,7 @@ class UserController
             'status' => 401,
             'method' => 'POST',
             'data' => params
-        } if getUser == nil || getUser == ''
+        } if GeneralController.checkNil(getUser) == true
         return {
             'message' => 'no file found',
             'status' => 401,
@@ -695,5 +696,7 @@ class UserController
         }  
         
     end
+
+
 
 end

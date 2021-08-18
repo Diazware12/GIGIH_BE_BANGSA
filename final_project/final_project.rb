@@ -255,4 +255,15 @@ findPeopleController = FindPeopleController.new
         return response.to_json
     end
 
+        post "#{settings.prefix}/followUser" do
+            response = followerController.follow_API(params)
+
+            return response.to_json
+        end
+
+        post "#{settings.prefix}/unfollowUser" do
+            response = followerController.unfollow_API(params)
+
+            return response.to_json
+        end
     

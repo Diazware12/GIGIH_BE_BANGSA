@@ -1,6 +1,7 @@
 require './model/user'
 require './model/tweet'
 require './model/liketweet'
+require_relative 'generalcontroller'
 
 class TweetController
 
@@ -61,7 +62,7 @@ class TweetController
             'status' => 401,
             'method' => 'POST',
             'data' => params
-        } if getUser == nil || getUser == ''
+        } if GeneralController.checkNil(getUser) == true
 
         if params[:file] != nil
             filename = params[:file][:filename]
@@ -97,14 +98,14 @@ class TweetController
             'status' => 401,
             'method' => 'POST',
             'data' => params
-        } if User.getUserById(params['userId']) == nil || User.getUserById(params['userId']) == ''
-
+        } if GeneralController.checkNil(User.getUserById(params['userId'])) == true
+        
         return {
             'message' => 'tweet not found :(',
             'status' => 401,
             'method' => 'POST',
             'data' => params
-        }if Tweet.getTweet(params['tweetId']) == nil || Tweet.getTweet(params['tweetId']) == ''
+        }if GeneralController.checkNil(Tweet.getTweet(params['tweetId'])) == true
 
         return {
             'message' => 'you already like this tweet',
@@ -132,14 +133,14 @@ class TweetController
             'status' => 401,
             'method' => 'POST',
             'data' => params
-        } if User.getUserById(params['userId']) == nil || User.getUserById(params['userId']) == ''
-
+        } if GeneralController.checkNil(User.getUserById(params['userId'])) == true
+        
         return {
             'message' => 'tweet not found :(',
             'status' => 401,
             'method' => 'POST',
             'data' => params
-        }if Tweet.getTweet(params['tweetId']) == nil || Tweet.getTweet(params['tweetId']) == ''
+        }if GeneralController.checkNil(Tweet.getTweet(params['tweetId'])) == true
 
         return {
             'message' => 'you didn\'n like this tweet before',
@@ -170,15 +171,15 @@ class TweetController
             'status' => 401,
             'method' => 'POST',
             'data' => params
-        } if getUser == nil || getUser == ''
+        } if GeneralController.checkNil(getUser) == true
 
         return {
             'message' => 'tweet not found :(',
             'status' => 401,
             'method' => 'POST',
             'data' => params
-        }if tweet == nil || tweet == ''
-
+        }if GeneralController.checkNil(tweet) == true
+        
         return {
             'message' => 'you\'re not allowed to delete',
             'status' => 401,
