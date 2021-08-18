@@ -53,7 +53,7 @@ class Hashtag
 
     def self.trending
         client = create_db_client
-        rawData=client.query("select (@x:=h.hashtagId) as hashtagId,h.hashtagName,h.dtm_crt,FORMAT(((select count(*) from tweetHashtag where hashtagId = (@x))+(select count(*) from commentHashtag where hashtagId = (@x))),0) as totalUse,HOUR(TIMEDIFF(curdate(), h.dtm_crt)) as trendDate from hashtags as h having trendDate = 24 and totalUse != 0 order by totalUse desc limit 5")
+        rawData=client.query("select (@x:=h.hashtagId) as hashtagId,h.hashtagName,h.dtm_crt,FORMAT(((select count(*) from tweetHashtag where hashtagId = (@x))+(select count(*) from commentHashtag where hashtagId = (@x))),0) as totalUse,HOUR(TIMEDIFF(curdate(), h.dtm_crt)) as trendDate from hashtags as h having trendDate <= 24 and totalUse != 0 order by totalUse desc limit 5")
         hashtagList = Array.new
 
         rawData.each do |data|

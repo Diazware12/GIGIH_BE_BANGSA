@@ -23,3 +23,7 @@
 }
 
 {"usId"=>"1", "hashtagId"=>"14"}
+
+
+
+{"filename"=>"twice-mina-profile-1-wm-758x506.jpg", "type"=>"image/jpeg", "name"=>"file", "tempfile"=>#<Tempfile:/tmp/RackMultipart20210815-18096-kp9ofz.jpg>, "head"=>"Content-Disposition: form-data; name=\"file\"; filename=\"twice-mina-profile-1-wm-758x506.jpg\"\r\nContent-Type: image/jpeg\r\n"4}

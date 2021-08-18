@@ -65,7 +65,7 @@ describe UserController do
                 commentList = CommentTweet.commentTweetListById(1)
                 getUser = User.getUserById(1)
 
-                result = controller.comment(params)
+                result = controller.commentPage(params)
 
                 expected_view = ERB.new(File.read("views/comment.erb")).result(binding)
                 expect(result).to eq(expected_view)

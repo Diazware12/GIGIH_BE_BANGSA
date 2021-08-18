@@ -1,0 +1,21 @@
+            return {
+                'message' => alert,
+                'status' => 401,
+                'method' => 'POST',
+                'data' => params
+            }
+
+
+            return {
+                'message' => 'Success',
+                'status' => 200,
+                'method' => 'POST',
+                'alert' => '',
+                'data' => {
+                    "full_name": response.full_name,
+                    "username": response.username,
+                    "email": response.email,
+                    "password": response.password,
+                    "gender": response.gender
+                }
+            }
