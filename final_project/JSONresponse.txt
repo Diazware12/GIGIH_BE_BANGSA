@@ -41,11 +41,11 @@ forgot password
             "alert": "",
             "redirect": "loginpage",
             "data": {
+                "userId": 7,
                 "full_name": "brad pitt",
                 "username": "bPitt12",
                 "email": "bPitt12@gmail.com",
-                "password": "bPitt12",
-                "gender": "Male"
+                "password": "bPitt12"
             }
         }
 
@@ -60,182 +60,160 @@ login
             "message": "Success",
             "status": 200,
             "method": "POST",
-            "alert": "",
-            "redirect": "homepage",
             "data": {
-                "username": "diazware12",
-                "password": "diazware12"
-            },
-            "Current Log-In User": {
-                "full_name": "Diaz Ilyasa",
-                "username": "diazware12",
-                "email": "diazilyasa987@gmail.com",
-                "password": "diazware12",
-                "gender": "Male"
-            },
-            "tweetList": [
-                {
-                    "tweetId": 1,
-                    "userId": [
-                        {
-                            "userId": 1,
-                            "username": "diazware12",
-                            "full_name": "Diaz Ilyasa"
-                        }
-                    ],
-                    "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  ",
-                    "attachment": null,
-                    "dtm_crt": "2021-08-12",
-                    "likes": [
-                        "#<LikeTweet:0x000055daf5cedbe8>",
-                        "#<LikeTweet:0x000055daf5cec9f0>"
-                    ],
-                    "alreadyLike": true,
-                    "comments": 2,
-                    "hashtags": []
+                "Current Log-In User": {
+                    "full_name": "Diaz Ilyasa",
+                    "username": "diazware12",
+                    "email": "diazilyasa987@gmail.com",
+                    "password": "diazware12",
+                    "gender": "Male"
                 },
-                {
-                    "tweetId": 10,
-                    "userId": [
-                        {
-                            "userId": 2,
-                            "username": "MusuhOrmas21",
-                            "full_name": "Tretan Muslim"
-                        }
-                    ],
-                    "content": "Tersesaaaattt!!!....Oh tersesaaattttt!!!!....Astagfirullah!!!!",
-                    "attachment": null,
-                    "dtm_crt": "2021-08-13",
-                    "likes": [
-                        "#<LikeTweet:0x000055daf5ccf8f0>"
-                    ],
-                    "alreadyLike": true,
-                    "comments": 0,
-                    "hashtags": [
-                        "#<TweetHashtag:0x000055daf5cb7ea8>",
-                        "#<TweetHashtag:0x000055daf5cb69e0>"
-                    ]
-                },
-                {
-                    "tweetId": 3,
-                    "userId": [
-                        {
-                            "userId": 1,
-                            "username": "diazware12",
-                            "full_name": "Diaz Ilyasa"
-                        }
-                    ],
-                    "content": "final projeknya susah nih hehehe.....bantuin dong :)",
-                    "attachment": null,
-                    "dtm_crt": "2021-08-13",
-                    "likes": [
-                        "#<LikeTweet:0x000055daf5ca2bc0>"
-                    ],
-                    "alreadyLike": false,
-                    "comments": 0,
-                    "hashtags": []
-                },
-                {
-                    "tweetId": 16,
-                    "userId": [
-                        {
-                            "userId": 2,
-                            "username": "MusuhOrmas21",
-                            "full_name": "Tretan Muslim"
-                        }
-                    ],
-                    "content": "Asli, Mobil gw bagus banget!!!!",
-                    "attachment": "/transaction/1140-classic-car-safety.imgcache.rev.web.1100.633.jpg",
-                    "dtm_crt": "2021-08-14",
-                    "likes": [],
-                    "alreadyLike": false,
-                    "comments": 3,
-                    "hashtags": [
-                        "#<TweetHashtag:0x000055daf5a9d898>"
-                    ]
-                },
-                {
-                    "tweetId": 17,
-                    "userId": [
-                        {
-                            "userId": 2,
-                            "username": "MusuhOrmas21",
-                            "full_name": "Tretan Muslim"
-                        }
-                    ],
-                    "content": "Untuk pertama kalinya diselenggarakan lomba makan cepat dengan durasi maksimum 20 menit serempak tingkat nasional......",
-                    "attachment": "/transaction/makan.JPG",
-                    "dtm_crt": "2021-08-14",
-                    "likes": [],
-                    "alreadyLike": false,
-                    "comments": 1,
-                    "hashtags": [
-                        "#<TweetHashtag:0x000055daf5b24488>"
-                    ]
-                },
-                {
-                    "tweetId": 7,
-                    "userId": [
-                        {
-                            "userId": 1,
-                            "username": "diazware12",
-                            "full_name": "Diaz Ilyasa"
-                        }
-                    ],
-                    "content": "ngetes aja kok, nggak macem\"",
-                    "attachment": null,
-                    "dtm_crt": "2021-08-13",
-                    "likes": [],
-                    "alreadyLike": false,
-                    "comments": 0,
-                    "hashtags": [
-                        "#<TweetHashtag:0x000055daf591a610>",
-                        "#<TweetHashtag:0x000055daf58244b8>",
-                        "#<TweetHashtag:0x000055daf60fbb90>"
-                    ]
-                },
-                {
-                    "tweetId": 8,
-                    "userId": [
-                        {
-                            "userId": 1,
-                            "username": "diazware12",
-                            "full_name": "Diaz Ilyasa"
-                        }
-                    ],
-                    "content": "What is Happening today!?!?!?",
-                    "attachment": null,
-                    "dtm_crt": "2021-08-13",
-                    "likes": [],
-                    "alreadyLike": false,
-                    "comments": 0,
-                    "hashtags": [
-                        "#<TweetHashtag:0x000055daf60f8828>",
-                        "#<TweetHashtag:0x000055daf60f3f58>"
-                    ]
-                },
-                {
-                    "tweetId": 9,
-                    "userId": [
-                        {
-                            "userId": 1,
-                            "username": "diazware12",
-                            "full_name": "Diaz Ilyasa"
-                        }
-                    ],
-                    "content": "Haus :\")",
-                    "attachment": null,
-                    "dtm_crt": "2021-08-13",
-                    "likes": [],
-                    "alreadyLike": false,
-                    "comments": 0,
-                    "hashtags": [
-                        "#<TweetHashtag:0x000055daf60f0448>"
-                    ]
-                }
-            ]
+                "tweetList": [
+                    {
+                        "tweetId": 1,
+                        "userId": [
+                            {
+                                "userId": 1,
+                                "username": "diazware12",
+                                "full_name": "Diaz Ilyasa"
+                            }
+                        ],
+                        "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  ",
+                        "attachment": null,
+                        "dtm_crt": "2021-08-12",
+                        "likes": [
+                            "#<LikeTweet:0x0000560c39956118>",
+                            "#<LikeTweet:0x0000560c39955100>"
+                        ],
+                        "alreadyLike": true,
+                        "comments": 2,
+                        "hashtags": []
+                    },
+                    {
+                        "tweetId": 3,
+                        "userId": [
+                            {
+                                "userId": 1,
+                                "username": "diazware12",
+                                "full_name": "Diaz Ilyasa"
+                            }
+                        ],
+                        "content": "final projeknya susah nih hehehe.....bantuin dong :)",
+                        "attachment": null,
+                        "dtm_crt": "2021-08-13",
+                        "likes": [
+                            "#<LikeTweet:0x0000560c3992baa8>"
+                        ],
+                        "alreadyLike": false,
+                        "comments": 0,
+                        "hashtags": []
+                    },
+                    {
+                        "tweetId": 10,
+                        "userId": [
+                            {
+                                "userId": 2,
+                                "username": "MusuhOrmas21",
+                                "full_name": "Tretan Muslim"
+                            }
+                        ],
+                        "content": "Tersesaaaattt!!!....Oh tersesaaattttt!!!!....Astagfirullah!!!!",
+                        "attachment": null,
+                        "dtm_crt": "2021-08-13",
+                        "likes": [
+                            "#<LikeTweet:0x0000560c39906280>"
+                        ],
+                        "alreadyLike": true,
+                        "comments": 0,
+                        "hashtags": [
+                            "#<TweetHashtag:0x0000560c398f75a0>",
+                            "#<TweetHashtag:0x0000560c398f6178>"
+                        ]
+                    },
+                    {
+                        "tweetId": 16,
+                        "userId": [
+                            {
+                                "userId": 2,
+                                "username": "MusuhOrmas21",
+                                "full_name": "Tretan Muslim"
+                            }
+                        ],
+                        "content": "Asli, Mobil gw bagus banget!!!!",
+                        "attachment": "/transaction/1140-classic-car-safety.imgcache.rev.web.1100.633.jpg",
+                        "dtm_crt": "2021-08-14",
+                        "likes": [
+                            "#<LikeTweet:0x0000560c398eefb8>"
+                        ],
+                        "alreadyLike": true,
+                        "comments": 3,
+                        "hashtags": [
+                            "#<TweetHashtag:0x0000560c398da9c8>"
+                        ]
+                    },
+                    {
+                        "tweetId": 7,
+                        "userId": [
+                            {
+                                "userId": 1,
+                                "username": "diazware12",
+                                "full_name": "Diaz Ilyasa"
+                            }
+                        ],
+                        "content": "ngetes aja kok, nggak macem\"",
+                        "attachment": null,
+                        "dtm_crt": "2021-08-13",
+                        "likes": [],
+                        "alreadyLike": false,
+                        "comments": 0,
+                        "hashtags": [
+                            "#<TweetHashtag:0x0000560c398c4b28>",
+                            "#<TweetHashtag:0x0000560c394fbaf0>",
+                            "#<TweetHashtag:0x0000560c394face0>"
+                        ]
+                    },
+                    {
+                        "tweetId": 8,
+                        "userId": [
+                            {
+                                "userId": 1,
+                                "username": "diazware12",
+                                "full_name": "Diaz Ilyasa"
+                            }
+                        ],
+                        "content": "What is Happening today!?!?!?",
+                        "attachment": null,
+                        "dtm_crt": "2021-08-13",
+                        "likes": [],
+                        "alreadyLike": false,
+                        "comments": 0,
+                        "hashtags": [
+                            "#<TweetHashtag:0x0000560c3989b480>",
+                            "#<TweetHashtag:0x0000560c3986fc68>"
+                        ]
+                    },
+                    {
+                        "tweetId": 17,
+                        "userId": [
+                            {
+                                "userId": 2,
+                                "username": "MusuhOrmas21",
+                                "full_name": "Tretan Muslim"
+                            }
+                        ],
+                        "content": "Untuk pertama kalinya diselenggarakan lomba makan cepat dengan durasi maksimum 20 menit serempak tingkat nasional......",
+                        "attachment": "/transaction/makan.JPG",
+                        "dtm_crt": "2021-08-14",
+                        "likes": [],
+                        "alreadyLike": false,
+                        "comments": 1,
+                        "hashtags": [
+                            "#<TweetHashtag:0x0000560c39867a90>"
+                        ]
+                    }
+                ]
+            }
         }
-
 
 comment page
 
@@ -249,42 +227,17 @@ comment page
             "message": "Success",
             "status": 200,
             "method": "GET",
-            "alert": "",
             "data": {
-                "userId": "7",
-                "tweetId": "16"
-            },
-            "redirect": "commentpage",
-            "current log-in user": {
-                "full_name": "brad pitt",
-                "username": "bPitt12",
-                "email": "bPitt12@gmail.com",
-                "password": "bPitt12",
-                "gender": "Male"
-            },
-            "tweet-comment data": {
-                "tweet-data": {
-                    "tweetId": 16,
-                    "userId": [
-                        {
-                            "userId": 2,
-                            "username": "MusuhOrmas21",
-                            "full_name": "Tretan Muslim"
-                        }
-                    ],
-                    "content": "Asli, Mobil gw bagus banget!!!!",
-                    "attachment": "/transaction/1140-classic-car-safety.imgcache.rev.web.1100.633.jpg",
-                    "dtm_crt": "2021-08-14",
-                    "likes": [],
-                    "alreadyLike": false,
-                    "comments": 2,
-                    "hashtags": [
-                        "#<TweetHashtag:0x00005595f6f9b5f0>"
-                    ]
+                "current log-in user": {
+                    "full_name": "Brad Pitt",
+                    "username": "actor_bPitt23",
+                    "email": "bPitt23@gmail.com",
+                    "password": "bPitt12",
+                    "gender": "Male"
                 },
-                "comment-data": [
-                    {
-                        "commentTweetId": 12,
+                "tweet-comment data": {
+                    "tweet-data": {
+                        "tweetId": 16,
                         "userId": [
                             {
                                 "userId": 2,
@@ -292,14 +245,629 @@ comment page
                                 "full_name": "Tretan Muslim"
                             }
                         ],
-                        "tweetId": 16,
-                        "comment_tweet": "HUWAAAAWWWW",
-                        "hashtags": [],
+                        "content": "Asli, Mobil gw bagus banget!!!!",
+                        "attachment": "/transaction/1140-classic-car-safety.imgcache.rev.web.1100.633.jpg",
                         "dtm_crt": "2021-08-14",
-                        "attachment": "/transaction/majelis-lucu.gif"
+                        "likes": [
+                            "#<LikeTweet:0x00007f99601d24e0>"
+                        ],
+                        "alreadyLike": false,
+                        "comments": 3,
+                        "hashtags": [
+                            "#<TweetHashtag:0x00007f99601d0fa0>"
+                        ]
+                    },
+                    "comment-data": [
+                        {
+                            "commentTweetId": 12,
+                            "userId": [
+                                {
+                                    "userId": 2,
+                                    "username": "MusuhOrmas21",
+                                    "full_name": "Tretan Muslim"
+                                }
+                            ],
+                            "tweetId": 16,
+                            "comment_tweet": "HUWAAAAWWWW",
+                            "hashtags": [],
+                            "dtm_crt": "2021-08-14",
+                            "attachment": "/transaction/majelis-lucu.gif"
+                        },
+                        {
+                            "commentTweetId": 14,
+                            "userId": [
+                                {
+                                    "userId": 1,
+                                    "username": "diazware12",
+                                    "full_name": "Diaz Ilyasa"
+                                }
+                            ],
+                            "tweetId": 16,
+                            "comment_tweet": "only for testing purposes",
+                            "hashtags": [
+                                "#<CommentHashtag:0x0000560c39a2cee8>",
+                                "#<CommentHashtag:0x00007f9960223e58>"
+                            ],
+                            "dtm_crt": "2021-08-17",
+                            "attachment": null
+                        },
+                        {
+                            "commentTweetId": 15,
+                            "userId": [
+                                {
+                                    "userId": 7,
+                                    "username": "actor_bPitt23",
+                                    "full_name": "Brad Pitt"
+                                }
+                            ],
+                            "tweetId": 16,
+                            "comment_tweet": "only for testing purposes",
+                            "hashtags": [
+                                "#<CommentHashtag:0x00007f9960222508>",
+                                "#<CommentHashtag:0x00007f9960221d10>"
+                            ],
+                            "dtm_crt": "2021-08-17",
+                            "attachment": "/transaction/Pc53K5.gif"
+                        }
+                    ]
+                }
+            }
+        }
+
+comment tweet
+
+    hit:
+        userId: 7
+        tweetId: 19
+        comment_tweet: "only for testing purposes"
+        hashtags: "#generasi #gigih"
+        file: attacment
+
+    response:
+        {
+            "message": "Success",
+            "status": 200,
+            "method": "POST",
+            "alert": "",
+            "redirect": "commentpage",
+            "Current Log-In User": {
+                "full_name": "Brad Pitt",
+                "username": "actor_bPitt23",
+                "email": "bPitt23@gmail.com",
+                "password": "bPitt12",
+                "gender": "Male"
+            },
+            "data": {
+                "userId": "7",
+                "tweetId": "19",
+                "comment_tweet": "only for testing purposes",
+                "hashtags": "#gojek",
+                "file": {
+                    "filename": "pardeds.gif",
+                    "type": "image/gif",
+                    "name": "file",
+                    "tempfile": "#<File:0x00007f3d784c2590>",
+                    "head": "Content-Disposition: form-data; name=\"file\"; filename=\"pardeds.gif\"\r\nContent-Type: image/gif\r\n"
+                }
+            }
+        }
+
+profilepage
+    
+    hit:
+        - userId: 1
+
+    response:
+        {
+            "message": "Success",
+            "status": 200,
+            "method": "GET",
+            "data": {
+                "current log-in user": {
+                    "full_name": "Diaz Ilyasa",
+                    "username": "diazware12",
+                    "email": "diazilyasa987@gmail.com",
+                    "password": "diazware12",
+                    "gender": "Male"
+                },
+                "profile content": {
+                    "followers ": [
+                        {
+                            "followersId": 7,
+                            "userFollowersId": [
+                                {
+                                    "userId": 2,
+                                    "username": "MusuhOrmas21",
+                                    "full_name": "Tretan Muslim"
+                                }
+                            ],
+                            "dtm_crt": "2021-08-14"
+                        }
+                    ],
+                    "tweets ": [
+                        {
+                            "tweetId": 1,
+                            "userId": [
+                                {
+                                    "userId": 1,
+                                    "username": "diazware12",
+                                    "full_name": "Diaz Ilyasa"
+                                }
+                            ],
+                            "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  ",
+                            "attachment": null,
+                            "dtm_crt": "2021-08-12",
+                            "likes": [
+                                "#<LikeTweet:0x00007f3d780bcef0>",
+                                "#<LikeTweet:0x00007f3d780bc4c8>"
+                            ],
+                            "alreadyLike": true,
+                            "comments": 2,
+                            "hashtags": []
+                        },
+                        {
+                            "tweetId": 3,
+                            "userId": [
+                                {
+                                    "userId": 1,
+                                    "username": "diazware12",
+                                    "full_name": "Diaz Ilyasa"
+                                }
+                            ],
+                            "content": "final projeknya susah nih hehehe.....bantuin dong :)",
+                            "attachment": null,
+                            "dtm_crt": "2021-08-13",
+                            "likes": [
+                                "#<LikeTweet:0x00007f3d7828dc98>"
+                            ],
+                            "alreadyLike": false,
+                            "comments": 0,
+                            "hashtags": []
+                        },
+                        {
+                            "tweetId": 7,
+                            "userId": [
+                                {
+                                    "userId": 1,
+                                    "username": "diazware12",
+                                    "full_name": "Diaz Ilyasa"
+                                }
+                            ],
+                            "content": "ngetes aja kok, nggak macem\"",
+                            "attachment": null,
+                            "dtm_crt": "2021-08-13",
+                            "likes": [],
+                            "alreadyLike": false,
+                            "comments": 0,
+                            "hashtags": [
+                                "#<TweetHashtag:0x00007f3d7828aa20>",
+                                "#<TweetHashtag:0x00007f3d7828a200>",
+                                "#<TweetHashtag:0x00007f3d782899e0>"
+                            ]
+                        },
+                        {
+                            "tweetId": 8,
+                            "userId": [
+                                {
+                                    "userId": 1,
+                                    "username": "diazware12",
+                                    "full_name": "Diaz Ilyasa"
+                                }
+                            ],
+                            "content": "What is Happening today!?!?!?",
+                            "attachment": null,
+                            "dtm_crt": "2021-08-13",
+                            "likes": [],
+                            "alreadyLike": false,
+                            "comments": 0,
+                            "hashtags": [
+                                "#<TweetHashtag:0x00007f3d782874b0>",
+                                "#<TweetHashtag:0x00007f3d78286cb8>"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+
+edit profile data
+
+    hit: 
+        - userId : 7
+        - fullname : "Brad Pitt"
+        - username : "actor_bPitt23"
+        - email : "bPitt23@gmail.com"
+        - description : "only for testing purposes"
+
+    response: 
+        {
+            "message": "Success",
+            "status": 200,
+            "method": "POST",
+            "data": {
+                "userId": 7,
+                "full_name": "Brad Pitt",
+                "username": "actor_bPitt23",
+                "email": "bPitt23@gmail.com",
+                "description": "only for testing purposes"
+            }
+        }
+
+other profile page
+
+    hit: 
+        - userId: 7
+        - otherUsId: 1
+
+    response:
+        {
+            "message": "Success",
+            "status": 200,
+            "method": "GET",
+            "data": {
+                "follow status": false,
+                "current log-in user": {
+                    "full_name": "Brad Pitt",
+                    "username": "actor_bPitt23",
+                    "email": "bPitt23@gmail.com",
+                    "password": "bPitt12",
+                    "gender": "Male"
+                },
+                "profile content": {
+                    "other profile user": {
+                        "full_name": "Diaz Ilyasa",
+                        "username": "diazware12",
+                        "email": "diazilyasa987@gmail.com",
+                        "password": "diazware12",
+                        "gender": "Male"
+                    },
+                    "followers ": [
+                        {
+                            "followersId": 7,
+                            "userFollowersId": [
+                                {
+                                    "userId": 2,
+                                    "username": "MusuhOrmas21",
+                                    "full_name": "Tretan Muslim"
+                                }
+                            ],
+                            "dtm_crt": "2021-08-14"
+                        }
+                    ],
+                    "tweets ": [
+                        {
+                            "tweetId": 1,
+                            "userId": [
+                                {
+                                    "userId": 1,
+                                    "username": "diazware12",
+                                    "full_name": "Diaz Ilyasa"
+                                }
+                            ],
+                            "content": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  ",
+                            "attachment": null,
+                            "dtm_crt": "2021-08-12",
+                            "likes": [
+                                "#<LikeTweet:0x00007f3d78251478>",
+                                "#<LikeTweet:0x00007f3d78250a50>"
+                            ],
+                            "alreadyLike": false,
+                            "comments": 2,
+                            "hashtags": []
+                        },
+                        {
+                            "tweetId": 3,
+                            "userId": [
+                                {
+                                    "userId": 1,
+                                    "username": "diazware12",
+                                    "full_name": "Diaz Ilyasa"
+                                }
+                            ],
+                            "content": "final projeknya susah nih hehehe.....bantuin dong :)",
+                            "attachment": null,
+                            "dtm_crt": "2021-08-13",
+                            "likes": [
+                                "#<LikeTweet:0x00007f3d7824e368>"
+                            ],
+                            "alreadyLike": false,
+                            "comments": 0,
+                            "hashtags": []
+                        },
+                        {
+                            "tweetId": 7,
+                            "userId": [
+                                {
+                                    "userId": 1,
+                                    "username": "diazware12",
+                                    "full_name": "Diaz Ilyasa"
+                                }
+                            ],
+                            "content": "ngetes aja kok, nggak macem\"",
+                            "attachment": null,
+                            "dtm_crt": "2021-08-13",
+                            "likes": [],
+                            "alreadyLike": false,
+                            "comments": 0,
+                            "hashtags": [
+                                "#<TweetHashtag:0x00007f3d782330e0>",
+                                "#<TweetHashtag:0x00007f3d782328e8>",
+                                "#<TweetHashtag:0x00007f3d782320c8>"
+                            ]
+                        },
+                        {
+                            "tweetId": 8,
+                            "userId": [
+                                {
+                                    "userId": 1,
+                                    "username": "diazware12",
+                                    "full_name": "Diaz Ilyasa"
+                                }
+                            ],
+                            "content": "What is Happening today!?!?!?",
+                            "attachment": null,
+                            "dtm_crt": "2021-08-13",
+                            "likes": [],
+                            "alreadyLike": false,
+                            "comments": 0,
+                            "hashtags": [
+                                "#<TweetHashtag:0x00007f3d78227ad8>",
+                                "#<TweetHashtag:0x00007f3d782272b8>"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+
+create tweet
+
+    hit: 
+        - userId : 7
+        - content : "ini pacar aku, aku sayang deh sama dia <3"
+        - file : attachment
+        - hashtags : #soobin #chaesoobin
+
+    response:
+        {
+            "message": "Success",
+            "status": 200,
+            "method": "POST",
+            "alert": "",
+            "redirect": "mainpage",
+            "data": {
+                "userId": "7",
+                "content": "ini pacar aku, aku sayang deh sama dia <3",
+                "file": {
+                    "filename": "soo bin.gif",
+                    "type": "image/gif",
+                    "name": "file",
+                    "tempfile": "#<File:0x000055e0dcb6dee8>",
+                    "head": "Content-Disposition: form-data; name=\"file\"; filename=\"soo bin.gif\"\r\nContent-Type: image/gif\r\n"
+                },
+                "hashtags": "#soobin #chaesoobin"
+            }
+        }
+
+like tweet
+
+    hit: 
+        - userId: 1
+        - tweetId: 16
+
+    response: 
+        {
+            "message": "Success",
+            "status": 200,
+            "method": "POST",
+            "data": {
+                "userId": "1",
+                "tweetId": "16"
+            }
+        }
+
+dislike tweet
+
+    hit: 
+        - userId: 1
+        - tweetId: 16
+
+    response: 
+        {
+            "message": "Success",
+            "status": 200,
+            "method": "POST",
+            "data": {
+                "userId": "1",
+                "tweetId": "16"
+            }
+        }
+
+edit profile picture
+
+    hit: 
+        - userId: 1
+        - profilePicture: attachment
+
+    response: 
+        {
+            "message": "Success",
+            "status": 200,
+            "method": "GET",
+            "alert": "",
+            "data": {
+                "userId": "7",
+                "profilePicture": {
+                    "filename": "brad-pitt-2_169.jpeg",
+                    "type": "image/jpeg",
+                    "name": "profilePicture",
+                    "tempfile": "#<File:0x000056531d0fe008>",
+                    "head": "Content-Disposition: form-data; name=\"profilePicture\"; filename=\"brad-pitt-2_169.jpeg\"\r\nContent-Type: image/jpeg\r\n"
+                }
+            }
+        }
+
+delete tweet
+
+    hit: 
+        - userId: 1
+        - tweetId: 17
+
+    response:
+        {
+            "message": "you're not allowed to delete",
+            "status": 401,
+            "method": "POST",
+            "data": {
+                "userId": "1",
+                "tweetId": "17"
+            }
+        }
+
+follow user
+
+    hit:
+        - userId: 1
+        - userFollowersId: 2
+    
+    response: 
+        {
+            "message": "Success",
+            "status": 200,
+            "method": "POST",
+            "data": {
+                "userId": "1",
+                "userFollowersId": "2"
+            }
+        }
+
+unfollow user
+
+    hit:
+        - userId: 1
+        - userFollowersId: 2
+    
+    response: 
+        {
+            "message": "Success",
+            "status": 200,
+            "method": "POST",
+            "data": {
+                "userId": "1",
+                "userFollowersId": "2"
+            }
+        }
+
+trending page
+
+    hit:
+        - userId: 1
+
+    response:
+        {
+            "message": "Success",
+            "status": 200,
+            "method": "POST",
+            "data": {
+                "Current Log-In User": {
+                    "full_name": "Diaz Ilyasa",
+                    "username": "diazware12",
+                    "email": "diazilyasa987@gmail.com",
+                    "password": "diazware12",
+                    "gender": "Male"
+                },
+                "trending list": [
+                    {
+                        "hashtagId": 20,
+                        "hashtagName": "generasi",
+                        "dtm_crt": "2021-08-17",
+                        "totalUsage": "2"
                     },
                     {
-                        "commentTweetId": 14,
+                        "hashtagId": 21,
+                        "hashtagName": "gigih",
+                        "dtm_crt": "2021-08-17",
+                        "totalUsage": "2"
+                    },
+                    {
+                        "hashtagId": 22,
+                        "hashtagName": "soobin",
+                        "dtm_crt": "2021-08-17",
+                        "totalUsage": "1"
+                    },
+                    {
+                        "hashtagId": 23,
+                        "hashtagName": "chaesoobin",
+                        "dtm_crt": "2021-08-17",
+                        "totalUsage": "1"
+                    },
+                    {
+                        "hashtagId": 24,
+                        "hashtagName": "gojek",
+                        "dtm_crt": "2021-08-18",
+                        "totalUsage": "1"
+                    }
+                ]
+            }
+        }
+
+user list
+
+    hit: 
+        userId: 1
+        searchUser: "diaz"
+
+    response:
+        {
+            "message": "Success",
+            "status": 200,
+            "method": "POST",
+            "data": {
+                "Current Log-In User": {
+                    "full_name": "Diaz Ilyasa",
+                    "username": "diazware12",
+                    "email": "diazilyasa987@gmail.com",
+                    "password": "diazware12",
+                    "gender": "Male"
+                },
+                "users": [
+                    {
+                        "userId": 1,
+                        "full_name": "Diaz Ilyasa",
+                        "username": "diazware12",
+                        "email": "diazilyasa987@gmail.com",
+                        "password": "diazware12",
+                        "gender": "Male",
+                        "profile_pic": "/transaction/1-diazware12.jpg",
+                        "role": "User",
+                        "dtm_crt": "2021-08-12"
+                    }
+                ]
+            }
+        }
+
+hashtag details
+
+    hit:
+        - userId: 1
+        - hashtagId: 5
+
+    response:
+        {
+            "message": "Success",
+            "status": 200,
+            "method": "POST",
+            "data": {
+                "Current Log-In User": {
+                    "full_name": "Diaz Ilyasa",
+                    "username": "diazware12",
+                    "email": "diazilyasa987@gmail.com",
+                    "password": "diazware12",
+                    "gender": "Male"
+                },
+                "Tweet List": [
+                    {
+                        "tweetId": 7,
                         "userId": [
                             {
                                 "userId": 1,
@@ -307,31 +875,60 @@ comment page
                                 "full_name": "Diaz Ilyasa"
                             }
                         ],
-                        "tweetId": 16,
-                        "comment_tweet": "only for testing purposes",
+                        "content": "ngetes aja kok, nggak macem\"",
+                        "attachment": null,
+                        "dtm_crt": "2021-08-13",
+                        "likes": [],
+                        "alreadyLike": false,
+                        "comments": 0,
                         "hashtags": [
-                            "#<CommentHashtag:0x00005595f6bd4d40>",
-                            "#<CommentHashtag:0x00005595f6bd4340>"
+                            "#<TweetHashtag:0x00007f3c6c09b168>",
+                            "#<TweetHashtag:0x00007f3c6c09a970>",
+                            "#<TweetHashtag:0x00007f3c6c09a178>"
+                        ]
+                    },
+                    {
+                        "tweetId": 8,
+                        "userId": [
+                            {
+                                "userId": 1,
+                                "username": "diazware12",
+                                "full_name": "Diaz Ilyasa"
+                            }
                         ],
-                        "dtm_crt": "2021-08-17",
-                        "attachment": null
+                        "content": "What is Happening today!?!?!?",
+                        "attachment": null,
+                        "dtm_crt": "2021-08-13",
+                        "likes": [],
+                        "alreadyLike": false,
+                        "comments": 0,
+                        "hashtags": [
+                            "#<TweetHashtag:0x000055b880032aa8>",
+                            "#<TweetHashtag:0x000055b8800309b0>"
+                        ]
+                    }
+                ],
+                "Comment List": [
+                    {
+                        "commentTweetId": 13,
+                        "userId": [
+                            {
+                                "userId": 1,
+                                "username": "diazware12",
+                                "full_name": "Diaz Ilyasa"
+                            }
+                        ],
+                        "tweetId": "#<Tweet:0x00007f3c6c0606f8>",
+                        "comment_tweet": "hadeuuuh!!!",
+                        "hashtags": [
+                            "#<CommentHashtag:0x000055b880022dd8>"
+                        ],
+                        "dtm_crt": "2021-08-15",
+                        "attachment": "/transaction/blok-blok.gif"
                     }
                 ]
             }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }        
 
 
 

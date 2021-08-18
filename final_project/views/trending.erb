@@ -72,7 +72,7 @@
         </div>
         <div class="py-4 px-4">
           <div class="py-4">
-                <% hashtagList.each_with_index do |tag,index| %>
+                <% hashtags.each_with_index do |tag,index| %>
                   <div class="post">
                       <div class="post__body">
                         <h3>  <a style="color:black;text-decoration:none;" href="/<%=getUser.userId%>/explore/<%=tag.hashtagId%>/details">  <b>#<%=tag.hashtagName%></b>   </a>  </h3>

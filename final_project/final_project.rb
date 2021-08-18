@@ -77,8 +77,6 @@ post '/forgotpassword' do
   userController.forgotPassword(params, 'submit')
 end
 
-# own profile
-
 get '/:userId/profile' do
   userController.profile(params)
 end
@@ -120,8 +118,6 @@ post '/:userId/profile/createTweet' do
   tweetController.createTweet(params)
   redirect "/#{params['userId']}/profile"
 end
-
-# other profile
 
 get '/:userId/:otherUsId/profile' do
   userController.otherProfile(params)
@@ -257,6 +253,24 @@ end
 
 post "#{settings.prefix}/unfollowUser" do
   response = followerController.unfollow_API(params)
+
+  return response.to_json
+end
+
+get "#{settings.prefix}/trendingPage" do
+  response = trendingController.trendingPage_API(params)
+
+  return response.to_json
+end
+
+get "#{settings.prefix}/userList" do
+  response = findPeopleController.findPeople_API(params)
+
+  return response.to_json
+end
+
+get "#{settings.prefix}/hashtagDetails" do
+  response = exploreController.details_API(params)
 
   return response.to_json
 end

@@ -251,8 +251,6 @@ class UserController
                 'message' => 'Success',
                 'status' => 200,
                 'method' => 'POST',
-                'alert' => '',
-                'redirect' => 'loginpage',
                 'data' => {
                     "full_name": response.full_name,
                     "username": response.username,
@@ -268,52 +266,50 @@ class UserController
 
     def forgotPassword_API(params)
 
-            alert = nil
+        alert = nil
 
-            exist = User.checkUser(params["username"])
+        exist = User.checkUser(params["username"])
 
-            if params["password"] != params["conpass"]
-                alert = "Confirm password should be same as password"
-            elsif params["username"].include? " "
-                alert = "username cannot contain space (' ')"
-            elsif exist == false
-                alert = "username not found"
-            end
+        if params["password"] != params["conpass"]
+            alert = "Confirm password should be same as password"
+        elsif params["username"].include? " "
+            alert = "username cannot contain space (' ')"
+        elsif exist == false
+            alert = "username not found"
+        end
 
-            if alert != nil
-                return {
-                    'message' => alert,
-                    'status' => 401,
-                    'method' => 'POST',
-                    'data' => params
+        if alert != nil
+            return {
+                'message' => alert,
+                'status' => 401,
+                'method' => 'POST',
+                'data' => params
+            }
+        else 
+            getUser = User.getUserByName(params["username"])
+
+            updatePass = User.new(
+                userId: getUser.userId,
+                full_name: getUser.full_name,
+                username: getUser.username,
+                email: getUser.email,
+                password: params["password"]
+            )
+            updatePass.updatePassword
+
+            return {
+                'message' => 'Success',
+                'status' => 200,
+                'method' => 'POST',
+                'data' => {
+                    "userId": updatePass.userId,
+                    "full_name": updatePass.full_name,
+                    "username": updatePass.username,
+                    "email": updatePass.email,
+                    "password": updatePass.password
                 }
-            else 
-                getUser = User.getUserByName(params["username"])
-
-                updatePass = User.new(
-                    userId: getUser.userId,
-                    full_name: getUser.full_name,
-                    username: getUser.username,
-                    email: getUser.email,
-                    password: params["password"]
-                )
-                updatePass.updatePassword
-
-                return {
-                    'message' => 'Success',
-                    'status' => 200,
-                    'method' => 'POST',
-                    'alert' => '',
-                    'redirect' => 'loginpage',
-                    'data' => {
-                        "userId": updatePass.userId,
-                        "full_name": updatePass.full_name,
-                        "username": updatePass.username,
-                        "email": updatePass.email,
-                        "password": updatePass.password
-                    }
-                }
-            end
+            }
+        end
             
 
     end
@@ -355,17 +351,16 @@ class UserController
                 'message' => 'Success',
                 'status' => 200,
                 'method' => 'POST',
-                'alert' => '',
-                'redirect' => 'homepage',
-                'data' => params,
-                "Current Log-In User" => {
-                    "full_name": getUser.full_name,
-                    "username": getUser.username,
-                    "email": getUser.email,
-                    "password": getUser.password,
-                    "gender": getUser.gender
-                },
-                'tweetList' => tweetsResponse
+                'data' => {
+                    "Current Log-In User" => {
+                        "full_name": getUser.full_name,
+                        "username": getUser.username,
+                        "email": getUser.email,
+                        "password": getUser.password,
+                        "gender": getUser.gender
+                    },
+                    'tweetList' => tweetsResponse
+                }
             }
         end
     end
@@ -411,35 +406,33 @@ class UserController
             'message' => 'Success',
             'status' => 200,
             'method' => 'GET',
-            'alert' => '',
-            'data' => params,
-            'redirect' => 'commentpage',
-            'current log-in user' => {
-                "full_name": getUser.full_name,
-                "username": getUser.username,
-                "email": getUser.email,
-                "password": getUser.password,
-                "gender": getUser.gender
-            },
-            'tweet-comment data' => {
-                "tweet-data": {
-                    "tweetId": getTweet.tweetId,
-                    "userId": [{
-                        "userId": getTweet.userId.userId,
-                        "username": getTweet.userId.username,
-                        "full_name": getTweet.userId.full_name
-                    }],
-                    "content": getTweet.content,
-                    "attachment": getTweet.attachment,
-                    "dtm_crt": getTweet.dtm_crt,
-                    "likes": getTweet.likes,
-                    "alreadyLike": getTweet.alreadyLike,
-                    "comments": getTweet.comments,
-                    "hashtags": getTweet.hashtags
+            'data' => {
+                'current log-in user' => {
+                    "full_name": getUser.full_name,
+                    "username": getUser.username,
+                    "email": getUser.email,
+                    "password": getUser.password,
+                    "gender": getUser.gender
                 },
-                "comment-data": commentResponse
-            }
-            
+                'tweet-comment data' => {
+                    "tweet-data": {
+                        "tweetId": getTweet.tweetId,
+                        "userId": [{
+                            "userId": getTweet.userId.userId,
+                            "username": getTweet.userId.username,
+                            "full_name": getTweet.userId.full_name
+                        }],
+                        "content": getTweet.content,
+                        "attachment": getTweet.attachment,
+                        "dtm_crt": getTweet.dtm_crt,
+                        "likes": getTweet.likes,
+                        "alreadyLike": getTweet.alreadyLike,
+                        "comments": getTweet.comments,
+                        "hashtags": getTweet.hashtags
+                    },
+                    "comment-data": commentResponse
+                }
+            }            
         }
     end
 
@@ -492,22 +485,19 @@ class UserController
             'message' => 'Success',
             'status' => 200,
             'method' => 'GET',
-            'alert' => '',
-            'data' => params,
-            'redirect' => 'commentpage',
-            'current log-in user' => {
-                "full_name": getUser.full_name,
-                "username": getUser.username,
-                "email": getUser.email,
-                "password": getUser.password,
-                "gender": getUser.gender
-            },
-            'profile content' => {
-                'followers ' => followerResponse,
-                'tweets ' => tweetsResponse
-            }
-
-            
+            'data' => {
+                'current log-in user' => {
+                    "full_name": getUser.full_name,
+                    "username": getUser.username,
+                    "email": getUser.email,
+                    "password": getUser.password,
+                    "gender": getUser.gender
+                },
+                'profile content' => {
+                    'followers ' => followerResponse,
+                    'tweets ' => tweetsResponse
+                }
+            }    
         }  
     end
 
@@ -555,13 +545,19 @@ class UserController
                 description: desc
             )
             editUser.update
-
+            
+            result = User.getUserById(params['userId'])
             return {
                 'message' => 'Success',
                 'status' => 200,
                 'method' => 'POST',
-                'alert' => '',
-                'data' => params            
+                'data' => {
+                    "userId": result.userId,
+                    "full_name": result.full_name,
+                    "username": result.username,
+                    "email": result.email,
+                    "description": result.description
+                }            
             }  
         end
 
@@ -628,29 +624,27 @@ class UserController
             'message' => 'Success',
             'status' => 200,
             'method' => 'GET',
-            'alert' => '',
-            'data' => params,
-            'redirect' => 'otherprofilepage',
-            'follow status' => followStatus,
-            'current log-in user' => {
-                "full_name": getUser.full_name,
-                "username": getUser.username,
-                "email": getUser.email,
-                "password": getUser.password,
-                "gender": getUser.gender
-            },
-            'profile content' => {
-                'other profile user' => {
-                    "full_name": getOtherUser.full_name,
-                    "username": getOtherUser.username,
-                    "email": getOtherUser.email,
-                    "password": getOtherUser.password,
-                    "gender": getOtherUser.gender
+            'data' => {
+                'follow status' => followStatus,
+                'current log-in user' => {
+                    "full_name": getUser.full_name,
+                    "username": getUser.username,
+                    "email": getUser.email,
+                    "password": getUser.password,
+                    "gender": getUser.gender
                 },
-                'followers ' => followerResponse,
-                'tweets ' => tweetsResponse
-            }
-            
+                'profile content' => {
+                    'other profile user' => {
+                        "full_name": getOtherUser.full_name,
+                        "username": getOtherUser.username,
+                        "email": getOtherUser.email,
+                        "password": getOtherUser.password,
+                        "gender": getOtherUser.gender
+                    },
+                    'followers ' => followerResponse,
+                    'tweets ' => tweetsResponse
+                }
+            }           
         }       
     end
 
@@ -687,12 +681,19 @@ class UserController
         )
         updatePicture.updateProfilePic
 
+        result = User.getUserById(getUser.userId)
         return {
             'message' => 'Success',
             'status' => 200,
             'method' => 'GET',
             'alert' => '',
-            'data' => params
+            'data' => {
+                "userId": result.full_name,
+                "full_name": result.full_name,
+                "username": result.username,
+                "email": result.email,
+                "profile_pic": result.profile_pic
+            }
         }  
         
     end
