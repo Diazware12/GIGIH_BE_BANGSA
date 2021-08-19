@@ -1,5 +1,7 @@
 register
 
+    link: localhost:4567/api/v1/register
+
     hit:
         - full_name: brad pitt
         - username: bPitt12
@@ -27,6 +29,8 @@ register
 
 forgot password
 
+    link: localhost:4567/api/v1/forgotpassword
+
     hit:
         - username: bPitt12
         - password: bPitt12
@@ -50,6 +54,8 @@ forgot password
         }
 
 login
+
+    link: localhost:4567/api/v1/login
 
     hit:
         - username: diazware12
@@ -215,7 +221,9 @@ login
             }
         }
 
-comment page
+comment page 
+
+    link: localhost:4567/api/v1/commenttweet (get)
 
     hit:
         - userId: 7
@@ -316,6 +324,8 @@ comment page
 
 comment tweet
 
+    link: localhost:4567/api/v1/commenttweet (post)
+
     hit:
         userId: 7
         tweetId: 19
@@ -353,6 +363,8 @@ comment tweet
         }
 
 profilepage
+
+    link: localhost:4567/api/v1/profilepage
     
     hit:
         - userId: 1
@@ -472,6 +484,8 @@ profilepage
 
 edit profile data
 
+    link: localhost:4567/api/v1/editprofiledata
+
     hit: 
         - userId : 7
         - fullname : "Brad Pitt"
@@ -494,6 +508,8 @@ edit profile data
         }
 
 other profile page
+
+    link: localhost:4567/api/v1/otherprofilepage
 
     hit: 
         - userId: 7
@@ -622,6 +638,8 @@ other profile page
 
 create tweet
 
+    link: localhost:4567/api/v1/createnewtweet
+
     hit: 
         - userId : 7
         - content : "ini pacar aku, aku sayang deh sama dia <3"
@@ -651,6 +669,8 @@ create tweet
 
 like tweet
 
+    link: localhost:4567/api/v1/liketweet
+
     hit: 
         - userId: 1
         - tweetId: 16
@@ -668,6 +688,8 @@ like tweet
 
 dislike tweet
 
+    link: localhost:4567/api/v1/disliketweet
+
     hit: 
         - userId: 1
         - tweetId: 16
@@ -684,6 +706,8 @@ dislike tweet
         }
 
 edit profile picture
+
+    link: localhost:4567/api/v1/editprofilepicture
 
     hit: 
         - userId: 1
@@ -709,6 +733,8 @@ edit profile picture
 
 delete tweet
 
+    link: localhost:4567/api/v1/deletetweet
+
     hit: 
         - userId: 1
         - tweetId: 17
@@ -725,6 +751,8 @@ delete tweet
         }
 
 follow user
+
+    link: localhost:4567/api/v1/followUser
 
     hit:
         - userId: 1
@@ -743,6 +771,8 @@ follow user
 
 unfollow user
 
+    link: localhost:4567/api/v1/unfollowUser
+
     hit:
         - userId: 1
         - userFollowersId: 2
@@ -759,6 +789,8 @@ unfollow user
         }
 
 trending page
+
+    link: localhost:4567/api/v1/trendingPage
 
     hit:
         - userId: 1
@@ -813,6 +845,8 @@ trending page
 
 user list
 
+    link: localhost:4567/api/v1/userList
+
     hit: 
         userId: 1
         searchUser: "diaz"
@@ -847,6 +881,8 @@ user list
         }
 
 hashtag details
+
+    link: localhost:4567/api/v1/hashtagDetails
 
     hit:
         - userId: 1
