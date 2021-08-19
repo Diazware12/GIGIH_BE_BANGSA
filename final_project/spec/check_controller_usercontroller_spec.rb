@@ -2,6 +2,7 @@ require_relative '../controller/usercontroller'
 require_relative '../model/user'
 require_relative '../db/db_connector'
 require 'mysql2'
+require 'json'
 
 describe UserController do
   describe 'login' do
@@ -30,50 +31,6 @@ describe UserController do
       end
     end
 
-    context 'regist via API' do
-      it 'should regist' do
-        stub = double
-
-        stub_query = "insert into users (full_name,username,email,password,gender,role,dtm_crt) values ('Aldebaran Adi','aldi123','aldi123@gmail.com','aldi123','Male','User',curdate())"
-         
-        getUser = User.new(
-          full_name: "Aldebaran Adi",
-          username: "aldi123",
-          email: "aldi123@gmail.com",
-          password: "aldi123",
-          gender: "Male"
-        )
-        
-        allow(Users).to receive(:new).and_return(stub)
-        expect(stub).to receive(:query).and_return(200)
-
-        response = {
-          'message' => 'Success',
-          'status' => 200,
-          'method' => 'POST',
-          'data' => {
-            'user_id' => 1,
-            'username' => 'naufalrdj',
-            'bio' => 'Hello',
-            'email' => 'test@gmail.com',
-            'createdAt' => '2021-08-15 00:51:03',
-            'updatedAt' => '2021-08-15 00:51:03'
-          }
-        }
-
-        params = {
-          'user_id' => 1,
-          'username' => 'naufalrdj',
-          'bio' => 'Hello',
-          'email' => 'test@gmail.com',
-          'createdAt' => '2021-08-15 00:51:03',
-          'updatedAt' => '2021-08-15 00:51:03'
-        }
-
-        result = @controller.register(params)
-        expect(result).to eq(response)
-      end
-    end
   end
 
   describe 'homepage' do

@@ -1,21 +1,29 @@
-            return {
-                'message' => alert,
-                'status' => 401,
-                'method' => 'POST',
-                'data' => params
-            }
+        response = {
+          'message' => 'Success',
+          'status' => 200,
+          'method' => 'POST',
+          'data': {
+              "full_name": "Aldebaran Adi",
+              "username": "aldi123",
+              "email": "aldi123@gmail.com",
+              "password": "aldi123",
+              "gender": "Male"
+          }
+        }
 
+        params = {
+          'full_name'=>'Aldebaran Adi',
+          'username'=>'aldi123',
+          'email'=>'aldi123@gmail.com',
+          'password'=>'aldi123',
+          'gender'=>'Male'
+        }
 
-            return {
-                'message' => 'Success',
-                'status' => 200,
-                'method' => 'POST',
-                'alert' => '',
-                'data' => {
-                    "full_name": response.full_name,
-                    "username": response.username,
-                    "email": response.email,
-                    "password": response.password,
-                    "gender": response.gender
-                }
-            }
+        params2 = {
+          'full_name'=>'Aldebaran Adi',
+          'username'=>'aldi123',
+          'email'=>'aldi123@gmail.com',
+          'password'=>'aldi123',
+          'conpass'=>'aldi123',
+          'gender'=>'Male'
+        }

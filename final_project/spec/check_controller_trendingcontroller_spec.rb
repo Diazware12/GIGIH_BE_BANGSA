@@ -1,6 +1,7 @@
 require_relative '../controller/trendingcontroller'
 require_relative '../model/liketweet'
 require_relative '../model/tweet'
+require_relative '../model/hashtag'
 require_relative '../db/db_connector'
 require 'mysql2'
 
@@ -15,7 +16,7 @@ describe TrendingController do
         }
 
         getUser = User.getUserById(1)
-        hashtagList = Hashtag.trending
+        hashtags = Hashtag.trending
         result = controller.trendingPage(params)
 
         expected_view = ERB.new(File.read('views/trending.erb')).result(binding)
