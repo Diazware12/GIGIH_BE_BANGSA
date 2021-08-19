@@ -39,7 +39,6 @@ describe FollowerController do
         }
         expect(Follower).to receive(:new).with(params).and_return(stub)
         expect(stub).to receive(:save)
-        
 
         response = {
           "message": "Success",
@@ -83,6 +82,29 @@ describe FollowerController do
         result = Follower.getFollowerData(1, 2)
 
         expect(result).to be_nil
+      end
+    end
+    context 'when executed API' do
+      it 'shouldn\'t unfollow user' do
+        stub = double
+        controller = FollowerController.new
+
+        params = {
+          'userId' => 1,
+          'userFollowersId' => 2
+        }
+
+        response = {
+          "message": "you're not followed this user before",
+          "status": 401,
+          "method": "POST",
+          "data": params
+        }
+
+        expect(Follower).to receive(:getFollowerData).with(1, 2)
+
+        result = controller.unfollow_API(params)
+        expect(result.to_json).to eq(response.to_json)
       end
     end
   end
