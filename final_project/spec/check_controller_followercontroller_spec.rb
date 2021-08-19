@@ -3,6 +3,7 @@ require_relative '../model/liketweet'
 require_relative '../model/follower'
 require_relative '../db/db_connector'
 require 'mysql2'
+require 'json'
 
 describe FollowerController do
   describe 'follow' do
@@ -24,6 +25,31 @@ describe FollowerController do
         expect(Follower).to receive(:getFollowerData).with(1, 2).and_return(stub)
         result_item = Follower.getFollowerData(1, 2)
         expect(result_item).not_to be_nil
+      end
+    end
+
+    context 'when executed API' do
+      it 'should follow user' do
+        stub = double
+        controller = FollowerController.new
+
+        params = {
+          'userId' => 1,
+          'userFollowersId' => 3
+        }
+        expect(Follower).to receive(:new).with(params).and_return(stub)
+        expect(stub).to receive(:save)
+        
+
+        response = {
+          "message": "Success",
+          "status": 200,
+          "method": "POST",
+          "data": params
+        }
+
+        result = controller.follow_API(params)
+        expect(result.to_json).to eq(response.to_json)
       end
     end
   end
