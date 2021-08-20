@@ -205,7 +205,7 @@ class Tweet
     if @attachment.nil?
       rawData = client.query("insert into tweets (userId,content,dtm_crt) values (#{@userId},'#{@content}',curdate());")
     else
-      rawData = client.query("insert into tweets (userId,content,attachment,dtm_crt) values (#{@userId},'#{@content}','/transaction/#{@attachment["filename"]}',curdate());")
+      rawData = client.query("insert into tweets (userId,content,attachment,dtm_crt) values (#{@userId},'#{@content}','/transaction/#{@attachment['filename']}',curdate());")
     end
 
     if !@hashtags.nil? || !@hashtags == ''

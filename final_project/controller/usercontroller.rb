@@ -22,7 +22,7 @@ class UserController
         else
             alert = nil
         
-            exist = User.checkUser(params["full_name"])
+            exist = User.checkUser(params["username"])
 
             if params["password"] != params["conpass"]
                 alert = "Confirm password should be same as password"

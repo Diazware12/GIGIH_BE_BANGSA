@@ -38,8 +38,8 @@ describe Tweet do
         stub_query = "insert into tweets (userId,content,dtm_crt) values (1,'only for testing',curdate());"
 
         getTweet = Tweet.new(
-            userId: 1,
-            content: "only for testing"
+          userId: 1,
+          content: 'only for testing'
         )
         allow(Mysql2::Client).to receive(:new).and_return(stub_client)
         expect(stub_client).to receive(:query).with(stub_query)
@@ -52,7 +52,7 @@ describe Tweet do
         stub_query = "insert into tweets (userId,content,dtm_crt) values (1,'only for testing',curdate());"
 
         getTweet = Tweet.new(
-            userId: 1
+          userId: 1
         )
         expect(getTweet.valid?).to eq(false)
       end
@@ -63,15 +63,15 @@ describe Tweet do
     context 'true' do
       it 'should be true' do
         stub_client = double
-        stub_query = "delete from tweets where tweetId = 1;"
+        stub_query = 'delete from tweets where tweetId = 1;'
 
-        tweet = Tweet.new({
-            tweetId: 1,
-            userId: 2,
-            content: 'only for test purposes',
-            attachment: '/transaction/foo.jpg',
-            dtm_crt: '2020-12-23'
-        })
+        tweet = Tweet.new(
+          tweetId: 1,
+          userId: 2,
+          content: 'only for test purposes',
+          attachment: '/transaction/foo.jpg',
+          dtm_crt: '2020-12-23'
+        )
 
         allow(Mysql2::Client).to receive(:new).and_return(stub_client)
         expect(stub_client).to receive(:query).with(stub_query)
@@ -81,17 +81,15 @@ describe Tweet do
     context 'false' do
       it 'should be false' do
         stub_client = double
-        stub_query = "delete from tweets where tweetId = 1;"
+        stub_query = 'delete from tweets where tweetId = 1;'
 
-        tweet = Tweet.new({
-            tweetId: 1,
-            dtm_crt: '2020-12-23'
-        })
+        tweet = Tweet.new(
+          tweetId: 1,
+          dtm_crt: '2020-12-23'
+        )
 
         expect(tweet.valid?).to eq(false)
       end
     end
   end
-
 end
-
