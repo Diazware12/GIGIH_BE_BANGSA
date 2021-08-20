@@ -102,15 +102,6 @@ class TweetController
       }
     end
 
-    if GeneralController.checkNil(Tweet.getTweet(params['tweetId'])) == true
-      return {
-        'message' => 'tweet not found :(',
-        'status' => 401,
-        'method' => 'POST',
-        'data' => params
-      }
-    end
-
     if LikeTweet.checkUserLikedStatus(params['userId'], params['tweetId']) == true
       return {
         'message' => 'you already like this tweet',
@@ -135,15 +126,6 @@ class TweetController
     if GeneralController.checkNil(User.getUserById(params['userId'])) == true
       return {
         'message' => 'user not found',
-        'status' => 401,
-        'method' => 'POST',
-        'data' => params
-      }
-    end
-
-    if GeneralController.checkNil(Tweet.getTweet(params['tweetId'])) == true
-      return {
-        'message' => 'tweet not found :(',
         'status' => 401,
         'method' => 'POST',
         'data' => params

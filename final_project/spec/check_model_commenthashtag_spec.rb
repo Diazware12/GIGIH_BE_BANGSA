@@ -4,7 +4,6 @@ require 'mysql2'
 
 describe CommentHashtag do
 
-    # =================== valid initialize =====================
 
     describe '#validCommentHashtag' do
         context 'true' do
@@ -31,7 +30,6 @@ describe CommentHashtag do
 
     end
 
-
     describe 'save' do
         context 'when executed' do
             it 'should save data' do
@@ -50,7 +48,6 @@ describe CommentHashtag do
         end
     end
 
-    # =================== hashtag to array =====================
     describe 'hashtag to array' do
 
         it 'convert to array' do

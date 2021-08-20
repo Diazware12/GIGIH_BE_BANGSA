@@ -92,7 +92,6 @@ describe LikeTweet do
             it 'should select data' do
                 stub_client = double
                 stub_query_1 = "select * from liketweets where userId = 1 and tweetId = 1"
-                stub_query_2 = "select * from users where userId = "
 
                 like = [{
                     "likeTweetId": 1, 
@@ -101,22 +100,9 @@ describe LikeTweet do
                     "dtm_crt": "2021-08-12"
                 }]
 
-                users = [{
-                    "userId": 1, 
-                    "full_name": "Martin Garrix", 
-                    "username": "mGrix99", 
-                    "email": "mGrix99@gmail.com", 
-                    "password": "mGrix99",
-                    "gender": "Male", 
-                    "profile_pic": "/transaction/1-mGrix99.jpg", 
-                    "role": "User",
-                    "dtm_crt": "2021-08-12",
-                    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod", 
-                }]
 
                 allow(Mysql2::Client).to receive(:new).and_return(stub_client)
                 expect(stub_client).to receive(:query).with(stub_query_1).and_return(like)
-                expect(stub_client).to receive(:query).with(stub_query_2).and_return(users)
 
                 getLikeTweet = LikeTweet.getSelectedDataForDelete(1,1)
                 expect(getLikeTweet).not_to be_nil

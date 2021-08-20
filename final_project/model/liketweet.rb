@@ -42,13 +42,11 @@ class LikeTweet
   def self.getSelectedDataForDelete(userId, tweetId)
     client = create_db_client
     rawData = client.query("select * from liketweets where userId = #{userId} and tweetId = #{tweetId}")
-
     getLikeTweet = nil
     rawData.each do |data|
-      user = User.getUserById(data['userId'])
       getLikeTweet = LikeTweet.new(
         likeTweetId: data['likeTweetId'],
-        userId: user,
+        userId: data['userId'],
         tweetId: data['tweetId'],
         dtm_crt: data['dtm_crt']
       )
