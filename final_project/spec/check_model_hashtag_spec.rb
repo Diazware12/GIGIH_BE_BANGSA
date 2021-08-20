@@ -4,7 +4,6 @@ require 'mysql2'
 
 describe Hashtag do
 
-    # =================== valid initialize =====================
 
     describe '#validLikeTweet' do
         context 'true' do
@@ -28,8 +27,6 @@ describe Hashtag do
         end 
 
     end
-
-    # =================== save =====================
 
     describe 'save' do
         context 'when executed' do
