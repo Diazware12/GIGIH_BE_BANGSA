@@ -20,8 +20,6 @@ There are 3 commit type :
 
 ### Access Application
 
-web application
-    localhost:4567
+1. web application = localhost:4567
 
-API
-    localhost:4567/api/v1
+2. API = localhost:4567/api/v1
