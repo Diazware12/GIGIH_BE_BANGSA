@@ -364,10 +364,10 @@ describe UserController do
 
         controller = UserController.new
         params = {
-          'userId' => 1
+          'userId' => 11
         }
-        tweetList = Tweet.tweetList(1)
-        getUser = User.getUserById(1)
+        tweetList = Tweet.tweetList(11)
+        getUser = User.getUserById(11)
         result = controller.homepage(params)
 
         expected_view = ERB.new(File.read('views/index.erb')).result(binding)

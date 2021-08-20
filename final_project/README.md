@@ -23,3 +23,7 @@ There are 3 commit type :
 1. `Web Application`: localhost:4567
 
 2. `API`: localhost:4567/api/v1
+
+### Run The Test
+
+1. Just type Rspec in the workspace terminal

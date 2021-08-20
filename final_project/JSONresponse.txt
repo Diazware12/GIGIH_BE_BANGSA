@@ -3,11 +3,11 @@ register
     link: localhost:4567/api/v1/register
 
     hit:
-        - full_name: brad pitt
-        - username: bPitt12
-        - email: bPitt12@gmail.com
-        - password: bPitt12
-        - conpass: bPitt12
+        - full_name: nanami kento
+        - username: nanami12
+        - email: nanami12@gmail.com
+        - password: nanami12
+        - conpass: nanami12
         - gender: male
 
     response:
@@ -16,13 +16,12 @@ register
             "message": "Success",
             "status": 200,
             "method": "POST",
-            "alert": "",
-            "redirect": "loginpage",
             "data": {
-                "full_name": "brad pitt",
-                "username": "bPitt12",
-                "email": "bPitt12@gmail.com",
-                "password": "bPitt12",
+                "full_name": "nanami kento",
+                "username": "nanami12",
+                "email": "nanami12@gmail.com",
+                "password": "nanami12",
+                "conpass": "nanami12",
                 "gender": "Male"
             }
         }
@@ -32,9 +31,9 @@ forgot password
     link: localhost:4567/api/v1/forgotpassword
 
     hit:
-        - username: bPitt12
-        - password: bPitt12
-        - conpass: bPitt12
+        - username: nanami12
+        - password: nanami12
+        - conpass: nanami12
 
     response:
 
@@ -42,14 +41,10 @@ forgot password
             "message": "Success",
             "status": 200,
             "method": "POST",
-            "alert": "",
-            "redirect": "loginpage",
             "data": {
-                "userId": 7,
-                "full_name": "brad pitt",
-                "username": "bPitt12",
-                "email": "bPitt12@gmail.com",
-                "password": "bPitt12"
+                "username": "nanami12",
+                "password": "nanami12",
+                "conpass": "nanami12"
             }
         }
 
