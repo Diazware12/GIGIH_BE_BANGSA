@@ -62,6 +62,25 @@ describe User do
                 expect(stub_client).to receive(:query).with(stub_query)
                 getUser.save
             end
+            it 'shouldn\'t save data' do
+                stub_client = double
+                stub_query = "insert into users (full_name,username,email,password,gender,role,dtm_crt) values ('Aldebaran Adi','aldi123','aldi123@gmail.com','aldi123','Male','User',curdate())"
+
+                getUser = User.new(
+                    userId: 1,
+                    full_name: "Lord Aldebaran",
+                    email: "Aldi23@gmail.com",
+                    password: "aldi23",
+                    gender: "Male",
+                    profile_pic: "/transaction/foo.jpg",
+                    role: "user",
+                    dtm_crt: "2020-12-23",
+                    description: "random"
+                )
+
+                allow(Mysql2::Client).to receive(:new).and_return(stub_client)
+                expect(getUser.valid?).to eq(false)
+            end
         end
     end
 
@@ -109,7 +128,7 @@ describe User do
     end
 
     describe 'update profile picture' do
-        context 'update profpic' do
+        context 'true' do
             it 'should update data' do
                 stub_client = double
                 stub_query = "UPDATE users SET profile_pic = '/transaction/aldi123.jpg' WHERE userId = 1 "
@@ -124,7 +143,27 @@ describe User do
                 allow(Mysql2::Client).to receive(:new).and_return(stub_client)
                 expect(stub_client).to receive(:query).with(stub_query)
                 getUser.updateProfilePic
+            end
+        end
+        context 'false' do
+            it 'shouldn\'t save' do
+                stub_client = double
+                stub_query = "UPDATE users SET profile_pic = '/transaction/aldi123.jpg' WHERE userId = 1 "
 
+                getUser = User.new(
+                    userId: 1,
+                    full_name: "Lord Aldebaran",
+                    email: "Aldi23@gmail.com",
+                    password: "aldi23",
+                    gender: "Male",
+                    profile_pic: "/transaction/foo.jpg",
+                    role: "user",
+                    dtm_crt: "2020-12-23",
+                    description: "random"
+                )
+
+                allow(Mysql2::Client).to receive(:new).and_return(stub_client)
+                expect(getUser.valid?).to eq(false)
             end
         end
     end
@@ -312,6 +351,29 @@ describe User do
 
                 user = User.userList
                 expect(user).not_to be_nil
+            end
+        end
+        context 'user empty' do
+            it 'there\'s no data' do
+                stub_client = double
+                stub_query = "select * from users"
+                users = [{
+                    "userId": 1, 
+                    "full_name": "Martin Garrix", 
+                    "username": "mGrix99", 
+                    "email": "mGrix99@gmail.com", 
+                    "password": "mGrix99",
+                    "gender": "Male", 
+                    "profile_pic": "/transaction/1-mGrix99.jpg", 
+                    "role": "User",
+                    "dtm_crt": "2021-08-12"
+                }]
+
+                allow(Mysql2::Client).to receive(:new).and_return(stub_client)
+                expect(stub_client).to receive(:query).with(stub_query).and_return([])
+
+                user = User.userList
+                expect(user).to eq([])
             end
         end
     end
