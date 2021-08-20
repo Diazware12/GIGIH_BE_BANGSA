@@ -30,7 +30,6 @@ describe UserController do
         expect(result).to eq(expected_view)
       end
     end
-
   end
 
   describe 'homepage' do
