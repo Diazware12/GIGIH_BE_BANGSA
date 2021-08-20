@@ -513,13 +513,7 @@ class UserController
                 'message' => 'Success',
                 'status' => 200,
                 'method' => 'POST',
-                'data' => {
-                    "userId": result.userId,
-                    "full_name": result.full_name,
-                    "username": result.username,
-                    "email": result.email,
-                    "description": result.description
-                }            
+                'data' => params         
             }  
         end
 

@@ -415,7 +415,7 @@ describe UserController do
       end
     end
     context 'submit' do
-      it 'should show edit profile data' do
+      it 'should submit profile data' do
         stub = double
 
         controller = UserController.new
@@ -432,6 +432,32 @@ describe UserController do
 
         alert = nil
         result = controller.editData(params)
+      end
+      it 'should submit profile data_API' do
+        stub = double
+
+        controller = UserController.new
+        params = {
+          'userId' => 1,
+          'full_name' => 'Diaz Ilyasa',
+          'username' => 'diazware12',
+          'email' => 'diazilyasa987@gmail.com',
+          'password' => 'diazware12',
+          'conpass' => 'diazware12',
+          'gender' => 'Male',
+          'description' => 'only for testing'
+        }
+
+        response = {
+          'message' => 'Success',
+          'status' => 200,
+          'method' => 'POST',
+          'data' => params         
+        }  
+
+        alert = nil
+        result = controller.editData_API(params)
+        expect(result.to_json).to eq(response.to_json)
       end
     end
   end
