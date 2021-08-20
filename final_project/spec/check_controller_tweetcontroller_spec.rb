@@ -74,6 +74,25 @@ describe TweetController do
     end
   end
 
+  describe 'create tweet' do
+    context 'when executed' do
+      it 'should create tweet' do
+        stub = double
+        controller = TweetController.new
+
+        params = {
+          'userId' => 1,
+          'content' => "only for testing"
+        }
+
+        expect(Tweet).to receive(:new).with(params).and_return(stub)
+        expect(stub).to receive(:save)
+
+        controller.createTweet(params)
+      end
+    end
+  end
+
   describe 'delete tweet' do
     context 'when executed' do
       it 'should delete tweet' do

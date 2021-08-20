@@ -13,21 +13,16 @@ class TweetController
     textContent = params['content']
     return false if textContent.length > 1000
 
-    unless params[:file].nil?
-      filename = params[:file][:filename]
-      file = params[:file][:tempfile]
+    unless params[:attachment].nil?
+      filename = params[:attachment][:filename]
+      file = params[:attachment][:tempfile]
 
       File.open("./public/transaction/#{filename}", 'wb') do |f|
         f.write(file.read)
       end
     end
 
-    createTweet = Tweet.new(
-      userId: params['userId'],
-      content: params['content'],
-      attachment: filename,
-      hashtags: params['hashtags']
-    )
+    createTweet = Tweet.new(params)
     createTweet.save
   end
 
