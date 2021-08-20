@@ -91,6 +91,30 @@ describe TweetController do
         controller.createTweet(params)
       end
     end
+    context 'when executed_API' do
+      it 'should create tweet' do
+        stub = double
+        controller = TweetController.new
+
+        params = {
+          'userId' => 1,
+          'content' => "only for testing"
+        }
+
+        response = {
+          'message' => 'Success',
+          'status' => 200,
+          'method' => 'POST',
+          'data' => params
+        }
+
+        expect(Tweet).to receive(:new).with(params).and_return(stub)
+        expect(stub).to receive(:save)
+
+        result = controller.createTweet_API(params)
+        expect(result.to_json).to eq(response.to_json)
+      end
+    end
   end
 
   describe 'delete tweet' do
@@ -101,6 +125,42 @@ describe TweetController do
 
         params = {
           'tweetId' => 1
+        }
+
+        createTweet = Tweet.new(
+          userId: 1,
+          content: 'only for testing',
+          attachment: '/attachment/foo.jpg',
+          hashtags: 'haha'
+        )
+
+        stub_query = 'delete from tweets where tweetId = ;'
+        allow(Mysql2::Client).to receive(:new).and_return(stub)
+        expect(Tweet).to receive(:getTweet).with(1).and_return(createTweet)
+        expect(stub).to receive(:query).with(stub_query)
+        expect(Tweet).to receive(:getTweet).with(1).and_return(nil)
+
+        controller.deleteTweet(params)
+
+        result = Tweet.getTweet(1)
+
+        expect(result).to be_nil
+      end
+    end
+    context 'when executed_API' do
+      it 'should delete tweet' do
+        stub = double
+        controller = TweetController.new
+
+        params = {
+          'tweetId' => 1
+        }
+
+        response = {
+          'message' => 'Success',
+          'status' => 200,
+          'method' => 'POST',
+          'data' => params
         }
 
         createTweet = Tweet.new(

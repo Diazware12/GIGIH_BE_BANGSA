@@ -30,6 +30,63 @@ describe UserController do
         expect(result).to eq(expected_view)
       end
     end
+    context 'submit regist' do
+      it 'should submit regist' do
+        stub = double
+        controller = UserController.new
+
+        params = {
+          "full_name" => "martin garrix",
+          "username" => "mGarrix12",
+          "email" => "mGarrix12@gmail.com",
+          "password" => "mGarrix12",
+          "conpass" => "mGarrix12",
+          "gender" => "Male"
+        }
+
+        expect(User).to receive(:new).with(params).and_return(stub)
+        expect(stub).to receive(:save)
+
+        controller.registerPage(params,"submit")
+      end
+      it 'password & confirmation not same' do
+        stub = double
+        controller = UserController.new
+
+        params = {
+          "full_name" => "martin garrix",
+          "username" => "mGarrix12",
+          "email" => "mGarrix12@gmail.com",
+          "password" => "mGarrix12",
+          "conpass" => "mGarrix",
+          "gender" => "Male"
+        }
+
+        result = controller.registerPage(params,"submit")
+        alert = "Confirm password should be same as password"
+        expected_view = ERB.new(File.read('views/register.erb')).result(binding)
+        expect(result).to eq(expected_view)
+      end
+      it 'username cannot contain space' do
+        stub = double
+        controller = UserController.new
+
+        params = {
+          "full_name" => "martin garrix",
+          "username" => "m Garrix12",
+          "email" => "mGarrix12@gmail.com",
+          "password" => "mGarrix12",
+          "conpass" => "mGarrix12",
+          "gender" => "Male"
+        }
+
+        result = controller.registerPage(params,"submit")
+        alert = "username cannot contain space (' ')"
+        expected_view = ERB.new(File.read('views/register.erb')).result(binding)
+        expect(result).to eq(expected_view)
+      end
+
+    end
   end
 
   describe 'homepage' do

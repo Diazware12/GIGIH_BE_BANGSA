@@ -21,15 +21,8 @@ class UserController
             renderer.result(binding)
         else
             alert = nil
-            getUser = User.new(
-                full_name: params["full_name"],
-                username: params["username"],
-                email: params["email"],
-                password: params["password"],
-                gender: params["gender"]
-            )
-
-            exist = User.checkUser(getUser.username)
+        
+            exist = User.checkUser(params["full_name"])
 
             if params["password"] != params["conpass"]
                 alert = "Confirm password should be same as password"
@@ -43,6 +36,7 @@ class UserController
                 renderer = ERB.new(File.read("views/register.erb"))
                 renderer.result(binding)
             else 
+                getUser = User.new(params)
                 getUser.save
                 renderer = ERB.new(File.read("views/login.erb"))
                 renderer.result(binding)
@@ -238,13 +232,7 @@ class UserController
                 'data' => params
             }
         else 
-            getUser = User.new(
-                full_name: params["full_name"],
-                username: params["username"],
-                email: params["email"],
-                password: params["password"],
-                gender: params["gender"]
-            )
+            getUser = User.new(params)
             getUser.save
             response = User.getUser(params["username"],params["password"])
             return {
