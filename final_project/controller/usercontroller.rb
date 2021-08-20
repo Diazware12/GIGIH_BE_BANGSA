@@ -234,18 +234,11 @@ class UserController
         else 
             getUser = User.new(params)
             getUser.save
-            response = User.getUser(params["username"],params["password"])
             return {
                 'message' => 'Success',
                 'status' => 200,
                 'method' => 'POST',
-                'data' => {
-                    "full_name": response.full_name,
-                    "username": response.username,
-                    "email": response.email,
-                    "password": response.password,
-                    "gender": response.gender
-                }
+                'data' => params
             }
         end
             
@@ -289,13 +282,7 @@ class UserController
                 'message' => 'Success',
                 'status' => 200,
                 'method' => 'POST',
-                'data' => {
-                    "userId": updatePass.userId,
-                    "full_name": updatePass.full_name,
-                    "username": updatePass.username,
-                    "email": updatePass.email,
-                    "password": updatePass.password
-                }
+                'data' => params
             }
         end
             

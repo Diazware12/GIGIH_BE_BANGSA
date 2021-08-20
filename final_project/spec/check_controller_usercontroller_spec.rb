@@ -16,6 +16,37 @@ describe UserController do
         expect(result).to eq(expected_view)
       end
     end
+    context 'when login' do
+      it 'should show home page' do
+        controller = UserController.new
+        params = {
+          'username' => 'diazware12',
+          'password' => 'diazware12'
+        }
+
+        getUser = User.getUser('diazware12','diazware12')
+        tweetList = Tweet.tweetList(getUser.userId)
+        result = controller.loginUser(params)
+
+        alert = nil
+        expected_view = ERB.new(File.read('views/index.erb')).result(binding)
+        expect(result).to eq(expected_view)
+      end
+      it 'user not found' do
+        controller = UserController.new
+        params = {
+          'username' => 'ff',
+          'password' => 'diazware12'
+        }
+
+        getUser = User.getUser('ff','diazware12')
+        result = controller.loginUser(params)
+
+        alert = "username didn't found or registered"
+        expected_view = ERB.new(File.read('views/login.erb')).result(binding)
+        expect(result).to eq(expected_view)
+      end
+    end
   end
 
   describe 'register' do
@@ -102,6 +133,103 @@ describe UserController do
         alert = "username already used by other user"
         expected_view = ERB.new(File.read('views/register.erb')).result(binding)
         expect(result).to eq(expected_view)
+      end
+    end
+    context 'submit regist_API' do
+      it 'should submit regist' do
+        stub = double
+        controller = UserController.new
+
+        params = {
+          'full_name' => 'martin garrix',
+          'username' => 'mGarrix12',
+          'email' => 'mGarrix12@gmail.com',
+          'password' => 'mGarrix12',
+          'conpass' => 'mGarrix12',
+          'gender' => 'Male'
+        }
+
+        expect(User).to receive(:new).with(params).and_return(stub)
+        expect(stub).to receive(:save)
+
+        response = {
+          'message' => 'Success',
+          'status' => 200,
+          'method' => 'POST',
+          'data' => params         
+        }
+
+        result = controller.register_API(params)
+        expect(result.to_json).to eq(response.to_json)
+      end
+      it 'password & confirmation not same' do
+        stub = double
+        controller = UserController.new
+
+        params = {
+          'full_name' => 'martin garrix',
+          'username' => 'mGarrix12',
+          'email' => 'mGarrix12@gmail.com',
+          'password' => 'mGarrix12',
+          'conpass' => 'mGarrix',
+          'gender' => 'Male'
+        }
+
+        result = controller.registerPage(params, 'submit')
+        alert = "Confirm password should be same as password"
+        response = {
+          'message' => alert,
+          'status' => 401,
+          'method' => 'POST',
+          'data' => params
+        }
+        result = controller.register_API(params)
+        expect(result.to_json).to eq(response.to_json)
+      end
+      it 'username cannot contain space' do
+        stub = double
+        controller = UserController.new
+
+        params = {
+          'full_name' => 'martin garrix',
+          'username' => 'm Garrix12',
+          'email' => 'mGarrix12@gmail.com',
+          'password' => 'mGarrix12',
+          'conpass' => 'mGarrix12',
+          'gender' => 'Male'
+        }
+        alert = "username cannot contain space (' ')"
+        response = {
+          'message' => alert,
+          'status' => 401,
+          'method' => 'POST',
+          'data' => params
+        }
+        result = controller.register_API(params)
+        expect(result.to_json).to eq(response.to_json)
+      end
+      it 'username already exist' do
+        stub = double
+        controller = UserController.new
+
+        params = {
+          'full_name' => 'martin garrix',
+          'username' => 'diazware12',
+          'email' => 'mGarrix12@gmail.com',
+          'password' => 'mGarrix12',
+          'conpass' => 'mGarrix12',
+          'gender' => 'Male'
+        }
+
+        alert = "username already used by other user"
+        response = {
+          'message' => alert,
+          'status' => 401,
+          'method' => 'POST',
+          'data' => params
+        }
+        result = controller.register_API(params)
+        expect(result.to_json).to eq(response.to_json)
       end
     end
   end
