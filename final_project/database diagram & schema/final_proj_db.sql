@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.26, for Linux (x86_64)
 --
--- Host: localhost    Database: final_proj_db
+-- Host: 127.0.0.1    Database: final_proj_db
 -- ------------------------------------------------------
 -- Server version	8.0.26-0ubuntu0.20.04.2
 
@@ -32,7 +32,7 @@ CREATE TABLE `commentHashtag` (
   KEY `commentHashtagFK` (`commentTweetId`),
   CONSTRAINT `commentHashtag_ibfk_2` FOREIGN KEY (`hashtagId`) REFERENCES `hashtags` (`hashtagId`) ON UPDATE CASCADE,
   CONSTRAINT `commentHashtagFK` FOREIGN KEY (`commentTweetId`) REFERENCES `commenttweets` (`commentTweetId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `commentHashtag` (
 
 LOCK TABLES `commentHashtag` WRITE;
 /*!40000 ALTER TABLE `commentHashtag` DISABLE KEYS */;
-INSERT INTO `commentHashtag` VALUES (1,8,12,'2021-08-13'),(4,13,5,'2021-08-15');
+INSERT INTO `commentHashtag` VALUES (1,8,12,'2021-08-13'),(4,13,5,'2021-08-15'),(5,14,20,'2021-08-17'),(6,14,21,'2021-08-17'),(7,15,20,'2021-08-17'),(8,15,21,'2021-08-17'),(9,16,24,'2021-08-18');
 /*!40000 ALTER TABLE `commentHashtag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -64,7 +64,7 @@ CREATE TABLE `commenttweets` (
   KEY `tweetId` (`tweetId`),
   CONSTRAINT `commenttweets_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON UPDATE CASCADE,
   CONSTRAINT `tweetFK` FOREIGN KEY (`tweetId`) REFERENCES `tweets` (`tweetId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `commenttweets` (
 
 LOCK TABLES `commenttweets` WRITE;
 /*!40000 ALTER TABLE `commenttweets` DISABLE KEYS */;
-INSERT INTO `commenttweets` VALUES (6,2,1,'Lorem Ipsum apaan cuk !?!?!?!','2021-08-13',NULL),(8,1,1,'baca di internet sat!!! @MusuhOrmas21','2021-08-13',NULL),(12,2,16,'HUWAAAAWWWW','2021-08-14','/transaction/majelis-lucu.gif'),(13,1,17,'hadeuuuh!!!','2021-08-15','/transaction/blok-blok.gif');
+INSERT INTO `commenttweets` VALUES (6,2,1,'Lorem Ipsum apaan cuk !?!?!?!','2021-08-13',NULL),(8,1,1,'baca di internet sat!!! @MusuhOrmas21','2021-08-13',NULL),(12,2,16,'HUWAAAAWWWW','2021-08-14','/transaction/majelis-lucu.gif'),(13,1,17,'hadeuuuh!!!','2021-08-15','/transaction/blok-blok.gif'),(14,1,16,'only for testing purposes','2021-08-17',NULL),(15,7,16,'only for testing purposes','2021-08-17','/transaction/Pc53K5.gif'),(16,7,19,'only for testing purposes','2021-08-18','/transaction/pardeds.gif');
 /*!40000 ALTER TABLE `commenttweets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,7 +92,7 @@ CREATE TABLE `followers` (
   PRIMARY KEY (`followersId`),
   KEY `userId` (`userId`),
   CONSTRAINT `followers_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -101,7 +101,7 @@ CREATE TABLE `followers` (
 
 LOCK TABLES `followers` WRITE;
 /*!40000 ALTER TABLE `followers` DISABLE KEYS */;
-INSERT INTO `followers` VALUES (6,2,1,'2021-08-14'),(7,1,2,'2021-08-14');
+INSERT INTO `followers` VALUES (7,1,2,'2021-08-14'),(9,2,1,'2021-08-18'),(10,7,1,'2021-08-18');
 /*!40000 ALTER TABLE `followers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +117,7 @@ CREATE TABLE `hashtags` (
   `hashtagName` varchar(50) DEFAULT NULL,
   `dtm_crt` date NOT NULL,
   PRIMARY KEY (`hashtagId`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,7 +126,7 @@ CREATE TABLE `hashtags` (
 
 LOCK TABLES `hashtags` WRITE;
 /*!40000 ALTER TABLE `hashtags` DISABLE KEYS */;
-INSERT INTO `hashtags` VALUES (5,'ppkm','2021-08-13'),(6,'bosen','2021-08-13'),(7,'ngoding','2021-08-13'),(8,'holiday','2021-08-13'),(12,'haduh','2021-08-13'),(13,'ckuaks','2021-08-13'),(14,'pemudatersesat','2021-08-13'),(15,'astagfirullah','2021-08-13'),(16,'letih','2021-08-14'),(17,'murahbanget','2021-08-14'),(18,'mina','2021-08-15'),(19,'twice','2021-08-15');
+INSERT INTO `hashtags` VALUES (5,'ppkm','2021-08-13'),(6,'bosen','2021-08-13'),(7,'ngoding','2021-08-13'),(8,'holiday','2021-08-13'),(12,'haduh','2021-08-13'),(13,'ckuaks','2021-08-13'),(14,'pemudatersesat','2021-08-13'),(15,'astagfirullah','2021-08-13'),(16,'letih','2021-08-14'),(17,'murahbanget','2021-08-14'),(18,'mina','2021-08-15'),(19,'twice','2021-08-15'),(20,'generasi','2021-08-17'),(21,'gigih','2021-08-17'),(22,'soobin','2021-08-17'),(23,'chaesoobin','2021-08-17'),(24,'gojek','2021-08-18'),(25,'mikir','2021-08-20');
 /*!40000 ALTER TABLE `hashtags` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -147,7 +147,7 @@ CREATE TABLE `liketweets` (
   KEY `tweetId` (`tweetId`),
   CONSTRAINT `liketweetFK` FOREIGN KEY (`tweetId`) REFERENCES `tweets` (`tweetId`) ON DELETE CASCADE,
   CONSTRAINT `liketweets_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,7 +156,7 @@ CREATE TABLE `liketweets` (
 
 LOCK TABLES `liketweets` WRITE;
 /*!40000 ALTER TABLE `liketweets` DISABLE KEYS */;
-INSERT INTO `liketweets` VALUES (1,2,1,'2021-08-12'),(20,1,1,'2021-08-13'),(26,2,3,'2021-08-13');
+INSERT INTO `liketweets` VALUES (1,2,1,'2021-08-12'),(20,1,1,'2021-08-13'),(26,2,3,'2021-08-13'),(39,1,10,'2021-08-17'),(51,1,16,'2021-08-19');
 /*!40000 ALTER TABLE `liketweets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,7 +210,7 @@ CREATE TABLE `tweetHashtag` (
   KEY `tweetHashtagFK` (`tweetId`),
   CONSTRAINT `tweetHashtag_ibfk_2` FOREIGN KEY (`hashtagId`) REFERENCES `hashtags` (`hashtagId`) ON UPDATE CASCADE,
   CONSTRAINT `tweetHashtagFK` FOREIGN KEY (`tweetId`) REFERENCES `tweets` (`tweetId`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,7 +219,7 @@ CREATE TABLE `tweetHashtag` (
 
 LOCK TABLES `tweetHashtag` WRITE;
 /*!40000 ALTER TABLE `tweetHashtag` DISABLE KEYS */;
-INSERT INTO `tweetHashtag` VALUES (1,7,5,'2021-08-13'),(2,7,6,'2021-08-13'),(3,7,7,'2021-08-13'),(4,8,5,'2021-08-13'),(5,8,8,'2021-08-13'),(6,9,5,'2021-08-13'),(7,10,14,'2021-08-13'),(8,10,15,'2021-08-13'),(10,16,17,'2021-08-14'),(11,17,13,'2021-08-14');
+INSERT INTO `tweetHashtag` VALUES (1,7,5,'2021-08-13'),(2,7,6,'2021-08-13'),(3,7,7,'2021-08-13'),(4,8,5,'2021-08-13'),(5,8,8,'2021-08-13'),(7,10,14,'2021-08-13'),(8,10,15,'2021-08-13'),(10,16,17,'2021-08-14'),(11,17,13,'2021-08-14'),(14,19,22,'2021-08-17'),(15,19,23,'2021-08-17');
 /*!40000 ALTER TABLE `tweetHashtag` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -239,7 +239,7 @@ CREATE TABLE `tweets` (
   PRIMARY KEY (`tweetId`),
   KEY `userId` (`userId`),
   CONSTRAINT `tweets_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -248,7 +248,7 @@ CREATE TABLE `tweets` (
 
 LOCK TABLES `tweets` WRITE;
 /*!40000 ALTER TABLE `tweets` DISABLE KEYS */;
-INSERT INTO `tweets` VALUES (1,1,'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  ',NULL,'2021-08-12'),(3,1,'final projeknya susah nih hehehe.....bantuin dong :)',NULL,'2021-08-13'),(7,1,'ngetes aja kok, nggak macem\"',NULL,'2021-08-13'),(8,1,'What is Happening today!?!?!?',NULL,'2021-08-13'),(9,1,'Haus :\")',NULL,'2021-08-13'),(10,2,'Tersesaaaattt!!!....Oh tersesaaattttt!!!!....Astagfirullah!!!!',NULL,'2021-08-13'),(16,2,'Asli, Mobil gw bagus banget!!!!','/transaction/1140-classic-car-safety.imgcache.rev.web.1100.633.jpg','2021-08-14'),(17,2,'Untuk pertama kalinya diselenggarakan lomba makan cepat dengan durasi maksimum 20 menit serempak tingkat nasional......','/transaction/makan.JPG','2021-08-14');
+INSERT INTO `tweets` VALUES (1,1,'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.  ',NULL,'2021-08-12'),(3,1,'final projeknya susah nih hehehe.....bantuin dong :)',NULL,'2021-08-13'),(7,1,'ngetes aja kok, nggak macem\"',NULL,'2021-08-13'),(8,1,'What is Happening today!?!?!?',NULL,'2021-08-13'),(10,2,'Tersesaaaattt!!!....Oh tersesaaattttt!!!!....Astagfirullah!!!!',NULL,'2021-08-13'),(16,2,'Asli, Mobil gw bagus banget!!!!','/transaction/1140-classic-car-safety.imgcache.rev.web.1100.633.jpg','2021-08-14'),(17,2,'Untuk pertama kalinya diselenggarakan lomba makan cepat dengan durasi maksimum 20 menit serempak tingkat nasional......','/transaction/makan.JPG','2021-08-14'),(19,7,'ini pacar aku, aku sayang deh sama dia <3','/transaction/soo bin.gif','2021-08-17'),(27,1,'ngetes aja kok, nggak macem\"','/transaction/tretan.JPG','2021-08-20');
 /*!40000 ALTER TABLE `tweets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,7 +271,7 @@ CREATE TABLE `users` (
   `dtm_crt` date DEFAULT NULL,
   `description` longtext,
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -280,7 +280,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Diaz Ilyasa','diazware12','diazilyasa987@gmail.com','diazware12','Male','/transaction/1-diazware12.jpg','User','2021-08-12','Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod'),(2,'Tretan Muslim','MusuhOrmas21','tretangaming23@gmail.com','MusuhOrmas2021','Male','/transaction/2-MusuhOrmas21.jpg','User','2021-08-12',NULL),(3,'Coki Pardede','PemudaTersesat666','SonsOfHorus666@gmail.com','moonwalker98','Male','/transaction/3-PemudaTersesat666.jpg','User','2021-08-15',NULL);
+INSERT INTO `users` VALUES (1,'Diaz Ilyasa','diazware12','diazilyasa987@gmail.com','diazware12','Male','/transaction/1-diazware12.jpg','User','2021-08-12','Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod'),(2,'Tretan Muslim','MusuhOrmas21','tretangaming23@gmail.com','MusuhOrmas2021','Male','/transaction/2-MusuhOrmas21.jpg','User','2021-08-12',NULL),(3,'Coki Pardede','PemudaTersesat666','SonsOfHorus666@gmail.com','moonwalker98','Male','/transaction/3-PemudaTersesat666.jpg','User','2021-08-15',NULL),(7,'Brad Pitt','actor_bPitt23','bPitt23@gmail.com','bPitt12','Male','/transaction/7-actor_bPitt23.jpg','User','2021-08-17','only for testing purposes');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -293,4 +293,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-16  0:29:12
+-- Dump completed on 2021-08-20  6:12:09
