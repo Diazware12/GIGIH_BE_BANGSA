@@ -217,15 +217,8 @@ class UserController
     def register_API(params)
 
         alert = nil
-        getUser = User.new(
-            full_name: params["full_name"],
-            username: params["username"],
-            email: params["email"],
-            password: params["password"],
-            gender: params["gender"]
-        )
 
-        exist = User.checkUser(getUser.username)
+        exist = User.checkUser(params["username"])
 
         if params["password"] != params["conpass"]
             alert = "Confirm password should be same as password"
@@ -245,6 +238,13 @@ class UserController
                 'data' => params
             }
         else 
+            getUser = User.new(
+                full_name: params["full_name"],
+                username: params["username"],
+                email: params["email"],
+                password: params["password"],
+                gender: params["gender"]
+            )
             getUser.save
             response = User.getUser(params["username"],params["password"])
             return {

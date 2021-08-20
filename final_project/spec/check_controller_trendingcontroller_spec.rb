@@ -23,8 +23,8 @@ describe TrendingController do
         expect(result).to eq(expected_view)
       end
     end
-    context 'no searching_API' do
-      it 'should show user list' do
+    context 'when executed_API' do
+      it 'should show trending list' do
         controller = TrendingController.new
         params = {
           'userId' => 1

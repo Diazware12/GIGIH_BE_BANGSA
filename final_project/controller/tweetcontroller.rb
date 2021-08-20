@@ -44,7 +44,7 @@ class TweetController
   # API Test
 
   def createTweet_API(params)
-    textContent = params['content']
+    
     if params['content'].length > 1000
       return {
         'message' => 'comment character cannot more than 1000 character',

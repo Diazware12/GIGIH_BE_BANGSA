@@ -4,8 +4,6 @@ require 'mysql2'
 
 describe User do
 
-    # =================== valid initialize =====================
-
     describe '#validUser' do
         context 'true' do
             it 'should be true' do
@@ -42,8 +40,6 @@ describe User do
         end 
 
     end
-
-    # =================== save data =====================
 
     describe 'save' do
         context 'when executed' do
@@ -83,8 +79,6 @@ describe User do
             end
         end
     end
-
-    # =================== update data =====================
 
     describe 'update' do
         context 'update data' do
@@ -168,7 +162,6 @@ describe User do
         end
     end
 
-    # =================== Login User =====================
 
     describe 'Login User' do
         context 'true' do
@@ -220,8 +213,6 @@ describe User do
         end
 
     end
-
-    # =================== select data =====================
 
     describe 'Get User By User Id' do
         context 'true' do
