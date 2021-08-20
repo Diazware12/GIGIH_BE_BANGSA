@@ -30,4 +30,34 @@ describe Tweet do
       end
     end
   end
+
+  describe '#savetweet' do
+    context 'true' do
+      it 'should be true' do
+        stub_client = double
+        stub_query = "insert into tweets (userId,content,dtm_crt) values (1,'only for testing',curdate());"
+
+        getTweet = Tweet.new(
+            userId: 1,
+            content: "only for testing"
+        )
+        allow(Mysql2::Client).to receive(:new).and_return(stub_client)
+        expect(stub_client).to receive(:query).with(stub_query)
+        getTweet.save
+      end
+    end
+    context 'false' do
+      it 'shouldn\'t be true' do
+        stub_client = double
+        stub_query = "insert into tweets (userId,content,dtm_crt) values (1,'only for testing',curdate());"
+
+        getTweet = Tweet.new(
+            userId: 1
+        )
+        expect(getTweet.valid?).to eq(false)
+      end
+    end
+  end
+
 end
+

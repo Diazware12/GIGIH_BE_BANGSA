@@ -208,8 +208,8 @@ class Tweet
       rawData = client.query("insert into tweets (userId,content,attachment,dtm_crt) values (#{@userId},'#{@content}','/transaction/#{@attachment}',curdate());")
     end
 
-    tweetid = client.last_id
     if !@hashtags.nil? || !@hashtags == ''
+      tweetid = client.last_id
       insertHashtag = TweetHashtag.saveToHashtag(@hashtags, tweetid)
     end
   end
