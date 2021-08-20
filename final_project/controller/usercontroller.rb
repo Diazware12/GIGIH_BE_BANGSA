@@ -133,13 +133,6 @@ class UserController
 
     def editData(params)
         getUser = User.getUserById(params['userId'])
-        
-        desc = nil
-        if params['description'] == "" || params['description'] == nil
-            desc = ""
-        else
-            desc = params['description']
-        end
 
         alert = nil
         exist = User.checkUser(params['username'])
@@ -150,13 +143,7 @@ class UserController
         end
 
         if alert == nil
-            editUser = User.new(
-                userId: params['userId'],
-                full_name: params['fullname'],
-                username: params['username'],
-                email: params['email'],
-                description: desc
-            )
+            editUser = User.new(params)
             
             editUser.update
         end

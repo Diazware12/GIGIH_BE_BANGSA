@@ -328,6 +328,33 @@ describe UserController do
         expect(result).to eq(expected_view)       
       end
     end
+    context 'submit_API' do
+      it 'reset password' do
+        stub = double
+
+        controller = UserController.new
+        params = {
+          'userId' => 1,
+          'full_name' => 'Diaz Ilyasa',
+          'username' => 'diazware12',
+          'email' => 'diazilyasa987@gmail.com',
+          'password' => 'diazware12',
+          'conpass' => 'diazware12',
+          'gender' => 'Male'
+        }
+
+        alert = nil
+        response = {
+          'message' => 'Success',
+          'status' => 200,
+          'method' => 'POST',
+          'data' => params
+        }
+        
+        result = controller.forgotPassword_API(params)
+        expect(result.to_json).to eq(response.to_json)       
+      end
+    end
   end
 
   describe 'homepage' do
@@ -385,6 +412,26 @@ describe UserController do
 
         expected_view = ERB.new(File.read('views/edituserdata.erb')).result(binding)
         expect(result).to eq(expected_view)
+      end
+    end
+    context 'submit' do
+      it 'should show edit profile data' do
+        stub = double
+
+        controller = UserController.new
+        params = {
+          'userId' => 1,
+          'full_name' => 'Diaz Ilyasa',
+          'username' => 'diazware12',
+          'email' => 'diazilyasa987@gmail.com',
+          'password' => 'diazware12',
+          'conpass' => 'diazware12',
+          'gender' => 'Male',
+          'description' => 'only for testing'
+        }
+
+        alert = nil
+        result = controller.editData(params)
       end
     end
   end
