@@ -20,11 +20,11 @@ describe UserController do
       it 'should show home page' do
         controller = UserController.new
         params = {
-          'username' => 'diazware12',
-          'password' => 'diazware12'
+          'username' => 'MusuhOrmas21',
+          'password' => 'MusuhOrmas2021'
         }
 
-        getUser = User.getUser('diazware12','diazware12')
+        getUser = User.getUser('MusuhOrmas21','MusuhOrmas2021')
         tweetList = Tweet.tweetList(getUser.userId)
         result = controller.loginUser(params)
 
