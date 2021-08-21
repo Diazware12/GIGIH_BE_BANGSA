@@ -20,13 +20,17 @@ There are 3 commit type :
 
 ### Access Application
 
-1. `Web Application`: localhost:4567
+1. `Web Application` 
+    a)`local`: localhost:4567
+    b)`deploy server`: 34.126.136.125:4567
 
-2. `API`: localhost:4567/api/v1
+2. `API`
+    a)`local`: localhost:4567/api/v1
+    b)`deploy server`: 34.126.136.125:4567/api/v1
 
 ### Run The Test
 
-1. Just type Rspec in the workspace terminal
+1. Just type `rspec` in the workspace terminal
 
 ### JSON guide
 
