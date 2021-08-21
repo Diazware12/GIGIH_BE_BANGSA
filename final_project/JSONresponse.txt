@@ -1,6 +1,6 @@
-register
+register (post)
 
-    link: localhost:4567/api/v1/register
+    link: /api/v1/register 
 
     hit:
         - full_name: nanami kento
@@ -26,9 +26,9 @@ register
             }
         }
 
-forgot password
+forgot password (post)
 
-    link: localhost:4567/api/v1/forgotpassword
+    link: /api/v1/forgotpassword 
 
     hit:
         - username: nanami12
@@ -48,9 +48,9 @@ forgot password
             }
         }
 
-login
+login (post)
 
-    link: localhost:4567/api/v1/login
+    link: /api/v1/login 
 
     hit:
         - username: diazware12
@@ -216,9 +216,9 @@ login
             }
         }
 
-comment page 
+comment page (get)
 
-    link: localhost:4567/api/v1/commenttweet (get)
+    link: /api/v1/commenttweet 
 
     hit:
         - userId: 7
@@ -317,9 +317,9 @@ comment page
             }
         }
 
-comment tweet
+comment tweet (post)
 
-    link: localhost:4567/api/v1/commenttweet (post)
+    link: /api/v1/commenttweet 
 
     hit:
         userId: 7
@@ -357,9 +357,9 @@ comment tweet
             }
         }
 
-profilepage
+profilepage (get)
 
-    link: localhost:4567/api/v1/profilepage
+    link: /api/v1/profilepage 
     
     hit:
         - userId: 1
@@ -477,9 +477,9 @@ profilepage
             }
         }
 
-edit profile data
+edit profile data (post)
 
-    link: localhost:4567/api/v1/editprofiledata
+    link: /api/v1/editprofiledata
 
     hit: 
         - userId : 7
@@ -502,9 +502,9 @@ edit profile data
             }
         }
 
-other profile page
+other profile page (get)
 
-    link: localhost:4567/api/v1/otherprofilepage
+    link: /api/v1/otherprofilepage
 
     hit: 
         - userId: 7
@@ -631,14 +631,14 @@ other profile page
             }
         }
 
-create tweet
+create tweet (post)
 
-    link: localhost:4567/api/v1/createnewtweet
+    link: /api/v1/createnewtweet
 
     hit: 
         - userId : 7
         - content : "ini pacar aku, aku sayang deh sama dia <3"
-        - file : attachment
+        - attachment : attachment
         - hashtags : #soobin #chaesoobin
 
     response:
@@ -651,7 +651,7 @@ create tweet
             "data": {
                 "userId": "7",
                 "content": "ini pacar aku, aku sayang deh sama dia <3",
-                "file": {
+                "attachment": {
                     "filename": "soo bin.gif",
                     "type": "image/gif",
                     "name": "file",
@@ -662,28 +662,9 @@ create tweet
             }
         }
 
-like tweet
+like tweet (post)
 
-    link: localhost:4567/api/v1/liketweet
-
-    hit: 
-        - userId: 1
-        - tweetId: 16
-
-    response: 
-        {
-            "message": "Success",
-            "status": 200,
-            "method": "POST",
-            "data": {
-                "userId": "1",
-                "tweetId": "16"
-            }
-        }
-
-dislike tweet
-
-    link: localhost:4567/api/v1/disliketweet
+    link: /api/v1/liketweet
 
     hit: 
         - userId: 1
@@ -700,9 +681,28 @@ dislike tweet
             }
         }
 
-edit profile picture
+dislike tweet (post)
 
-    link: localhost:4567/api/v1/editprofilepicture
+    link: /api/v1/disliketweet
+
+    hit: 
+        - userId: 1
+        - tweetId: 16
+
+    response: 
+        {
+            "message": "Success",
+            "status": 200,
+            "method": "POST",
+            "data": {
+                "userId": "1",
+                "tweetId": "16"
+            }
+        }
+
+edit profile picture (post)
+
+    link: /api/v1/editprofilepicture 
 
     hit: 
         - userId: 1
@@ -726,9 +726,9 @@ edit profile picture
             }
         }
 
-delete tweet
+delete tweet (post)
 
-    link: localhost:4567/api/v1/deletetweet
+    link: /api/v1/deletetweet
 
     hit: 
         - userId: 1
@@ -745,28 +745,9 @@ delete tweet
             }
         }
 
-follow user
+follow user (post)
 
-    link: localhost:4567/api/v1/followUser
-
-    hit:
-        - userId: 1
-        - userFollowersId: 2
-    
-    response: 
-        {
-            "message": "Success",
-            "status": 200,
-            "method": "POST",
-            "data": {
-                "userId": "1",
-                "userFollowersId": "2"
-            }
-        }
-
-unfollow user
-
-    link: localhost:4567/api/v1/unfollowUser
+    link: /api/v1/followUser
 
     hit:
         - userId: 1
@@ -783,9 +764,28 @@ unfollow user
             }
         }
 
-trending page
+unfollow user (post)
 
-    link: localhost:4567/api/v1/trendingPage
+    link: /api/v1/unfollowUser
+
+    hit:
+        - userId: 1
+        - userFollowersId: 2
+    
+    response: 
+        {
+            "message": "Success",
+            "status": 200,
+            "method": "POST",
+            "data": {
+                "userId": "1",
+                "userFollowersId": "2"
+            }
+        }
+
+trending page (get)
+
+    link: /api/v1/trendingPage
 
     hit:
         - userId: 1
@@ -838,13 +838,13 @@ trending page
             }
         }
 
-user list
+user list (get)
 
-    link: localhost:4567/api/v1/userList
+    link: /api/v1/userList
 
     hit: 
         userId: 1
-        searchUser: "diaz"
+        searchUser: "diaz" (can be empty)
 
     response:
         {
@@ -875,9 +875,9 @@ user list
             }
         }
 
-hashtag details
+hashtag details (get)
 
-    link: localhost:4567/api/v1/hashtagDetails
+    link: /api/v1/hashtagDetails
 
     hit:
         - userId: 1

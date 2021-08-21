@@ -27,3 +27,7 @@ There are 3 commit type :
 ### Run The Test
 
 1. Just type Rspec in the workspace terminal
+
+### JSON guide
+
+1. you can see `JSONresponse.txt` to try the API
